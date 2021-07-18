@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "paths": {
+            "@Src/*": ["./*"],
+            "@Hook/*": ["Hooks/*"],
+            "@Hooks": ["Hooks"],
+            "@Element/*": ["Components/Elements/*"],
+            "@Elements": ["Components/Elements"],
+            "@Layouts": ["Components/Layouts"],
+            "@CommonLayouts": ["Components/Layouts/Commons"],
+            "@Page/*": ["Pages/*"],
+            "@Pages": ["Pages"],
+            "@Store/*": ["Store/*"],
+            "@Stores": ["Store"],
+            "@Modules": ["Modules"],
+            "@Module/*": ["Modules/*"],
+            "@API": ["Modules/API"],
+            "@Utils": ["Utils"],
+            "@Util/*": ["Utils/*"],
+            "@Helper": ["Utils/Helper"],
+            "@_Alert_": ["Utils/_Alert_"],
+            "@Style/*": ["Styles/*"],
+            "@Publish/*": ["Publishs/*"],
+            "@Publishs": ["Publishs"]
+        }
+    }
+}
