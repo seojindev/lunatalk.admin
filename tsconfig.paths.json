@@ -18,10 +18,7 @@
             "@Utils": ["Utils"],
             "@Util/*": ["Utils/*"],
             "@Helper": ["Utils/Helper"],
-            "@_Alert_": ["Utils/_Alert_"],
-            "@Style/*": ["Styles/*"],
-            "@Publish/*": ["Publishs/*"],
-            "@Publishs": ["Publishs"]
+            "@_Alert_": ["Utils/_Alert_"]
         }
     }
 }
