@@ -34,7 +34,6 @@ function App() {
                         return <Routes Routerhistory={History} />;
                     }
                 })()}
-                <Routes Routerhistory={History} />
             </Provider>
         </React.StrictMode>
     );
