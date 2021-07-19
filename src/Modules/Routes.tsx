@@ -1,6 +1,6 @@
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-import { TestPage, DefaultPage } from '@Pages';
+import { TestPage, DefaultPage, LoginPage } from '@Pages';
 
 const Routes = ({ Routerhistory }: { Routerhistory: any }) => {
     return (
@@ -11,6 +11,7 @@ const Routes = ({ Routerhistory }: { Routerhistory: any }) => {
                     <Route path={process.env.PUBLIC_URL + '/'} component={DefaultPage} exact />
                     <Route path={process.env.PUBLIC_URL + '/test'} component={TestPage} exact />
                     <Route path={process.env.PUBLIC_URL + '/default'} component={DefaultPage} exact />
+                    <Route path={process.env.PUBLIC_URL + '/auth/login'} component={LoginPage} exact />
                     {/* </Route> */}
                 </Switch>
             </ConnectedRouter>
