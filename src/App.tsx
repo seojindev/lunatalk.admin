@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './App.less';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import configureStore from '@Store/configureStore';
