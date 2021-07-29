@@ -16,7 +16,7 @@ export default function Dashboard() {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>
-                    :: {process.env.REACT_APP_TITLE} :: {`로그인`}
+                    :: {process.env.REACT_APP_TITLE} :: {`대시보드`}
                 </title>
                 <link rel="canonical" href={`${globalThis.location.origin}${storeRouterLocation}`} />
             </Helmet>
