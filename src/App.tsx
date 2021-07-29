@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.less';
+import '@Style/MainStyle.less';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import configureStore from '@Store/configureStore';
@@ -26,17 +26,18 @@ function App() {
     };
 
     return (
-        <React.StrictMode>
-            <Provider store={store}>
-                {(function () {
-                    if (AppLoading === true) {
-                        return <SplashComponent appLoading={handleAppLoading} />;
-                    } else {
-                        return <Routes Routerhistory={History} />;
-                    }
-                })()}
-            </Provider>
-        </React.StrictMode>
+        // FIXME: 2021-07-29 11:32 StrictMode 사이트 메뉴 클릭시 에러나서 주석처리. 원인 파악 필요.
+        // <React.StrictMode>
+        <Provider store={store}>
+            {(function () {
+                if (AppLoading === true) {
+                    return <SplashComponent appLoading={handleAppLoading} />;
+                } else {
+                    return <Routes Routerhistory={History} />;
+                }
+            })()}
+        </Provider>
+        // </React.StrictMode>
     );
 }
 

@@ -1,1 +1,1 @@
-export { default as CopyRightBox } from './CopyRightBox';
+export { default as CopyRightBox } from './CopyRightBoxComponent';

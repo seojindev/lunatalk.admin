@@ -8,18 +8,17 @@ import {
     SettingOutlined,
     TeamOutlined,
 } from '@ant-design/icons';
-import './Style.less';
 
 const { SubMenu } = Menu;
 
 const { Sider } = Layout;
 
-function SideBar({ handleOnCollapse, collapsed }) {
+export default function SideBarComponent({ handleOnCollapse, collapsed }: { handleOnCollapse: any; collapsed: any }) {
     const theme = 'light';
 
     const history = useHistory();
 
-    const handleSiderMenuClick = action => {
+    const handleSiderMenuClick = (action: any) => {
         console.log('menu:', action);
         switch (action.key) {
             case 'dashboard':
@@ -57,22 +56,22 @@ function SideBar({ handleOnCollapse, collapsed }) {
             <Menu mode="inline" theme={theme} onClick={handleSiderMenuClick}>
                 <Menu.Item key="dashboard">
                     <DashboardOutlined />
-                    <span className="nav-text">Dashboard</span>
+                    <span className="nav-text">대시보드</span>
                 </Menu.Item>
                 <SubMenu
                     key="products"
                     title={
                         <span>
                             <PartitionOutlined />
-                            <span>Products</span>
+                            <span>상품관리</span>
                         </span>
                     }
                 >
                     <Menu.Item key="showProducts">
-                        <span className="nav-text">Show Products</span>
+                        <span className="nav-text">상품 리스트.</span>
                     </Menu.Item>
                     <Menu.Item key="addProduct">
-                        <span className="nav-text">Add Product</span>
+                        <span className="nav-text">상품 추가.</span>
                     </Menu.Item>
                 </SubMenu>
                 <SubMenu
@@ -80,15 +79,12 @@ function SideBar({ handleOnCollapse, collapsed }) {
                     title={
                         <span>
                             <TeamOutlined />
-                            <span>Customers</span>
+                            <span>회원</span>
                         </span>
                     }
                 >
                     <Menu.Item key="showCustomers">
-                        <span className="nav-text">Show Customers</span>
-                    </Menu.Item>
-                    <Menu.Item key="addCustomer">
-                        <span className="nav-text">Add Customer</span>
+                        <span className="nav-text">회원 리스트.</span>
                     </Menu.Item>
                 </SubMenu>
                 <Menu.Item key="settings">
@@ -103,5 +99,3 @@ function SideBar({ handleOnCollapse, collapsed }) {
         </Sider>
     );
 }
-
-export default SideBar;

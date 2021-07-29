@@ -10,7 +10,7 @@ function getColor(username: string) {
     return colors[(firstChar + secondChar + thirdChar) % 7];
 }
 
-export default function getUsernameAvatar(username: string) {
+export default function TopAvatarComponent(username: string) {
     return (
         <div>
             <Avatar

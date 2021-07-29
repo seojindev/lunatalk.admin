@@ -17,6 +17,7 @@
             "@API": ["Modules/API"],
             "@Utils": ["Utils"],
             "@Util/*": ["Utils/*"],
+            "@Style/*": ["Styles/*"],
             "@Helper": ["Utils/Helper"],
             "@_Alert_": ["Utils/_Alert_"]
         }
