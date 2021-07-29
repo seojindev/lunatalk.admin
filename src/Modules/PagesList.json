@@ -1,0 +1,34 @@
+{
+    "blankLayout": [
+        {
+            "routeName": "/test",
+            "componentName": "TestPage"
+        },
+        {
+            "routeName": "/sample",
+            "componentName": "SamplePage"
+        },
+        {
+            "routeName": "/default",
+            "componentName": "DefaultPage"
+        },
+        {
+            "routeName": "/auth/login",
+            "componentName": "Auths/LoginPage"
+        }
+    ],
+    "MainLayout": [
+        {
+            "routeName": "/dashboard",
+            "componentName": "Mains/Dashboard"
+        },
+        {
+            "routeName": "/products/product-list",
+            "componentName": "Products/ShowProductsPage"
+        },
+        {
+            "routeName": "/products/product-add",
+            "componentName": "Products/AddProductPage"
+        }
+    ]
+}
