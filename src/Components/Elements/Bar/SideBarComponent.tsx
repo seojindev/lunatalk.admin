@@ -22,13 +22,13 @@ export default function SideBarComponent({ handleOnCollapse, collapsed }: { hand
         console.log('menu:', action);
         switch (action.key) {
             case 'dashboard':
-                history.push('/');
+                history.push('/dashboard');
                 break;
             case 'showProducts':
-                history.push('/products');
+                history.push('/products/product-list');
                 break;
             case 'addProduct':
-                history.push('/add-product');
+                history.push('/products/product-add');
                 break;
             case 'showCustomers':
                 history.push('/customers');

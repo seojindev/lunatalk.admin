@@ -1,28 +1,61 @@
+import { lazy, Suspense } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-import { TestPage, DefaultPage, LoginPage, SamplePage, Dashboard } from '@Pages';
 import { MainLayout, BlankLayout } from '@Element/Layouts';
 
+import PagesList from './PagesList.json';
+
 const Routes = ({ Routerhistory }: { Routerhistory: any }) => {
+    const blankLayoutPage = PagesList.blankLayout.map((page: { routeName: string; componentName: string }) => {
+        return {
+            name: page.routeName,
+            comoonent: lazy(() => import(`../Pages/${page.componentName}`)),
+        };
+    });
+
+    const MainLayoutPage = PagesList.MainLayout.map((page: { routeName: string; componentName: string }) => {
+        return {
+            name: page.routeName,
+            comoonent: lazy(() => import(`../Pages/${page.componentName}`)),
+        };
+    });
+
     return (
         <BrowserRouter basename={process.env.PUBLIC_URL}>
             <ConnectedRouter history={Routerhistory}>
                 <Switch>
-                    <Route path={['/auth/login', '/auth/logout']}>
+                    <Route path={['/auth/:path?']}>
                         <BlankLayout>
                             <Switch>
-                                <Route path={process.env.PUBLIC_URL + '/auth/login'} component={LoginPage} exact />
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    {blankLayoutPage.map((item: any, n: any) => {
+                                        return (
+                                            <Route
+                                                path={process.env.PUBLIC_URL + `${item.name}`}
+                                                component={item.comoonent}
+                                                key={n}
+                                            />
+                                        );
+                                    })}
+                                </Suspense>
                             </Switch>
                         </BlankLayout>
                     </Route>
-                    <Route path={['/', '/test', '/default']}>
+                    <Route path={['/:path?']}>
                         <MainLayout>
                             <Switch>
-                                <Route path={process.env.PUBLIC_URL + '/'} component={Dashboard} exact />
-                                <Route path={process.env.PUBLIC_URL + '/test'} component={TestPage} exact />
-                                <Route path={process.env.PUBLIC_URL + '/default'} component={DefaultPage} exact />
-                                <Route path={process.env.PUBLIC_URL + '/main'} component={SamplePage} exact />
-                                <Route path={process.env.PUBLIC_URL + '/main/dashboard'} component={Dashboard} exact />
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    {MainLayoutPage.map((item: any, n: any) => {
+                                        return (
+                                            <Route
+                                                path={process.env.PUBLIC_URL + `${item.name}`}
+                                                component={item.comoonent}
+                                                key={n}
+                                                exact
+                                            />
+                                        );
+                                    })}
+                                </Suspense>
                             </Switch>
                         </MainLayout>
                     </Route>

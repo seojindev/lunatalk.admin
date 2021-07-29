@@ -1,10 +1,12 @@
 import React from 'react';
-import PulseLoader from 'react-spinners/PulseLoader';
+import { Spin, Row, Col } from 'antd';
 
 export default function PageSpinnerComponent() {
     return (
-        <React.Fragment>
-            <PulseLoader color="#ddd" size="15px" />
-        </React.Fragment>
+        <Row justify="center" align="middle" style={{ minHeight: '90vh' }}>
+            <Col>
+                <Spin />
+            </Col>
+        </Row>
     );
 }
