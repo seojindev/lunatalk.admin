@@ -5,8 +5,9 @@ import {
     DashboardOutlined,
     FundProjectionScreenOutlined,
     PartitionOutlined,
-    SettingOutlined,
+    SlidersOutlined,
     TeamOutlined,
+    PayCircleOutlined,
 } from '@ant-design/icons';
 
 const { SubMenu } = Menu;
@@ -68,10 +69,10 @@ export default function SideBarComponent({ handleOnCollapse, collapsed }: { hand
                     }
                 >
                     <Menu.Item key="showProducts">
-                        <span className="nav-text">상품 리스트.</span>
+                        <span className="nav-text">상품 리스트</span>
                     </Menu.Item>
                     <Menu.Item key="addProduct">
-                        <span className="nav-text">상품 추가.</span>
+                        <span className="nav-text">상품 추가</span>
                     </Menu.Item>
                 </SubMenu>
                 <SubMenu
@@ -79,22 +80,56 @@ export default function SideBarComponent({ handleOnCollapse, collapsed }: { hand
                     title={
                         <span>
                             <TeamOutlined />
-                            <span>회원</span>
+                            <span>회원관리</span>
                         </span>
                     }
                 >
                     <Menu.Item key="showCustomers">
-                        <span className="nav-text">회원 리스트.</span>
+                        <span className="nav-text">회원 리스트</span>
                     </Menu.Item>
                 </SubMenu>
-                <Menu.Item key="settings">
-                    <SettingOutlined />
-                    <span className="nav-text">Settings</span>
-                </Menu.Item>
-                <Menu.Item key="reports">
-                    <FundProjectionScreenOutlined />
-                    <span className="nav-text">Reports</span>
-                </Menu.Item>
+
+                <SubMenu
+                    key="manages"
+                    title={
+                        <span>
+                            <SlidersOutlined />
+                            <span>싸이트관리</span>
+                        </span>
+                    }
+                >
+                    <Menu.Item key="showNotice">
+                        <span className="nav-text">공지사항</span>
+                    </Menu.Item>
+                </SubMenu>
+
+                <SubMenu
+                    key="pages"
+                    title={
+                        <span>
+                            <FundProjectionScreenOutlined />
+                            <span>페이지관리</span>
+                        </span>
+                    }
+                >
+                    <Menu.Item key="showMainSlide">
+                        <span className="nav-text">메인슬라이드</span>
+                    </Menu.Item>
+                </SubMenu>
+
+                <SubMenu
+                    key="pays"
+                    title={
+                        <span>
+                            <PayCircleOutlined />
+                            <span>결제관리</span>
+                        </span>
+                    }
+                >
+                    <Menu.Item key="showPays">
+                        <span className="nav-text">결제리스트</span>
+                    </Menu.Item>
+                </SubMenu>
             </Menu>
         </Sider>
     );

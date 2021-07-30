@@ -8,7 +8,7 @@ function useActionMenu({ selectedRow, updateEntityPath }: { selectedRow: any; up
 
     const handleMenuClick = (action: any) => {
         if (action.key === 'edit') {
-            const updatePath = '/' + updateEntityPath + '/' + selectedRow.id;
+            const updatePath = '/' + updateEntityPath + '/' + selectedRow.key;
             history.push(updatePath);
         }
     };
@@ -21,7 +21,7 @@ function useActionMenu({ selectedRow, updateEntityPath }: { selectedRow: any; up
         <Menu onClick={handleMenuClick}>
             <Menu.Item key="edit">
                 <EditOutlined />
-                Update
+                수정
             </Menu.Item>
             <Menu.Item key="delete">
                 <Popconfirm
@@ -31,7 +31,7 @@ function useActionMenu({ selectedRow, updateEntityPath }: { selectedRow: any; up
                     onConfirm={handleSingleDelete}
                 >
                     <DeleteOutlined type="delete" />
-                    Delete
+                    삭제
                 </Popconfirm>
             </Menu.Item>
         </Menu>

@@ -32,7 +32,7 @@ function useDataTable({
     const updatedColumns = [
         ...columns,
         {
-            title: 'Action',
+            title: '관리',
             key: 'action',
             render: () => actionColumnView,
         },
