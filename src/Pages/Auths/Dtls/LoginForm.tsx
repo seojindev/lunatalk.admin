@@ -3,19 +3,23 @@ import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 // import { useHistory } from 'react-router-dom';
 import { isEmpty, cookieManager } from '@Helper';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'StoreTypes';
+import { loginRequestAction } from '@Store/Auths';
 
 export default function LoginForm() {
+    const dispatch = useDispatch();
     // const history = useHistory();
     const [checkState, setCheckState] = useState<boolean>(false);
     const [checkRemember, setCheckRemember] = useState<{ state: boolean; id: string }>({ state: true, id: '' });
 
     const onFinish = ({
         login_id,
-        // login_password,
+        login_password,
         remember,
     }: {
         login_id: string;
-        // login_password: string;
+        login_password: string;
         remember: boolean;
     }) => {
         // history.push({
@@ -25,6 +29,8 @@ export default function LoginForm() {
         if (remember === true) {
             cookieManager.set('remember', login_id, 24 * 31);
         }
+
+        dispatch(loginRequestAction({ login_id: login_id, login_password: login_password }));
     };
 
     useEffect(() => {

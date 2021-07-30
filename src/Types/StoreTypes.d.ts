@@ -16,9 +16,12 @@ declare module 'StoreTypes' {
         loginUser: Login;
     }
 
+    export interface AuthsState {}
+
     // store 인터페이스.
     export interface RootState {
         router: RouterState;
         app: AppState;
+        auths: AuthsState;
     }
 }
