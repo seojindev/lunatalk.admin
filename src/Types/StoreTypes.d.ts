@@ -1,11 +1,12 @@
 declare module 'StoreTypes' {
     import { RouterState } from 'connected-react-router';
-    import { Codes } from 'CommonTypes';
+    import { Login, Codes } from 'CommonTypes';
     import { Login } from 'ServiceTypes';
 
     // App Store
     export interface AppState {
         loading: boolean;
+        pageLoading: boolean;
         status: boolean;
         loginState: boolean;
         service_message: string;
