@@ -32,8 +32,6 @@ function* appInitSaga() {
                 codes: serverBaseData.payload.codes,
             },
         });
-        //  로그인후 데이터 저장
-        yield put({ type: _Types.LOGIN_SET_START });
 
         yield put({ type: _Types.APP_INIT_END });
     } catch (error) {
@@ -49,8 +47,8 @@ function* appInitSaga() {
     yield put({ type: _Types.END_APP_LOADING }); // 공통 로딩 끝.
 }
 
-// function* loginCheckSaga() {
 // TODO: api 완성시 추가해야함.
+// function* loginCheckSaga() {
 // }
 
 function* loginSetSaga() {

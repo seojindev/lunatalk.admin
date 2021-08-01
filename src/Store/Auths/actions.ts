@@ -1,7 +1,5 @@
 import { deprecated, createAction } from 'typesafe-actions';
-import { string } from 'yargs';
 const { createStandardAction } = deprecated;
-
 import * as _Types from './types';
 
 export const loginRequestAction = createAction(
@@ -11,3 +9,5 @@ export const loginRequestAction = createAction(
         login_password,
     })
 )();
+
+export const logoutAction = createStandardAction(_Types.START_LOGOUT)();

@@ -50,4 +50,6 @@ declare module 'CommonTypes' {
             E01: CodeItem[];
         };
     }
+
+    export interface LoginResult {}
 }

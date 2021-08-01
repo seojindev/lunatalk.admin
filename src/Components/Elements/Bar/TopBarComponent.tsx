@@ -1,13 +1,15 @@
 import React from 'react';
-import { MenuUnfoldOutlined, MenuFoldOutlined, BellOutlined, UserOutlined, LogoutOutlined } from '@ant-design/icons';
+import { MenuUnfoldOutlined, MenuFoldOutlined, BellOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Layout, Menu, Badge } from 'antd';
 import { TopAvatar } from '@Element/Avatar';
+import { useHistory } from 'react-router-dom';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
 // FIXME: 타입 정의.
 export default function TopBarComponent({ collapsed, handleOnCollapse }: { collapsed: any; handleOnCollapse: any }) {
+    const history = useHistory();
     const getCollapseIcon = () => {
         if (collapsed) {
             return <MenuUnfoldOutlined onClick={handleOnCollapse} className="trigger" />;
@@ -19,11 +21,12 @@ export default function TopBarComponent({ collapsed, handleOnCollapse }: { colla
     //     console.debug('handleLanguageMenuClick');
     // };
 
-    const handleSettingMenuClick = () => {
-        console.debug('handleSettingMenuClick');
-    };
-    const handleLogout = () => {
-        console.debug('handleLogout');
+    const handleSettingMenuClick = (action: any) => {
+        if (action.key === 'logout') {
+            history.push({
+                pathname: process.env.PUBLIC_URL + '/auth/logout',
+            });
+        }
     };
 
     return (
@@ -55,15 +58,9 @@ export default function TopBarComponent({ collapsed, handleOnCollapse }: { colla
             </Menu>
             <Menu key="avatar" onClick={handleSettingMenuClick} mode="horizontal" className="menu">
                 <SubMenu title={TopAvatar('Cemal')} key="setting">
-                    <Menu.Item key="setting-1">
+                    <Menu.Item key="logout">
                         <span>
-                            <UserOutlined />
-                            Profile
-                        </span>
-                    </Menu.Item>
-                    <Menu.Item key="setting-2">
-                        <span>
-                            <LogoutOutlined onClick={handleLogout} />
+                            <LogoutOutlined />
                             Logout
                         </span>
                     </Menu.Item>

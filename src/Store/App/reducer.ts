@@ -30,10 +30,6 @@ const initialState: AppState = {
             },
         },
     },
-    loginUser: {
-        access_token: '',
-        refresh_token: '',
-    },
 };
 
 export const AppSagaReducer = createReducer<AppState>(initialState, {
@@ -67,16 +63,33 @@ export const AppSagaReducer = createReducer<AppState>(initialState, {
     [_Types.LOGIN_SET_START]: (state: AppState) => {
         return produce(state, draft => {
             draft.loginState = false;
-            draft.loginUser = initialState.loginUser;
         });
     },
     // 로그인 체크후 로그인 정보 저장.
-    [_Types.LOGIN_SET_END]: (state: AppState, action: SagaAction<{ access_token: string; refresh_token: string }>) => {
+    [_Types.LOGIN_SET_END]: (state: AppState) => {
         return produce(state, draft => {
             //TODO: access_token, refresh_token 이 null이여도 check_api 탈때 비정상인 토큰일 경우 false 처리로 변경 되야함.
             draft.loginState = true;
-            draft.loginUser.access_token = action.payload.access_token;
-            draft.loginUser.refresh_token = action.payload.refresh_token;
+        });
+    },
+    [_Types.START_PAGE_LOADING]: (state: AppState) => {
+        return produce(state, draft => {
+            draft.pageLoading = true;
+        });
+    },
+    [_Types.END_PAGE_LOADING]: (state: AppState) => {
+        return produce(state, draft => {
+            draft.pageLoading = false;
+        });
+    },
+    [_Types.SET_LOGIN_STATE_TRUE]: (state: AppState) => {
+        return produce(state, draft => {
+            draft.loginState = true;
+        });
+    },
+    [_Types.SET_LOGIN_STATE_FALSE]: (state: AppState) => {
+        return produce(state, draft => {
+            draft.loginState = false;
         });
     },
 });

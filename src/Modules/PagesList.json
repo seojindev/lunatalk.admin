@@ -15,6 +15,10 @@
         {
             "routeName": "/auth/login",
             "componentName": "Auths/LoginPage"
+        },
+        {
+            "routeName": "/auth/logout",
+            "componentName": "Auths/LogoutPage"
         }
     ],
     "MainLayout": [

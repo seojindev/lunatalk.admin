@@ -1,6 +1,6 @@
 declare module 'StoreTypes' {
     import { RouterState } from 'connected-react-router';
-    import { Login, Codes, LocalTokenInterface } from 'CommonTypes';
+    import { Codes, LocalTokenInterface, DefaultStatus } from 'CommonTypes';
 
     // App Store
     export interface AppState {
@@ -16,7 +16,7 @@ declare module 'StoreTypes' {
 
     export interface AuthsState {
         login: {
-            result: boolean;
+            state: DefaultStatus;
             message: string;
             token: LocalTokenInterface;
         };

@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-// import { useHistory } from 'react-router-dom';
 import { isEmpty, cookieManager } from '@Helper';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'StoreTypes';
 import { loginRequestAction } from '@Store/Auths';
+import _Alert_ from '@_Alert_';
 
 export default function LoginForm() {
     const dispatch = useDispatch();
+
+    const { authsLoginState, authsLoginMessage } = useSelector((store: RootState) => ({
+        authsLoginState: store.auths.login.state,
+        authsLoginMessage: store.auths.login.message,
+    }));
+
     // const history = useHistory();
     const [checkState, setCheckState] = useState<boolean>(false);
     const [checkRemember, setCheckRemember] = useState<{ state: boolean; id: string }>({ state: true, id: '' });
@@ -50,8 +56,20 @@ export default function LoginForm() {
     }, []);
 
     useEffect(() => {
-        console.debug(checkRemember);
-    }, [checkRemember]);
+        const failAlert = (text: string) => {
+            _Alert_.error({ text: text });
+        };
+
+        const successAlert = (text: string) => {
+            _Alert_.default({ text: text });
+        };
+
+        if (authsLoginState === 'failure') {
+            failAlert(authsLoginMessage);
+        } else if (authsLoginState === 'success') {
+            successAlert(authsLoginMessage);
+        }
+    }, [authsLoginState, authsLoginMessage]);
 
     return (
         <>

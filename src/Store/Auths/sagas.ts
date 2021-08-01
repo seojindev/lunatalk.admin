@@ -1,20 +1,18 @@
 import { takeLatest, fork, put, call } from 'redux-saga/effects';
-import _Alert_ from '@_Alert_';
 import { postLogin } from '@API';
-import { COLORLOG, getLocalToken } from '@Helper';
-import { axiosDefaultHeader } from '@Util/_Axios_';
-import axios from 'axios';
-import { ServiceResponse, AppBase } from 'CommonTypes';
+import { setlocalToken, removeLocalToken } from '@Helper';
+import { ServiceResponse } from 'CommonTypes';
 
 import * as _Types from './types';
+import * as _AppTypes from '@Store/App/types';
 
-// function* loginRequestSaga({ login_id, login_password }: { login_id: string; login_password: string }) {
 function* loginRequestSaga({
     payload: { login_id, login_password },
 }: {
     payload: { login_id: string; login_password: string };
 }) {
-    console.debug({ login_id: login_id, login_password: login_password });
+    yield put({ type: _AppTypes.START_PAGE_LOADING });
+
     const response: ServiceResponse<{ access_token: string; refresh_token: string }> = yield call(postLogin, {
         login_id: login_id,
         login_password: login_password,
@@ -23,11 +21,51 @@ function* loginRequestSaga({
     const { status, message, payload } = response;
 
     if (status === true) {
+        setlocalToken({
+            access_token: payload.access_token,
+            refresh_token: payload.refresh_token,
+        });
+        yield put({
+            type: _Types.LOGIN_SUCCESS,
+            payload: {
+                message: '로그인 성공했습니다.',
+                access_token: payload.access_token,
+                refresh_token: payload.refresh_token,
+            },
+        });
+
+        yield put({
+            type: _AppTypes.SET_LOGIN_STATE_TRUE,
+        });
+    } else {
+        removeLocalToken();
+        yield put({
+            type: _Types.LOGIN_FAILURE,
+            payload: {
+                message: message,
+            },
+        });
+        yield put({
+            type: _AppTypes.SET_LOGIN_STATE_FALSE,
+        });
     }
+
+    yield put({ type: _AppTypes.END_PAGE_LOADING });
+}
+
+function* startLogoutSaga() {
+    yield put({ type: _AppTypes.START_PAGE_LOADING });
+
+    removeLocalToken();
+    yield put({
+        type: _AppTypes.SET_LOGIN_STATE_FALSE,
+    });
+    yield put({ type: _AppTypes.END_PAGE_LOADING });
 }
 
 function* onBaseSagaWatcher() {
     yield takeLatest(_Types.LOGIN_REQUEST as any, loginRequestSaga);
+    yield takeLatest(_Types.START_LOGOUT as any, startLogoutSaga);
 }
 
 export default [fork(onBaseSagaWatcher)];
