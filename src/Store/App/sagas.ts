@@ -4,18 +4,9 @@ import { checkServerNotice, getBaseData } from '@API';
 import { COLORLOG, getLocalToken } from '@Helper';
 import { axiosDefaultHeader } from '@Util/_Axios_';
 import axios from 'axios';
-import { ServiceResponse, AppBase } from 'ServiceTypes';
+import { ServiceResponse, AppBase } from 'CommonTypes';
 
-import {
-    START_APP_LOADING,
-    END_APP_LOADING,
-    APP_INIT_START,
-    APP_INIT_END,
-    APP_ERROR,
-    COMMON_DATA,
-    LOGIN_SET_START,
-    LOGIN_SET_END,
-} from './actions';
+import * as _Types from './types';
 
 // 서버 통신 체크만 따로 뺴서..
 const checkServerStatus = async () => {
@@ -23,7 +14,7 @@ const checkServerStatus = async () => {
 };
 
 function* appInitSaga() {
-    yield put({ type: START_APP_LOADING }); // 공통 로딩 시작.
+    yield put({ type: _Types.START_APP_LOADING }); // 공통 로딩 시작.
 
     try {
         yield call(checkServerStatus);
@@ -36,30 +27,28 @@ function* appInitSaga() {
         const serverBaseData: ServiceResponse<AppBase> = yield call(getBaseData);
 
         yield put({
-            type: COMMON_DATA,
+            type: _Types.COMMON_DATA,
             payload: {
                 codes: serverBaseData.payload.codes,
             },
         });
-        //  로그인후 데이터 저장
-        yield put({ type: LOGIN_SET_START });
 
-        yield put({ type: APP_INIT_END });
+        yield put({ type: _Types.APP_INIT_END });
     } catch (error) {
         COLORLOG(':: check Server Error :: ', 'error');
         yield put({
-            type: APP_ERROR,
+            type: _Types.APP_ERROR,
             payload: {
                 message: '어플리 케이션 초기화중 문제가 발생했습니다. \n 잠시후 다시 시도해 주세요.',
             },
         });
     }
 
-    yield put({ type: END_APP_LOADING }); // 공통 로딩 끝.
+    yield put({ type: _Types.END_APP_LOADING }); // 공통 로딩 끝.
 }
 
-// function* loginCheckSaga() {
 // TODO: api 완성시 추가해야함.
+// function* loginCheckSaga() {
 // }
 
 function* loginSetSaga() {
@@ -67,7 +56,7 @@ function* loginSetSaga() {
     const { login_access_token, login_refresh_token } = localToken;
 
     yield put({
-        type: LOGIN_SET_END,
+        type: _Types.LOGIN_SET_END,
         payload: {
             access_token: login_access_token,
             refresh_token: login_refresh_token,
@@ -76,9 +65,9 @@ function* loginSetSaga() {
 }
 
 function* onBaseSagaWatcher() {
-    yield takeLatest(APP_INIT_START as any, appInitSaga);
+    yield takeLatest(_Types.APP_INIT_START as any, appInitSaga);
     // yield takeLatest(CHECK_LOGIN_START as any, checkLoginSaga);
-    yield takeLatest(LOGIN_SET_START as any, loginSetSaga);
+    yield takeLatest(_Types.LOGIN_SET_START as any, loginSetSaga);
 }
 
 export default [fork(onBaseSagaWatcher)];

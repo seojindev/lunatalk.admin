@@ -189,7 +189,7 @@ export default ({ method = 'post', url, payload }: serviceInterface): any => {
                     .catch(() => {
                         // 토큰 Refresh Error
                         Helper.COLORLOG(':: Fail Token Refresh :: ', 'error');
-                        Helper.removeLoginToken();
+                        Helper.removeLocalToken();
                         // processQueue(err, '');
                         // reject(err);
                         _Alert_.thenGoHome({

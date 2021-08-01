@@ -94,7 +94,7 @@ export const cookieManager = {
  * 로그인 토큰 저장.
  * @param payload
  */
-export function saveLoginToken({ access_token, refresh_token }: { access_token: string; refresh_token: string }): void {
+export function setlocalToken({ access_token, refresh_token }: { access_token: string; refresh_token: string }): void {
     storageManager.set('login_state', 'true');
     storageManager.set('login_access_token', access_token);
     storageManager.set('login_refresh_token', refresh_token);
@@ -103,9 +103,8 @@ export function saveLoginToken({ access_token, refresh_token }: { access_token: 
 /**
  * 로그인 토큰 제거.
  */
-export function removeLoginToken(): void {
+export function removeLocalToken(): void {
     storageManager.remove('login_state');
-    storageManager.remove('login_expires_in');
     storageManager.remove('login_access_token');
     storageManager.remove('login_refresh_token');
 }
@@ -115,13 +114,11 @@ export function removeLoginToken(): void {
  */
 export function getLocalToken(): {
     login_state: boolean | null;
-    login_expires_in: number | null;
     login_access_token: string | null;
     login_refresh_token: string | null;
 } {
     return {
         login_state: storageManager.get('login_state'),
-        login_expires_in: storageManager.get('login_expires_in'),
         login_access_token: storageManager.get('login_access_token'),
         login_refresh_token: storageManager.get('login_refresh_token'),
     };
