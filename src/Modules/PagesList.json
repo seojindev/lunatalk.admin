@@ -23,15 +23,19 @@
     ],
     "MainLayout": [
         {
+            "routeName": "/",
+            "componentName": "Mains/Dashboard"
+        },
+        {
             "routeName": "/dashboard",
             "componentName": "Mains/Dashboard"
         },
         {
-            "routeName": "/products/product-list",
+            "routeName": "/products/list-product",
             "componentName": "Products/ShowProductsPage"
         },
         {
-            "routeName": "/products/product-add",
+            "routeName": "/products/add-product",
             "componentName": "Products/AddProductPage"
         }
     ]

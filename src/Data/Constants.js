@@ -106,7 +106,7 @@ export const data = {
             description: '필크',
             qty: 32,
             owner: 'John Brown',
-            category: ['jewellery', 'accessory'],
+            category: ['jewellery'],
         },
         {
             key: '2',
@@ -114,7 +114,7 @@ export const data = {
             description: 'Vegan-friendly leather',
             qty: 12,
             owner: 'John Green',
-            category: ['clothing', 'living'],
+            category: ['living'],
         },
         {
             key: '3',
@@ -122,7 +122,7 @@ export const data = {
             description: 'This is a metal bracelet',
             qty: 32,
             owner: 'John Brown',
-            category: ['jewellery', 'clothing'],
+            category: ['clothing'],
         },
         // ...
     ],

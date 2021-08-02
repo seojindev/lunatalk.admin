@@ -26,10 +26,10 @@ export default function SideBarComponent({ handleOnCollapse, collapsed }: { hand
                 history.push('/dashboard');
                 break;
             case 'showProducts':
-                history.push('/products/product-list');
+                history.push('/products/list-product');
                 break;
             case 'addProduct':
-                history.push('/products/product-add');
+                history.push('/products/add-product');
                 break;
             case 'showCustomers':
                 history.push('/customers');
