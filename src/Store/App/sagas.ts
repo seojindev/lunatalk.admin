@@ -1,7 +1,7 @@
 import { takeLatest, fork, put, call } from 'redux-saga/effects';
 import _Alert_ from '@_Alert_';
 import { checkServerNotice, getBaseData } from '@API';
-import { COLORLOG, getLocalToken } from '@Helper';
+import { COLORLOG } from '@Helper';
 import { axiosDefaultHeader } from '@Util/_Axios_';
 import axios from 'axios';
 import { ServiceResponse, AppBase } from 'CommonTypes';
@@ -13,6 +13,7 @@ const checkServerStatus = async () => {
     return axios.get('/api/system/check-status', axiosDefaultHeader);
 };
 
+// app 최초 로딩.
 function* appInitSaga() {
     yield put({ type: _Types.START_APP_LOADING }); // 공통 로딩 시작.
 
@@ -47,27 +48,8 @@ function* appInitSaga() {
     yield put({ type: _Types.END_APP_LOADING }); // 공통 로딩 끝.
 }
 
-// TODO: api 완성시 추가해야함.
-// function* loginCheckSaga() {
-// }
-
-function* loginSetSaga() {
-    const localToken = getLocalToken();
-    const { login_access_token, login_refresh_token } = localToken;
-
-    yield put({
-        type: _Types.LOGIN_SET_END,
-        payload: {
-            access_token: login_access_token,
-            refresh_token: login_refresh_token,
-        },
-    });
-}
-
 function* onBaseSagaWatcher() {
     yield takeLatest(_Types.APP_INIT_START as any, appInitSaga);
-    // yield takeLatest(CHECK_LOGIN_START as any, checkLoginSaga);
-    yield takeLatest(_Types.LOGIN_SET_START as any, loginSetSaga);
 }
 
 export default [fork(onBaseSagaWatcher)];

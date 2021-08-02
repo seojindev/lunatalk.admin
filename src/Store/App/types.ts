@@ -13,13 +13,6 @@ export const APP_INIT_END = 'app/APP_INIT_END';
 export const APP_ERROR = 'app/APP_ERROR';
 export const COMMON_DATA = 'app/COMMON_DATA';
 
-export const CHECK_LOGIN_START = 'app/CHECK_LOGIN_START';
-export const CHECK_LOGIN_SUCCESS = 'app/CHECK_LOGIN_SUCCESS';
-export const CHECK_LOGIN_FAILURE = 'app/CHECK_LOGIN_FAILURE';
-
-export const LOGIN_SET_START = 'app/LOGIN_SET_START';
-export const LOGIN_SET_END = 'app/LOGIN_SET_END';
-
 export const SET_LOGIN_STATE_TRUE = 'app/SET_LOGIN_STATE_TRUE';
 export const SET_LOGIN_STATE_FALSE = 'app/SET_LOGIN_STATE_FALSE';
 

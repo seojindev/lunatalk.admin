@@ -18,6 +18,7 @@ const initialState: AuthsState = {
 };
 
 export const AppSagaReducer = createReducer<AuthsState>(initialState, {
+    // 로그인 시도
     [_Types.LOGIN_REQUEST]: (state: AuthsState) => {
         return produce(state, draft => {
             draft.login.state = 'loading';
@@ -25,6 +26,7 @@ export const AppSagaReducer = createReducer<AuthsState>(initialState, {
             draft.login.token = initialState.login.token;
         });
     },
+    // 로그인 시도 실패.
     [_Types.LOGIN_FAILURE]: (state: AuthsState, action: SagaAction<{ message: string }>) => {
         return produce(state, draft => {
             draft.login.state = 'failure';
@@ -32,6 +34,7 @@ export const AppSagaReducer = createReducer<AuthsState>(initialState, {
             draft.login.token = initialState.login.token;
         });
     },
+    // 로그인 시도 성공
     [_Types.LOGIN_SUCCESS]: (
         state: AuthsState,
         action: SagaAction<{ message: string; access_token: string; refresh_token: string }>
@@ -45,7 +48,14 @@ export const AppSagaReducer = createReducer<AuthsState>(initialState, {
             };
         });
     },
+    // 로그아웃 처리.
     [_Types.START_LOGOUT]: (state: AuthsState) => {
+        return produce(state, draft => {
+            draft.login = initialState.login;
+        });
+    },
+    // 로컬 토큰 체크
+    [_Types.CHECK_LOCAL_TOKEN]: (state: AuthsState) => {
         return produce(state, draft => {
             draft.login = initialState.login;
         });
