@@ -11,3 +11,5 @@ export const loginRequestAction = createAction(
 )();
 
 export const logoutAction = createStandardAction(_Types.START_LOGOUT)();
+
+export const checkLocalTokenAction = createStandardAction(_Types.CHECK_LOCAL_TOKEN)();

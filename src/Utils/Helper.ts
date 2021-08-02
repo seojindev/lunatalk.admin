@@ -95,32 +95,28 @@ export const cookieManager = {
  * @param payload
  */
 export function setlocalToken({ access_token, refresh_token }: { access_token: string; refresh_token: string }): void {
-    storageManager.set('login_state', 'true');
-    storageManager.set('login_access_token', access_token);
-    storageManager.set('login_refresh_token', refresh_token);
+    storageManager.set('access_token', access_token);
+    storageManager.set('refresh_token', refresh_token);
 }
 
 /**
  * 로그인 토큰 제거.
  */
 export function removeLocalToken(): void {
-    storageManager.remove('login_state');
-    storageManager.remove('login_access_token');
-    storageManager.remove('login_refresh_token');
+    storageManager.remove('access_token');
+    storageManager.remove('refresh_token');
 }
 
 /**
  * 로컬 스토리지 토큰. 페이지 다시 로드시 사용.
  */
 export function getLocalToken(): {
-    login_state: boolean | null;
-    login_access_token: string | null;
-    login_refresh_token: string | null;
+    access_token: string | null;
+    refresh_token: string | null;
 } {
     return {
-        login_state: storageManager.get('login_state'),
-        login_access_token: storageManager.get('login_access_token'),
-        login_refresh_token: storageManager.get('login_refresh_token'),
+        access_token: storageManager.get('access_token'),
+        refresh_token: storageManager.get('refresh_token'),
     };
 }
 
@@ -128,14 +124,14 @@ export function getLocalToken(): {
  * return AccessToken.
  */
 export function getAccessToken() {
-    return storageManager.get('login_access_token');
+    return storageManager.get('access_token');
 }
 
 /**
  * return RefreshToken.
  */
 export function getRefreshToken() {
-    return storageManager.get('login_refresh_token');
+    return storageManager.get('refresh_token');
 }
 
 /**
@@ -149,8 +145,8 @@ export function saveRefreshToken({
     access_token: string;
     refresh_token: string;
 }): void {
-    storageManager.set('login_access_token', access_token);
-    storageManager.set('login_refresh_token', refresh_token);
+    storageManager.set('access_token', access_token);
+    storageManager.set('refresh_token', refresh_token);
 }
 
 /**
