@@ -1,8 +1,8 @@
-import React from 'react';
-import { Switch, Card, Form, Input, Row, Col, Select, Divider, Button, InputNumber } from 'antd';
+import React, { useState } from 'react';
+import { Switch, Card, Form, Input, Row, Col, Select, Divider, Button, InputNumber, Upload } from 'antd';
+import ImgCrop from 'antd-img-crop';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-
-const { Option } = Select;
+import * as DataProduct from '@Src/Data/Product';
 
 export default function AddProduct() {
     const [form] = Form.useForm();
@@ -12,40 +12,36 @@ export default function AddProduct() {
         // call save API
     };
 
-    const requiredFieldRule = [{ required: true, message: 'Required Field' }];
+    const [fileList, setFileList] = useState<any>([
+        {
+            uid: '-1',
+            name: 'image.png',
+            status: 'done',
+            url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        },
+    ]);
 
-    const ownerArray = [
-        {
-            id: 1,
-            value: 'John Nash',
-        },
-        {
-            id: 2,
-            value: 'Leonhard Euler',
-        },
-        {
-            id: 3,
-            value: 'Alan Turing',
-        },
-    ];
+    const onChange = ({ fileList: newFileList }) => {
+        setFileList(newFileList);
+    };
 
-    const categoryArray = [
-        {
-            id: 1,
-            value: 'Clothing',
-        },
-        {
-            id: 2,
-            value: 'Jewelery',
-        },
-        {
-            id: 3,
-            value: 'Accessory',
-        },
-    ];
+    const onPreview = async (file: any) => {
+        let src = file.url;
+        if (!src) {
+            src = await new Promise(resolve => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file.originFileObj);
+                reader.onload = () => resolve(reader.result);
+            });
+        }
+        const image = new Image();
+        image.src = src;
+        const imgWindow = window.open(src);
+        // imgWindow.document.write(image.outerHTML);
+    };
 
     return (
-        <Card title="Add Product" loading={false}>
+        <Card title="상품 등록" loading={false}>
             <Row justify="center">
                 <Col span={12}>
                     <Form
@@ -55,36 +51,92 @@ export default function AddProduct() {
                         name="product-form"
                         onFinish={handleSave}
                     >
-                        <Form.Item label="Name" name="name" rules={requiredFieldRule}>
+                        <Form.Item
+                            label="상품명"
+                            name="productName"
+                            rules={[{ required: true, message: '상품명을 입력해 주세요.', type: 'string' }]}
+                        >
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Description" name="description">
-                            <Input />
-                        </Form.Item>
-                        <Form.Item label="Owner" name="owner">
+                        <Form.Item
+                            label="카테고리"
+                            name="productCategory"
+                            rules={[{ required: true, message: '카테고리를 선택해 주세요.', type: 'string' }]}
+                        >
                             <Select>
-                                {ownerArray.map(item => (
-                                    <Option key={item.id} value={item.id}>
+                                {DataProduct.category.map(item => (
+                                    <Select.Option key={item.code} value={item.value}>
                                         {item.value}
-                                    </Option>
+                                    </Select.Option>
                                 ))}
                             </Select>
                         </Form.Item>
-                        <Form.Item label="Category" name="category">
-                            <Select>
-                                {categoryArray.map(item => (
-                                    <Option key={item.id} value={item.id}>
+                        <Form.Item
+                            label="옵션(색상)"
+                            name="productOptionStep1"
+                            rules={[{ required: true, message: '색상을 선택해 주세요.', type: 'string' }]}
+                        >
+                            <Select
+                                mode="multiple"
+                                allowClear
+                                style={{ width: '100%' }}
+                                placeholder="색상을 선택해 주세요."
+                                onChange={e => console.debug(e)}
+                            >
+                                {DataProduct.optionStep1.map(item => (
+                                    <Select.Option key={item.code} value={item.value}>
                                         {item.value}
-                                    </Option>
+                                    </Select.Option>
                                 ))}
                             </Select>
                         </Form.Item>
-                        <Form.Item label="Quantity" name="qty">
+                        <Form.Item label="옵션(유무선)" name="productOptionStep1">
+                            <Select
+                                mode="multiple"
+                                allowClear
+                                style={{ width: '100%' }}
+                                placeholder="유무선을 선택해 주세요."
+                                onChange={e => console.debug(e)}
+                            >
+                                {DataProduct.optionStep2.map(item => (
+                                    <Select.Option key={item.code} value={item.value}>
+                                        {item.value}
+                                    </Select.Option>
+                                ))}
+                            </Select>
+                        </Form.Item>
+                        <Form.Item
+                            label="수량"
+                            name="productQuantity"
+                            rules={[{ required: true, message: '색상을 선택해 주세요.', type: 'number' }]}
+                        >
                             <InputNumber />
                         </Form.Item>
-                        <Form.Item label="Status" name="active" valuePropName="checked" initialValue={false}>
+                        <Form.Item
+                            label="판매 상태"
+                            name="productSaleActive"
+                            valuePropName="checked"
+                            initialValue={false}
+                        >
                             <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
                         </Form.Item>
+                        <Form.Item label="상품 상태" name="productActive" valuePropName="checked" initialValue={false}>
+                            <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
+                        </Form.Item>
+                        <Form.Item label="메모" name="productMemo">
+                            <Input.TextArea rows={4} />
+                        </Form.Item>
+                        <ImgCrop rotate>
+                            <Upload
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                listType="picture-card"
+                                fileList={fileList}
+                                onChange={onChange}
+                                onPreview={onPreview}
+                            >
+                                {fileList.length < 5 && '+ Upload'}
+                            </Upload>
+                        </ImgCrop>
                         <Divider />
                         <Row justify="center">
                             <Button type="primary" htmlType="submit">

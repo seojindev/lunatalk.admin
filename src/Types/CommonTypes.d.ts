@@ -52,4 +52,10 @@ declare module 'CommonTypes' {
     }
 
     export interface LoginResult {}
+
+    interface lunaTreeSelectItem {
+        title: string;
+        value: string | number;
+        key: string | number;
+    }
 }

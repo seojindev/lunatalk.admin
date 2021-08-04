@@ -16,7 +16,7 @@ export default function AddProductPage() {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>
-                    :: {process.env.REACT_APP_TITLE} :: {`싱품`}
+                    :: {process.env.REACT_APP_TITLE} :: {`싱품 등록`}
                 </title>
                 <link rel="canonical" href={`${globalThis.location.origin}${storeRouterLocation}`} />
             </Helmet>
