@@ -102,7 +102,11 @@ export default function AddProduct() {
                                 ))}
                             </Select>
                         </Form.Item>
-                        <Form.Item label="옵션(유무선)" name="productOptionStep1">
+                        <Form.Item
+                            label="옵션(유무선)"
+                            name="productOptionStep2"
+                            rules={[{ required: true, message: '색상을 선택해 주세요.', type: 'string' }]}
+                        >
                             <Select
                                 mode="multiple"
                                 allowClear
@@ -120,7 +124,7 @@ export default function AddProduct() {
                         <Form.Item
                             label="수량"
                             name="productQuantity"
-                            rules={[{ required: true, message: '색상을 선택해 주세요.', type: 'number' }]}
+                            rules={[{ required: true, message: '수량을 입력해 주세요.', type: 'number' }]}
                         >
                             <InputNumber />
                         </Form.Item>
