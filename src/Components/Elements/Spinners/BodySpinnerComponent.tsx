@@ -6,7 +6,7 @@ export default function BodySpinnerComponent() {
     return (
         <Row justify="center" align="middle" style={{ minHeight: '90vh' }}>
             <Col>
-                <PulseLoader color="#ddd" size="10" />
+                <PulseLoader color="#ddd" size="10px" />
             </Col>
         </Row>
     );
