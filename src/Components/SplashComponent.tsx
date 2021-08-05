@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRoot } from '@Hooks';
-import { PageSpinner } from '@Element/Spinners';
+import { BodySpinner } from '@Element/Spinners';
 
 export default function SplashComponent({ appLoading }: { appLoading: () => void }) {
     const { AppBaseCheckState } = useRoot();
@@ -17,7 +17,7 @@ export default function SplashComponent({ appLoading }: { appLoading: () => void
 
     return (
         <>
-            <PageSpinner />
+            <BodySpinner />
         </>
     );
 }

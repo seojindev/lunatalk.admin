@@ -3,7 +3,7 @@ import { Card, Col, Row, Tooltip } from 'antd';
 import { InfoCircleFilled, CaretUpFilled } from '@ant-design/icons';
 import { ChartCard, MiniBar, MiniProgress, ProductBarChart, ProductPieChart } from '@Element/Charts';
 import MiniArea from '@Element/Charts/MiniArea';
-import { movementSummary, visitSummary } from '@Src/Data/Constants';
+import { movementSummary, visitSummary } from '@Src/Data/Dashboard';
 
 export default function Dashboard() {
     const topColResponsiveProps = {

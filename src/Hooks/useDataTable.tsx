@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { Table } from 'antd';
+import { DEFAULT_PAGE_SIZE, DEFAULT_PAGE_NUMBER } from '@Constants';
 import useActionMenu from './useActionMenu';
-
-const DEFAULT_PAGE_SIZE = 10;
-const DEFAULT_PAGE_NUMBER = 0;
 
 function useDataTable({
     columns,

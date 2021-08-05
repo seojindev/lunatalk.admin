@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 const { Search } = Input;
 
-export default function HeaderComponent({
+export default function PageHeaderComponent({
     addNewPath,
     hasSelected,
     handleSearch,

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Header } from '@Layouts';
+import { PageHeader } from '@Layouts';
 import { useDataTable } from '@Hooks';
-import * as constants from '@Src/Data/Constants';
+import * as constants from '@Src/Data/ProductTable';
 
 export default function ShowProducts() {
     const { DataTable, hasSelected } = useDataTable({
@@ -12,7 +12,7 @@ export default function ShowProducts() {
 
     return (
         <>
-            <Header addNewPath="product-add" hasSelected={hasSelected} />
+            <PageHeader addNewPath="products/add-product" hasSelected={hasSelected} />
             <DataTable />
         </>
     );

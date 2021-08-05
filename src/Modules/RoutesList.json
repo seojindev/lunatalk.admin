@@ -15,9 +15,17 @@
         {
             "routeName": "/auth/login",
             "componentName": "Auths/LoginPage"
+        },
+        {
+            "routeName": "/auth/logout",
+            "componentName": "Auths/LogoutPage"
         }
     ],
     "MainLayout": [
+        {
+            "routeName": "/",
+            "componentName": "Mains/Dashboard"
+        },
         {
             "routeName": "/dashboard",
             "componentName": "Mains/Dashboard"
@@ -27,7 +35,7 @@
             "componentName": "Products/ShowProductsPage"
         },
         {
-            "routeName": "/products/product-add",
+            "routeName": "/products/add-product",
             "componentName": "Products/AddProductPage"
         }
     ]
