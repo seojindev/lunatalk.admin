@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { Layout, Menu } from 'antd';
 import { useHistory } from 'react-router-dom';
 

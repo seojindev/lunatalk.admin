@@ -1,11 +1,11 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import {
     DashboardOutlined,
-    FundProjectionScreenOutlined,
+    // FundProjectionScreenOutlined,
     PartitionOutlined,
     SlidersOutlined,
     TeamOutlined,
-    PayCircleOutlined,
+    // PayCircleOutlined,
 } from '@ant-design/icons';
 
 export const menus = [
