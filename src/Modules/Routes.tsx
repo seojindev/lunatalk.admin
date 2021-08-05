@@ -3,7 +3,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { MainLayout, BlankLayout } from '@Element/Layouts';
 
-import PagesList from './PagesList.json';
+import PagesList from './RoutesList.json';
 
 const Routes = ({ Routerhistory }: { Routerhistory: any }) => {
     const blankLayoutPage = PagesList.blankLayout.map((page: { routeName: string; componentName: string }) => {

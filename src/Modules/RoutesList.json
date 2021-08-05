@@ -23,7 +23,7 @@
             "componentName": "Mains/Dashboard"
         },
         {
-            "routeName": "/products/product-list",
+            "routeName": "/products/show-products",
             "componentName": "Products/ShowProductsPage"
         },
         {
