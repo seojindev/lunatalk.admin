@@ -1,11 +1,11 @@
 import React from 'react';
 import {
     DashboardOutlined,
-    // FundProjectionScreenOutlined,
+    FundProjectionScreenOutlined,
     PartitionOutlined,
     SlidersOutlined,
     TeamOutlined,
-    // PayCircleOutlined,
+    PayCircleOutlined,
 } from '@ant-design/icons';
 
 export const menus = [
@@ -50,13 +50,51 @@ export const menus = [
         ],
     },
     {
-        name: '싸이트관리',
+        name: '결제 관리',
+        key: 'pays',
+        icon: <PayCircleOutlined />,
+        list: [
+            {
+                name: '결제 목록',
+                key: 'show-pays',
+            },
+        ],
+    },
+    {
+        name: '페이지관리',
+        key: 'pages',
+        icon: <FundProjectionScreenOutlined />,
+        list: [
+            {
+                name: '메인슬라이드',
+                key: 'show-main-slide',
+            },
+            {
+                name: '메인슬라이드 추가',
+                key: 'add-main-slide',
+            },
+        ],
+    },
+    {
+        name: '싸이트 관리',
         key: 'sites',
         icon: <SlidersOutlined />,
         list: [
             {
-                name: '메인슬라이드',
-                key: 'show-main-slade',
+                name: '싸이트 공지사항',
+                key: 'show-sites-notice',
+            },
+            {
+                name: '싸이트 공지사항 추가',
+                key: 'add-sites-notice',
+            },
+            {
+                name: '서비스 공지사항',
+                key: 'show-services-notice',
+            },
+            {
+                name: '서비스 공지사항 추가',
+                key: 'add-services-notice',
             },
         ],
     },
