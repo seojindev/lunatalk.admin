@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Menu } from 'antd';
 import { useHistory } from 'react-router-dom';
 
-import { menus } from '@Module/MenusList';
+import { menus } from '@Constants/MenusList';
 
 const { SubMenu } = Menu;
 
