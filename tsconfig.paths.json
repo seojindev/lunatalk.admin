@@ -21,6 +21,7 @@
             "@Style/*": ["Styles/*"],
             "@Helper": ["Utils/Helper"],
             "@Constants": ["Constants"],
+            "@Constants/*": ["Constants/*"],
             "@_Alert_": ["Utils/_Alert_"]
         }
     }

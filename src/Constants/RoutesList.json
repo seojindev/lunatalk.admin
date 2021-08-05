@@ -31,7 +31,7 @@
             "componentName": "Mains/Dashboard"
         },
         {
-            "routeName": "/products/list-product",
+            "routeName": "/products/show-products",
             "componentName": "Products/ShowProductsPage"
         },
         {

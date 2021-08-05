@@ -2,7 +2,8 @@ import { lazy, Suspense } from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { MainLayout, BlankLayout } from '@Element/Layouts';
-import PagesList from './PagesList.json';
+
+import PagesList from '@Constants/RoutesList.json';
 import { BodySpinner } from '@Element/Spinners';
 
 const Routes = ({ Routerhistory }: { Routerhistory: any }) => {
