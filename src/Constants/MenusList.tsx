@@ -22,11 +22,11 @@ export const menus = [
         list: [
             {
                 name: '카테고리',
-                key: 'show-product-catgory',
+                key: 'show-product-category',
             },
             {
                 name: '카테고리 등록',
-                key: 'add-product-catgory',
+                key: 'add-product-category',
             },
             {
                 name: '상품보기',

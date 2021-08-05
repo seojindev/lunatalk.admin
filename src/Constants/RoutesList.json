@@ -31,6 +31,14 @@
             "componentName": "Mains/Dashboard"
         },
         {
+            "routeName": "/products/show-product-category",
+            "componentName": "Products/ShowProductsCategoryPages"
+        },
+        {
+            "routeName": "/products/add-product",
+            "componentName": "Products/AddProductPage"
+        },
+        {
             "routeName": "/products/show-products",
             "componentName": "Products/ShowProductsPage"
         },
