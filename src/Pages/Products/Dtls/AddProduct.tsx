@@ -171,7 +171,7 @@ export default function AddProduct() {
                         <Divider />
                         <Row justify="center">
                             <Button type="primary" htmlType="submit">
-                                Save
+                                저장
                             </Button>
                         </Row>
                     </Form>
