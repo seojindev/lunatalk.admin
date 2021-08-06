@@ -23,28 +23,44 @@
     ],
     "MainLayout": [
         {
+            "name": "대시보드.",
             "routeName": "/",
             "componentName": "Mains/Dashboard"
         },
         {
+            "name": "대시보드.",
             "routeName": "/dashboard",
             "componentName": "Mains/Dashboard"
         },
         {
+            "name": "카테고리 목록.",
             "routeName": "/products/show-product-category",
             "componentName": "Products/ShowProductsCategoryPages"
         },
         {
+            "name": "카테고리 등록.",
+            "routeName": "/products/add-product-category",
+            "componentName": "Products/AddProductsCategoryPages"
+        },
+        {
+            "name": "카테고리 등록.",
             "routeName": "/products/add-product",
             "componentName": "Products/AddProductPage"
         },
         {
+            "name": "상품 목록.",
             "routeName": "/products/show-products",
             "componentName": "Products/ShowProductsPage"
         },
         {
-            "routeName": "/products/add-product",
-            "componentName": "Products/AddProductPage"
+            "name": "사용자 목록.",
+            "routeName": "/customers/show-customers",
+            "componentName": "Customers/ShowCustomersPage"
+        },
+        {
+            "name": "결제 목록.",
+            "routeName": "/pays/show-pays",
+            "componentName": "Pays/ShowPaysPage"
         }
     ]
 }

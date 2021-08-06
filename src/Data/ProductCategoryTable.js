@@ -4,8 +4,8 @@ import { Tag } from 'antd';
 export const columns = [
     {
         title: '아이디',
-        dataIndex: 'id',
-        key: 'id',
+        dataIndex: 'key',
+        key: 'key',
     },
     {
         title: '코드',
@@ -54,7 +54,7 @@ export const data = {
     totalElements: 4,
     content: [
         {
-            id: '1',
+            key: '1',
             codeId: 'P010110',
             codeName: 'acc',
             name: 'acc',
@@ -62,7 +62,7 @@ export const data = {
             category: ['acc'],
         },
         {
-            id: '2',
+            key: '2',
             codeId: 'P010120',
             codeName: 'bag',
             name: 'bag',
@@ -70,7 +70,7 @@ export const data = {
             category: ['bag'],
         },
         {
-            id: '3',
+            key: '3',
             codeId: 'P010130',
             codeName: 'stationery',
             name: 'stationery',
@@ -78,7 +78,7 @@ export const data = {
             category: ['stationery'],
         },
         {
-            id: '3',
+            key: '4',
             codeId: 'P010140',
             codeName: 'wallet',
             name: 'wallet',
