@@ -4,9 +4,9 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { RootState } from 'StoreTypes';
 import { useSelector } from 'react-redux';
 
-const DtlPage = lazy(() => import('./Dtls/AddProduct'));
+const DtlPage = lazy(() => import('./Dtls/ShowPays'));
 
-export default function AddProductPage() {
+export default function ShowPaysPage() {
     const { storeRouterLocation } = useSelector((store: RootState) => ({
         storeRouterLocation: store.router.location,
     }));
@@ -16,7 +16,7 @@ export default function AddProductPage() {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>
-                    :: {process.env.REACT_APP_TITLE} :: {`싱품 등록`}
+                    :: {process.env.REACT_APP_TITLE} :: {`결제 목록`}
                 </title>
                 <link rel="canonical" href={`${globalThis.location.origin}${storeRouterLocation}`} />
             </Helmet>

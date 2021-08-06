@@ -22,6 +22,7 @@
     "@types/redux-logger": "^3.0.8",
     "@types/redux-saga": "^0.10.5",
     "antd": "^4.16.8",
+    "antd-img-crop": "^3.14.3",
     "axios": "^0.21.1",
     "bizcharts": "^4.1.11",
     "connected-react-router": "^6.9.1",

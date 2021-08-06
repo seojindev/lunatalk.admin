@@ -21,20 +21,20 @@ export const menus = [
         icon: <PartitionOutlined />,
         list: [
             {
-                name: '카테고리',
-                key: 'show-product-catgory',
+                name: '카테고리 목록',
+                key: 'show-product-category',
             },
             {
                 name: '카테고리 등록',
-                key: 'add-product-catgory',
+                key: 'add-product-category',
             },
             {
-                name: '상품보기',
+                name: '상품 목록',
                 key: 'show-products',
             },
             {
                 name: '상품 등록',
-                key: 'add-products',
+                key: 'add-product',
             },
         ],
     },
@@ -44,7 +44,7 @@ export const menus = [
         icon: <TeamOutlined />,
         list: [
             {
-                name: '회원리스트',
+                name: '회원 목록',
                 key: 'show-customers',
             },
         ],
