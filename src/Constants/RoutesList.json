@@ -48,8 +48,8 @@
             "componentName": "Products/ShowProductsPage"
         },
         {
-            "name": "상품 목록.",
-            "routeName": "/products/:product_uuid/detail-products",
+            "name": "상품 상세 정보.",
+            "routeName": "/products/:product_uuid/detail-product",
             "componentName": "Products/DetailProductsPage"
         },
         {

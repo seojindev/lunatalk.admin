@@ -1,4 +1,5 @@
 import React from 'react';
+import History from '@Module/History';
 import { Tag } from 'antd';
 
 export const columns = [
@@ -8,10 +9,34 @@ export const columns = [
         key: 'key',
     },
     {
+        title: 'UUID',
+        dataIndex: 'uuid',
+        key: 'uuid',
+        render: text => (
+            <a
+                onClick={() => {
+                    History.push({
+                        pathname: process.env.PUBLIC_URL + `/products/${text}/detail-product`,
+                    });
+                }}
+            >
+                {text}
+            </a>
+        ),
+    },
+    {
         title: '상품명',
         dataIndex: 'name',
         key: 'name',
-        render: text => <a>{text}</a>,
+        render: text => (
+            <a
+                onClick={e => {
+                    console.debug(e);
+                }}
+            >
+                {text}
+            </a>
+        ),
     },
     {
         title: 'Category',
@@ -54,6 +79,7 @@ export const data = {
     content: [
         {
             key: '1',
+            uuid: '02044820563-57378387982-05071466738',
             name: '핑크 가방',
             description: '필크',
             qty: 32,
@@ -62,6 +88,7 @@ export const data = {
         },
         {
             key: '2',
+            uuid: '31166073535-23002777704-14457730101',
             name: '파란 가방',
             description: 'Vegan-friendly leather',
             qty: 12,
@@ -70,6 +97,7 @@ export const data = {
         },
         {
             key: '3',
+            uuid: '05536136307-83877962299-01693136394',
             name: '블랙 가방',
             description: 'This is a metal bracelet',
             qty: 32,
