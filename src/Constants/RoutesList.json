@@ -35,22 +35,32 @@
         {
             "name": "카테고리 목록.",
             "routeName": "/products/show-product-category",
-            "componentName": "Products/ShowProductsCategoryPages"
+            "componentName": "Products/ShowProductsCategoryPage"
         },
         {
             "name": "카테고리 등록.",
             "routeName": "/products/add-product-category",
-            "componentName": "Products/AddProductsCategoryPages"
-        },
-        {
-            "name": "카테고리 등록.",
-            "routeName": "/products/add-product",
-            "componentName": "Products/AddProductPage"
+            "componentName": "Products/AddProductsCategoryPage"
         },
         {
             "name": "상품 목록.",
             "routeName": "/products/show-products",
             "componentName": "Products/ShowProductsPage"
+        },
+        {
+            "name": "상품 목록.",
+            "routeName": "/products/:product_uuid/detail-products",
+            "componentName": "Products/DetailProductsPage"
+        },
+        {
+            "name": "상품 등록.",
+            "routeName": "/products/add-product",
+            "componentName": "Products/AddProductPage"
+        },
+        {
+            "name": "상품 상세.",
+            "routeName": "/products/add-product",
+            "componentName": "Products/AddProductPage"
         },
         {
             "name": "사용자 목록.",

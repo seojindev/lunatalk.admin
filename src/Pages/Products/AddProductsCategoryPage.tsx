@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 const DtlPage = lazy(() => import('./Dtls/AddCategory'));
 
-export default function AddProductsCategoryPages() {
+export default function AddProductsCategoryPage() {
     const { storeRouterLocation } = useSelector((store: RootState) => ({
         storeRouterLocation: store.router.location,
     }));
