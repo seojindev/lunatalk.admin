@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageHeader } from '@Layouts';
 import { useDataTable } from '@Hooks';
-import * as constants from '@Src/Data/PaysShowTable';
+import * as constants from '@Src/Data/PagesMainSlides';
 
 export default function ShowSlides() {
     const { DataTable, hasSelected } = useDataTable({

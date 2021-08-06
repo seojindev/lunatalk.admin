@@ -61,6 +61,16 @@
             "name": "결제 목록.",
             "routeName": "/pays/show-pays",
             "componentName": "Pays/ShowPaysPage"
+        },
+        {
+            "name": "메인 슬라이드 목록.",
+            "routeName": "/pages/show-main-slide",
+            "componentName": "Pages/ShowMainSlidePage"
+        },
+        {
+            "name": "메인 슬라이드 등록.",
+            "routeName": "/pages/add-main-slide",
+            "componentName": "Pages/AddMainSlidePage"
         }
     ]
 }
