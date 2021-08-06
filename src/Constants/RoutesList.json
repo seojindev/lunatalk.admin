@@ -71,6 +71,21 @@
             "name": "메인 슬라이드 등록.",
             "routeName": "/pages/add-main-slide",
             "componentName": "Pages/AddMainSlidePage"
+        },
+        {
+            "name": "싸이트 공지사항 목록.",
+            "routeName": "/sites/show-site-notice",
+            "componentName": "Sites/ShowSiteNoticesPage"
+        },
+        {
+            "name": "싸이트 공지사항 등록.",
+            "routeName": "/sites/add-site-notice",
+            "componentName": "Sites/AddSiteNoticesPage"
+        },
+        {
+            "name": "서비스 공지사항 등록.",
+            "routeName": "/sites/show-service-notice",
+            "componentName": "Sites/ShowServiceNoticePage"
         }
     ]
 }

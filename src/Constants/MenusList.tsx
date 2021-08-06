@@ -82,19 +82,15 @@ export const menus = [
         list: [
             {
                 name: '싸이트 공지사항',
-                key: 'show-sites-notice',
+                key: 'show-site-notice',
             },
             {
                 name: '싸이트 공지사항 추가',
-                key: 'add-sites-notice',
+                key: 'add-site-notice',
             },
             {
                 name: '서비스 공지사항',
-                key: 'show-services-notice',
-            },
-            {
-                name: '서비스 공지사항 추가',
-                key: 'add-services-notice',
+                key: 'show-service-notice',
             },
         ],
     },
