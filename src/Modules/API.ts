@@ -16,5 +16,5 @@ export function postLogin(payload: {
     login_id: string;
     login_password: string;
 }): Promise<ServiceResponse<{ access_token: string; refresh_token: string }>> {
-    return _Axios_({ method: 'post', url: '/api/v1/admin/auth/login', payload: payload });
+    return _Axios_({ method: 'post', url: '/api/admin-front/v1/auth/login', payload: payload });
 }
