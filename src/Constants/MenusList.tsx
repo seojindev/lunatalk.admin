@@ -21,20 +21,12 @@ export const menus = [
         icon: <PartitionOutlined />,
         list: [
             {
-                name: '카테고리 목록',
+                name: '카테고리',
                 key: 'show-product-category',
             },
             {
-                name: '카테고리 등록',
-                key: 'add-product-category',
-            },
-            {
-                name: '상품 목록',
+                name: '상품',
                 key: 'show-products',
-            },
-            {
-                name: '상품 등록',
-                key: 'add-product',
             },
         ],
     },
@@ -44,7 +36,7 @@ export const menus = [
         icon: <TeamOutlined />,
         list: [
             {
-                name: '회원 목록',
+                name: '회원',
                 key: 'show-customers',
             },
         ],
@@ -55,7 +47,7 @@ export const menus = [
         icon: <PayCircleOutlined />,
         list: [
             {
-                name: '결제 목록',
+                name: '결제',
                 key: 'show-pays',
             },
         ],
@@ -69,10 +61,6 @@ export const menus = [
                 name: '메인슬라이드',
                 key: 'show-main-slide',
             },
-            {
-                name: '메인슬라이드 추가',
-                key: 'add-main-slide',
-            },
         ],
     },
     {
@@ -83,10 +71,6 @@ export const menus = [
             {
                 name: '싸이트 공지사항',
                 key: 'show-site-notice',
-            },
-            {
-                name: '싸이트 공지사항 추가',
-                key: 'add-site-notice',
             },
             {
                 name: '서비스 공지사항',
