@@ -13,8 +13,6 @@ function* loginRequestSaga({
 }: {
     payload: { login_id: string; login_password: string };
 }) {
-    yield put({ type: _AppTypes.START_PAGE_LOADING });
-
     const response: ServiceResponse<{ access_token: string; refresh_token: string }> = yield call(postLogin, {
         login_id: login_id,
         login_password: login_password,
@@ -51,25 +49,18 @@ function* loginRequestSaga({
             type: _AppTypes.SET_LOGIN_STATE_FALSE,
         });
     }
-
-    yield put({ type: _AppTypes.END_PAGE_LOADING });
 }
 
 // 로그 아웃 처리.
 function* startLogoutSaga() {
-    yield put({ type: _AppTypes.START_PAGE_LOADING });
-
     removeLocalToken();
     yield put({
         type: _AppTypes.SET_LOGIN_STATE_FALSE,
     });
-    yield put({ type: _AppTypes.END_PAGE_LOADING });
 }
 
 // app init 할때 로컬 토큰 체크.
 function* checkLocalTokenSaga() {
-    yield put({ type: _AppTypes.START_PAGE_LOADING });
-
     const { access_token, refresh_token } = getLocalToken();
 
     if (!isEmpty(access_token) && !isEmpty(refresh_token)) {
@@ -90,7 +81,6 @@ function* checkLocalTokenSaga() {
         COLORLOG(':: 로컬 토큰 체크 실패 :: ', 'error');
         removeLocalToken();
     }
-    yield put({ type: _AppTypes.END_PAGE_LOADING });
 }
 
 function* onBaseSagaWatcher() {

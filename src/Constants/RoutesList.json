@@ -43,6 +43,11 @@
             "componentName": "Products/AddProductsCategoryPage"
         },
         {
+            "name": "카테고리 수정.",
+            "routeName": "/products/update-product-category/:category_uuid",
+            "componentName": "Products/updateProductsCategoryPage"
+        },
+        {
             "name": "상품 목록.",
             "routeName": "/products/show-products",
             "componentName": "Products/ShowProductsPage"

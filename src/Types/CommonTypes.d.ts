@@ -51,11 +51,30 @@ declare module 'CommonTypes' {
         };
     }
 
+    export interface ProductCategoryItem {
+        id: number;
+        uuid: string;
+        name: string;
+        products_count: number;
+    }
+
     export interface LoginResult {}
 
     interface lunaTreeSelectItem {
         title: string;
         value: string | number;
         key: string | number;
+    }
+
+    interface productCategoryResponse {
+        id: number;
+        uuid: string;
+        name: string;
+        products_count: number;
+    }
+
+    interface productCategoryDetailResponse {
+        uuid: string;
+        name: string;
     }
 }

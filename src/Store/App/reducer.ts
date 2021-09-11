@@ -10,10 +10,14 @@ import * as _Types from './types';
 // 스토어 init.
 const initialState: AppState = {
     loading: false,
-    pageLoading: false,
     status: false,
     loginState: false,
     service_message: '',
+    pageState: {
+        state: 'idle',
+        loading: false,
+        message: '',
+    },
     common: {
         codes: {
             code_name: '',
@@ -58,14 +62,19 @@ export const AppSagaReducer = createReducer<AppState>(initialState, {
             draft.service_message = action.payload.message;
         });
     },
-    [_Types.START_PAGE_LOADING]: (state: AppState) => {
+    [_Types.APP_PAGE_LOADING_START]: (state: AppState) => {
         return produce(state, draft => {
-            draft.pageLoading = true;
+            draft.pageState.loading = true;
         });
     },
-    [_Types.END_PAGE_LOADING]: (state: AppState) => {
+    [_Types.APP_PAGE_LOADING_END]: (state: AppState) => {
         return produce(state, draft => {
-            draft.pageLoading = false;
+            draft.pageState.loading = false;
+        });
+    },
+    [_Types.RESET_PAGE_LOADING]: (state: AppState) => {
+        return produce(state, draft => {
+            draft.pageState.loading = initialState.pageState.loading;
         });
     },
     [_Types.SET_LOGIN_STATE_TRUE]: (state: AppState) => {

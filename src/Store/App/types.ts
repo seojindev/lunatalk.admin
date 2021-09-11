@@ -16,6 +16,7 @@ export const COMMON_DATA = 'app/COMMON_DATA';
 export const SET_LOGIN_STATE_TRUE = 'app/SET_LOGIN_STATE_TRUE';
 export const SET_LOGIN_STATE_FALSE = 'app/SET_LOGIN_STATE_FALSE';
 
-export const START_PAGE_LOADING = 'app/START_PAGE_LOADING';
-export const END_PAGE_LOADING = 'app/END_PAGE_LOADING';
+export const APP_PAGE_LOADING_START = 'app/APP_PAGE_LOADING_START';
+export const APP_PAGE_LOADING_END = 'app/APP_PAGE_LOADING_END';
+export const RESET_PAGE_LOADING = 'app/RESET_PAGE_LOADING';
 /* action type end */
