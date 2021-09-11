@@ -1,60 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import { RootState } from 'StoreTypes';
+import React, { useState } from 'react';
 import { Card, Form, Input, Row, Col, Divider, Button, message } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
-import { addCategoryAction, productCateogoryResetAction } from '@Store/Products';
-import {} from '@Store/App';
 import { useHistory } from 'react-router-dom';
 import { addProductCategory } from '@API';
+import { useLoading } from '@Hooks';
 
 export default function AddCategory() {
-    const dispatch = useDispatch();
     const history = useHistory();
 
-    const { storeState, storeMessage } = useSelector((store: RootState) => ({
-        storeState: store.products.category.add.state,
-        storeMessage: store.products.category.add.message,
-    }));
+    const { loadingControl } = useLoading();
 
     const [form] = Form.useForm();
     const [cardLoading, setCardLoading] = useState<boolean>(false);
     const handleSave = async (values: { categoryName: string }) => {
-        console.log('onFinish', values);
-        // call save API
-        // dispatch(addCategoryAction({ name: values.categoryName }));
+        await loadingControl({
+            type: 'fetch',
+        });
+        const { status } = await addProductCategory({ name: values.categoryName });
+        if (status) {
+            await loadingControl({
+                type: 'success',
+            });
+            message.success('정상 처리 하였습니다.');
+            history.push({ pathname: `${process.env.PUBLIC_URL}/products/show-product-category` });
+        } else {
+            await loadingControl({
+                type: 'error',
+            });
+            message.error('문제가 발생했습니다.');
+        }
+        setCardLoading(false);
 
-        const response = await addProductCategory({ name: values.categoryName });
-
-        console.debug(response);
-    };
-
-    useEffect(() => {
-        const funcSetCardLoading = () => {
-            if (storeState === 'loading') {
-                setCardLoading(true);
-            } else {
-                setCardLoading(false);
-            }
-        };
-
-        const funcSetMessage = () => {
-            if (storeState === 'failure') {
-                message.error(storeMessage ? storeMessage : '문제가 발생했습니다.').then();
-            } else if (storeState === 'success') {
-                message.success(storeMessage ? storeMessage : '정상 처리 하였습니다.').then();
-                history.push({ pathname: `${process.env.PUBLIC_URL}/products/show-product-category` });
-            }
-        };
-
-        funcSetCardLoading();
-        funcSetMessage();
-    }, [storeState]);
-
-    useEffect(() => {
         return () => {
-            dispatch(productCateogoryResetAction());
+            //
         };
-    }, [storeMessage]);
+    };
 
     return (
         <>

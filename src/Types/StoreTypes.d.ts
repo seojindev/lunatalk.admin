@@ -29,43 +29,8 @@ declare module 'StoreTypes' {
 
     // 상품 스토어
     export interface ProductsState {
-        category: {
-            add: {
-                state: DefaultStatus;
-                message: string;
-                result: {
-                    uuid: string;
-                };
-            };
-            show: {
-                state: DefaultStatus;
-                message: string;
-                result: ProductCategoryItem[];
-            };
-            detail: {
-                state: DefaultStatus;
-                message: string;
-                result: {
-                    uuid: string;
-                    name: string;
-                };
-            };
-            update: {
-                state: DefaultStatus;
-                message: string;
-                result: {
-                    uuid: string;
-                    name: string;
-                };
-            };
-        };
-        products: {
-            show: {
-                state: DefaultStatus;
-                message: string;
-                result: ProductCategoryItem[];
-            };
-        };
+        category: {};
+        products: {};
     }
 
     // store 인터페이스.
@@ -73,6 +38,5 @@ declare module 'StoreTypes' {
         router: RouterState;
         app: AppState;
         auths: AuthsState;
-        products: ProductsState;
     }
 }

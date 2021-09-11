@@ -1,79 +1,72 @@
 import React, { useEffect, useState } from 'react';
-import { RootState } from 'StoreTypes';
 import { Card, Form, Input, Row, Col, Divider, Button, message } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
-import { addCategoryAction, productCateogoryResetAction } from '@Store/Products';
 import { useHistory, useParams } from 'react-router-dom';
 import { isEmpty } from '@Helper';
-import { detailCategoryAction, updateCategoryAction } from '@Store/Products';
+import { useLoading } from '@Hooks';
+import { getProductCategoryDetail, updateProductCategory } from '@API';
 
 export default function updateCategory() {
-    const dispatch = useDispatch();
     const history = useHistory();
-    const { storeResult, storeState, storeUpdateMessage, storeUpdateState } = useSelector((state: RootState) => ({
-        storeState: state.products.category.detail.state,
-        storeResult: state.products.category.detail.result,
-        storeMessage: state.products.category.detail.message,
+    const { loadingState, loadingControl } = useLoading();
 
-        storeUpdateMessage: state.products.category.update.message,
-        storeUpdateState: state.products.category.update.state,
-    }));
     const [form] = Form.useForm();
     const parmas = useParams<{ category_uuid: string }>();
     const [cardLoading, setCardLoading] = useState<boolean>(true);
     const [categoryInputName, setCategoryInputName] = useState<string>();
     const handleSave = (values: { categoryName: string }) => {
-        dispatch(updateCategoryAction({ uuid: parmas.category_uuid, name: values.categoryName }));
-    };
-
-    useEffect(() => {
-        console.debug('start');
-        console.debug(parmas.category_uuid);
-
-        const funcGetCategoryInfo = () => {
-            dispatch(detailCategoryAction(parmas.category_uuid));
-        };
-
-        if (!isEmpty(parmas.category_uuid)) {
-            funcGetCategoryInfo();
-        }
-        return () => {
-            dispatch(productCateogoryResetAction());
-        };
-    }, []);
-
-    useEffect(() => {
-        const funcSetCategoryName = () => {
-            console.debug(storeResult.name);
-            setCategoryInputName(storeResult.name);
-        };
-
-        const funcSetFormLoading = () => {
-            if (storeState === 'success') {
+        const fnUpdate = async () => {
+            await loadingControl({
+                type: 'fetch',
+            });
+            const response = await updateProductCategory(parmas.category_uuid, values.categoryName);
+            if (response.status) {
+                await loadingControl({
+                    type: 'success',
+                });
+                message.success('수정 되었습니다.').then();
                 setCardLoading(false);
+                history.push({ pathname: `${process.env.PUBLIC_URL}/products/show-product-category` });
             } else {
-                setCardLoading(true);
+                await loadingControl({
+                    type: 'error',
+                });
+                setCardLoading(false);
+                message.error('문제가 발생했습니다.');
             }
         };
 
-        if (storeState) {
-            funcSetCategoryName();
-        }
-        funcSetFormLoading();
-    }, [storeState]);
+        fnUpdate().then();
+    };
 
     useEffect(() => {
-        if (storeUpdateState) {
-            message.success(storeUpdateMessage ? storeUpdateMessage : '정상 처리 하였습니다.').then();
-            history.push({ pathname: `${process.env.PUBLIC_URL}/products/show-product-category` });
-        } else if (storeUpdateState === 'failure') {
-            message.error(storeUpdateMessage ? storeUpdateMessage : '문제가 발생했습니다.').then();
+        const fnGetCategoryInfo = async () => {
+            await loadingControl({
+                type: 'fetch',
+            });
+            const response = await getProductCategoryDetail(parmas.category_uuid);
+            if (response.status) {
+                await loadingControl({
+                    type: 'success',
+                });
+                setCategoryInputName(response.payload.name);
+                setCardLoading(false);
+            } else {
+                await loadingControl({
+                    type: 'error',
+                });
+                setCardLoading(false);
+                message.error('문제가 발생했습니다.');
+            }
+        };
+
+        if (!isEmpty(parmas.category_uuid)) {
+            fnGetCategoryInfo().then();
         }
-    }, [storeUpdateState]);
+    }, []);
 
     return (
         <>
-            {storeState && categoryInputName && (
+            {loadingState && categoryInputName && (
                 <Card title="카테고리 등록" loading={cardLoading}>
                     <Row justify="center">
                         <Col span={12}>

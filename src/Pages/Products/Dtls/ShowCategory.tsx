@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { PageHeader } from '@Layouts';
-import { useDataTable } from '@Hooks';
+import { useDataTable, useLoading } from '@Hooks';
 import * as constants from '@Src/Data/ProductCategoryTable';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'StoreTypes';
 import { ProductCategoryItem } from 'CommonTypes';
-import { productCateogoryResetAction, showCategoryAction } from '@Store/Products';
+import { getProductCategory } from '@API';
 
 interface tableDataItem {
     key: string;
@@ -19,13 +17,7 @@ interface tableDataInserface {
 }
 
 export default function ShowCategory() {
-    const dispatch = useDispatch();
-
-    const { storeState, storeResult } = useSelector((store: RootState) => ({
-        storeState: store.products.category.show.state,
-        storeResult: store.products.category.show.result,
-    }));
-
+    const { loadingControl } = useLoading();
     const [tableData, setTableData] = useState<tableDataInserface>({
         totalElements: 0,
         content: [],
@@ -37,35 +29,35 @@ export default function ShowCategory() {
     });
 
     useEffect(() => {
-        const funcSetTableData = () => {
-            setTableData({
-                totalElements: storeResult.length,
-                content: storeResult.map((e: ProductCategoryItem) => {
-                    return {
-                        key: e.uuid,
-                        id: e.id,
-                        name: e.name,
-                        products: e.products_count,
-                    };
-                }),
+        const fnGetCategoryList = async () => {
+            await loadingControl({
+                type: 'fetch',
             });
+            const response = await getProductCategory();
+            if (response.status) {
+                await loadingControl({
+                    type: 'success',
+                });
+                setTableData({
+                    totalElements: response.payload.length,
+                    content: response.payload.map((e: ProductCategoryItem) => {
+                        return {
+                            key: e.uuid,
+                            id: e.id,
+                            name: e.name,
+                            products: e.products_count,
+                        };
+                    }),
+                });
+            } else {
+                // FIXME: 에러 날때?
+                await loadingControl({
+                    type: 'error',
+                });
+            }
         };
 
-        if (storeState === 'success') {
-            funcSetTableData();
-        }
-    }, [storeState]);
-
-    useEffect(() => {
-        const funcGetTableData = () => {
-            dispatch(showCategoryAction());
-        };
-
-        funcGetTableData();
-
-        return () => {
-            dispatch(productCateogoryResetAction());
-        };
+        fnGetCategoryList().then();
     }, []);
 
     return (
