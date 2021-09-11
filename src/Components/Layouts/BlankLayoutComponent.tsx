@@ -9,7 +9,7 @@ const { Content } = Layout;
 
 export default function BlankLayoutComponent({ children }: { children: any }) {
     const { appPageLoading } = useSelector((store: RootState) => ({
-        appPageLoading: store.app.pageLoading,
+        appPageLoading: store.app.pageState.loading,
     }));
 
     const [viewLoading, setViewLoading] = useState<boolean>(false);
