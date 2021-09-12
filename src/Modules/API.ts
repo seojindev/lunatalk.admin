@@ -51,3 +51,12 @@ export function updateProductCategory(
         payload: { name: name },
     });
 }
+
+// 상품 카테고리 삭제
+export function deleteProductCategory(uuid: string[]): Promise<CommonTypes.ServiceResponse<{ message: string }>> {
+    return _Axios_({
+        method: 'delete',
+        url: '/api/admin-front/v1/product/delete-product-categories',
+        payload: { uuid: uuid },
+    });
+}

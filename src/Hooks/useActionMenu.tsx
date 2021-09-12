@@ -1,6 +1,6 @@
 import React from 'react';
-import { Dropdown, Menu, Popconfirm } from 'antd';
-import { DeleteOutlined, DownOutlined, EditOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import { Dropdown, Menu } from 'antd';
+import { DownOutlined, EditOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 
 function useActionMenu({ selectedRow, updateEntityPath }: { selectedRow: any; updateEntityPath: any }) {
@@ -13,9 +13,9 @@ function useActionMenu({ selectedRow, updateEntityPath }: { selectedRow: any; up
         }
     };
 
-    const handleSingleDelete = () => {
-        console.log('handleSingleDelete, selected:', selectedRow);
-    };
+    // const handleSingleDelete = () => {
+    //     console.log('handleSingleDelete, selected:', selectedRow);
+    // };
 
     const actionMenu = (
         <Menu onClick={handleMenuClick}>
@@ -23,17 +23,17 @@ function useActionMenu({ selectedRow, updateEntityPath }: { selectedRow: any; up
                 <EditOutlined />
                 수정
             </Menu.Item>
-            <Menu.Item key="delete">
-                <Popconfirm
-                    title="Sure to delete?"
-                    placement="left"
-                    icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
-                    onConfirm={handleSingleDelete}
-                >
-                    <DeleteOutlined type="delete" />
-                    삭제
-                </Popconfirm>
-            </Menu.Item>
+            {/*<Menu.Item key="delete">*/}
+            {/*    <Popconfirm*/}
+            {/*        title="Sure to delete?"*/}
+            {/*        placement="left"*/}
+            {/*        icon={<QuestionCircleOutlined style={{ color: 'red' }} />}*/}
+            {/*        onConfirm={handleSingleDelete}*/}
+            {/*    >*/}
+            {/*        <DeleteOutlined type="delete" />*/}
+            {/*        삭제*/}
+            {/*    </Popconfirm>*/}
+            {/*</Menu.Item>*/}
         </Menu>
     );
 

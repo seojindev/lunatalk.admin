@@ -9,10 +9,12 @@ export default function PageHeaderComponent({
     addNewPath,
     hasSelected,
     handleSearch,
+    handleDelete,
 }: {
     addNewPath: any;
     hasSelected: any;
     handleSearch?: any;
+    handleDelete?: any;
 }) {
     const history = useHistory();
 
@@ -45,7 +47,8 @@ export default function PageHeaderComponent({
                             title="Sure to delete?"
                             icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
                             onConfirm={() => {
-                                console.debug('onConfirm');
+                                // console.debug('onConfirm');
+                                handleDelete();
                             }}
                         >
                             Delete
