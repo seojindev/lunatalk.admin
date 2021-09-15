@@ -7,7 +7,7 @@ export default function SplashComponent({ appLoading }: { appLoading: () => void
 
     useEffect(() => {
         const setAppMainLoading = (loading: boolean) => {
-            if (loading === true) {
+            if (loading) {
                 appLoading();
             }
         };

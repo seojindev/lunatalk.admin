@@ -60,3 +60,89 @@ export function deleteProductCategory(uuid: string[]): Promise<CommonTypes.Servi
         payload: { uuid: uuid },
     });
 }
+
+// 대표 이미지 업로드.
+export function uploadProductRepImage(formData: any): Promise<
+    CommonTypes.ServiceResponse<{
+        status: boolean;
+        media_id: number;
+        media_full_url: string;
+        file_name: string;
+        message: string;
+    }>
+> {
+    return _Axios_({
+        method: 'post',
+        url: '/api/other/v1/media/products/rep/create',
+        payload: formData,
+    });
+}
+
+// 상세 이미지 업로드.
+export function uploadProductDetailImage(formData: any): Promise<
+    CommonTypes.ServiceResponse<{
+        status: boolean;
+        media_id: number;
+        media_full_url: string;
+        file_name: string;
+        message: string;
+    }>
+> {
+    return _Axios_({
+        method: 'post',
+        url: '/api/other/v1/media/products/detail/create',
+        payload: formData,
+    });
+}
+
+// 상품 등록.
+export function addProduct({
+    name,
+    category,
+    barcode,
+    color,
+    wireless,
+    price,
+    stock,
+    memo,
+    sale,
+    active,
+    rep_image,
+    detail_image,
+}: {
+    name: string;
+    category: number;
+    barcode: string;
+    color: number[];
+    wireless: number[];
+    price: number;
+    stock: number;
+    memo: string;
+    sale: string;
+    active: string;
+    rep_image: number[];
+    detail_image: number[];
+}): Promise<
+    CommonTypes.ServiceResponse<{
+        uuid: string;
+    }>
+> {
+    return _Axios_({
+        method: 'post',
+        url: '/api/admin-front/v1/product/create-product',
+        payload: {
+            name: name,
+            category: category,
+            barcode: barcode,
+            color: color,
+            wireless: wireless,
+            price: price,
+            stock: stock,
+            memo: memo,
+            sale: sale,
+            active: active,
+            rep_image: rep_image,
+            detail_image: detail_image,
+        },
+    });
+}

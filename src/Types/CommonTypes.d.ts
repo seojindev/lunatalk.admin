@@ -15,9 +15,62 @@ declare module 'CommonTypes' {
         payload: T;
     }
 
+    export interface ProductColorOptionItem {
+        id: number;
+        name: string;
+    }
+
+    export interface ProductWirelessOptionItem {
+        id: number;
+        name: string;
+    }
+
+    export interface ColorOptionListItem {
+        id: number;
+        name: string;
+        eng_name: string;
+    }
+
+    export interface WirelessOptionsListItem {
+        id: 1;
+        wireless: 'Y' | 'N';
+    }
+
+    export interface OptionItem {
+        id: number;
+        color: ProductColorOptionItem[] | null;
+        wireless: ProductWirelessOptionItem | null;
+    }
+
+    export interface productListItem {
+        id: number;
+        uuid: string;
+        name: string;
+        category: {
+            id: number;
+            uuid: string;
+            name: string;
+        };
+        options: OptionItem[];
+    }
+
+    export interface ProductsCategoryItms {
+        id: number;
+        uuid: string;
+        name: string;
+    }
+
+    export interface Products {
+        category: ProductsCategoryItms[];
+        list: productListItem[];
+        color_options: ColorOptionListItem[];
+        wireless_options: WirelessOptionsListItem[];
+    }
+
     // 기본 데이터들.
     export interface AppBase {
         codes: Codes[];
+        products: Products;
     }
 
     // 토큰
@@ -51,6 +104,7 @@ declare module 'CommonTypes' {
         };
     }
 
+    // 상품 카테고리 아이템
     export interface ProductCategoryItem {
         id: number;
         uuid: string;
@@ -66,6 +120,7 @@ declare module 'CommonTypes' {
         key: string | number;
     }
 
+    // 상품 카테고리 결과
     interface productCategoryResponse {
         id: number;
         uuid: string;
@@ -73,6 +128,7 @@ declare module 'CommonTypes' {
         products_count: number;
     }
 
+    // 상품 카테고리 상세 결과.
     interface productCategoryDetailResponse {
         uuid: string;
         name: string;

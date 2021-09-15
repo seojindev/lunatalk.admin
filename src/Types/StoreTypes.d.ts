@@ -1,6 +1,6 @@
 declare module 'StoreTypes' {
     import { RouterState } from 'connected-react-router';
-    import { Codes, LocalTokenInterface, DefaultStatus } from 'CommonTypes';
+    import { Codes, Products, LocalTokenInterface, DefaultStatus } from 'CommonTypes';
 
     // App Store
     export interface AppState {
@@ -15,6 +15,7 @@ declare module 'StoreTypes' {
         };
         common: {
             codes: Codes;
+            products: Products;
         };
     }
 

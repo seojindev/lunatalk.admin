@@ -21,7 +21,7 @@ function* appInitSaga() {
         yield call(checkServerStatus);
 
         const serverNotice: ServiceResponse<{ notice: string }> = yield call(checkServerNotice);
-        if (serverNotice.status === true && serverNotice.payload && serverNotice.payload.notice) {
+        if (serverNotice.status && serverNotice.payload && serverNotice.payload.notice) {
             _Alert_.default({ text: serverNotice.payload.notice });
         }
 
@@ -31,6 +31,7 @@ function* appInitSaga() {
             type: _Types.COMMON_DATA,
             payload: {
                 codes: serverBaseData.payload.codes,
+                products: serverBaseData.payload.products,
             },
         });
 
