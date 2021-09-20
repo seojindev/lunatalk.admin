@@ -35,7 +35,7 @@ export default function PageHeaderComponent({
                 </Col>
                 <Col flex="auto">
                     <Button icon={<PlusOutlined />} type="primary" style={{ float: 'right' }} onClick={handleAddNew}>
-                        Add New
+                        등록
                     </Button>
 
                     <Button
@@ -44,7 +44,7 @@ export default function PageHeaderComponent({
                         style={{ float: 'right', marginRight: 12 }}
                     >
                         <Popconfirm
-                            title="Sure to delete?"
+                            title="삭제 하시겠습니까?"
                             icon={<QuestionCircleOutlined style={{ color: 'red' }} />}
                             onConfirm={() => {
                                 // console.debug('onConfirm');

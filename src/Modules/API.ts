@@ -146,3 +146,66 @@ export function addProduct({
         },
     });
 }
+
+// 상품 수정.
+export function updateProduct({
+    uuid,
+    payload: { name, category, barcode, color, wireless, price, stock, memo, sale, active, rep_image, detail_image },
+}: {
+    uuid: string;
+    payload: {
+        name: string;
+        category: number;
+        barcode: string;
+        color: number[];
+        wireless: number[];
+        price: number;
+        stock: number;
+        memo: string;
+        sale: string;
+        active: string;
+        rep_image: number[];
+        detail_image: number[];
+    };
+}): Promise<
+    CommonTypes.ServiceResponse<{
+        uuid: string;
+    }>
+> {
+    return _Axios_({
+        method: 'put',
+        url: `/api/admin-front/v1/product/${uuid}/update-product`,
+        payload: {
+            name: name,
+            category: category,
+            barcode: barcode,
+            color: color,
+            wireless: wireless,
+            price: price,
+            stock: stock,
+            memo: memo,
+            sale: sale,
+            active: active,
+            rep_image: rep_image,
+            detail_image: detail_image,
+        },
+    });
+}
+
+// 상품 리스트.
+export function getShowProducts(): Promise<CommonTypes.ServiceResponse<CommonTypes.productListItem[]>> {
+    return _Axios_({ method: 'get', url: '/api/admin-front/v1/product/show-product', payload: { data: {} } });
+}
+
+// 상품 상세 리스트.
+export function getDetailProducts({
+    uuid,
+}: {
+    uuid: string;
+}): Promise<CommonTypes.ServiceResponse<CommonTypes.productDeatailResponse>> {
+    return _Axios_({
+        method: 'get',
+        url: `/api/admin-front/v1/product/${uuid}/detail-product`,
+        payload: { data: {} },
+    });
+}

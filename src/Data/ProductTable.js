@@ -6,35 +6,21 @@ export const columns = [
     {
         title: '아이디',
         dataIndex: 'key',
-        key: 'key',
-    },
-    {
-        title: 'UUID',
-        dataIndex: 'uuid',
         key: 'uuid',
-        render: text => (
-            <a
-                onClick={() => {
-                    History.push({
-                        pathname: process.env.PUBLIC_URL + `/products/${text}/detail-product`,
-                    });
-                }}
-            >
-                {text}
-            </a>
-        ),
     },
     {
         title: '상품명',
-        dataIndex: 'name',
-        key: 'name',
-        render: text => (
+        dataIndex: 'product',
+        key: 'product',
+        render: product => (
             <a
-                onClick={e => {
-                    console.debug(e);
+                onClick={() => {
+                    History.push({
+                        pathname: process.env.PUBLIC_URL + `/products/${product.uuid}/detail-product`,
+                    });
                 }}
             >
-                {text}
+                {product.name}
             </a>
         ),
     },
@@ -42,68 +28,50 @@ export const columns = [
         title: 'Category',
         key: 'category',
         dataIndex: 'category',
-        render: tags => (
+        render: category => (
             <>
-                {tags.map(tag => {
-                    let color = 'blue';
-                    if (tag === 'accessory') {
-                        color = 'volcano';
-                    } else if (tag === 'clothing') {
-                        color = 'geekblue';
-                    } else if (tag === 'jewellery') {
-                        color = 'green';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
+                <Tag color={`blue`}>{category.toUpperCase()}</Tag>
             </>
         ),
     },
     {
-        title: '옵션',
-        dataIndex: 'description',
-        key: 'description',
+        title: '컬러',
+        dataIndex: 'color',
+        key: 'color',
+        render: color => {
+            return (
+                <>
+                    {color.map(name => {
+                        return (
+                            <Tag color={`blue`} key={name}>
+                                {name.toUpperCase()}
+                            </Tag>
+                        );
+                    })}
+                </>
+            );
+        },
+    },
+    {
+        title: '유/무선',
+        dataIndex: 'wireless',
+        key: 'wireless',
+        render: wireless => {
+            return (
+                <>
+                    <Tag color={`blue`}>{wireless}</Tag>
+                </>
+            );
+        },
     },
     {
         title: '제고',
         dataIndex: 'qty',
         key: 'qty',
     },
+    {
+        title: '가격',
+        dataIndex: 'price',
+        key: 'price',
+    },
 ];
-
-export const data = {
-    totalElements: 8,
-    content: [
-        {
-            key: '1',
-            uuid: '02044820563-57378387982-05071466738',
-            name: '핑크 가방',
-            description: '필크',
-            qty: 32,
-            owner: 'John Brown',
-            category: ['jewellery'],
-        },
-        {
-            key: '2',
-            uuid: '31166073535-23002777704-14457730101',
-            name: '파란 가방',
-            description: 'Vegan-friendly leather',
-            qty: 12,
-            owner: 'John Green',
-            category: ['living'],
-        },
-        {
-            key: '3',
-            uuid: '05536136307-83877962299-01693136394',
-            name: '블랙 가방',
-            description: 'This is a metal bracelet',
-            qty: 32,
-            owner: 'John Brown',
-            category: ['clothing'],
-        },
-        // ...
-    ],
-};

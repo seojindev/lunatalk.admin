@@ -1,5 +1,5 @@
 import { createReducer } from 'typesafe-actions';
-import { SagaAction, Codes, Products } from 'CommonTypes';
+import { SagaAction, Codes, Products, productListItem } from 'CommonTypes';
 import produce from 'immer';
 // import { ErrorMessage } from 'StoreTypes';
 import { AppState } from 'StoreTypes';
@@ -92,6 +92,21 @@ export const AppSagaReducer = createReducer<AppState>(initialState, {
     [_Types.SET_LOGIN_STATE_FALSE]: (state: AppState) => {
         return produce(state, draft => {
             draft.loginState = false;
+        });
+    },
+    [_Types.RESET_PRODUCT_LIST]: (state: AppState) => {
+        return produce(state, draft => {
+            draft.common.products.list = initialState.common.products.list;
+        });
+    },
+    [_Types.GET_PRODUCT_REQUEST]: (state: AppState) => {
+        return produce(state, draft => {
+            draft.common.products.list = initialState.common.products.list;
+        });
+    },
+    [_Types.GET_PRODUCT_SUCCESS]: (state: AppState, action: SagaAction<productListItem[]>) => {
+        return produce(state, draft => {
+            draft.common.products.list = action.payload;
         });
     },
 });

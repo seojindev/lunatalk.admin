@@ -22,7 +22,13 @@ declare module 'CommonTypes' {
 
     export interface ProductWirelessOptionItem {
         id: number;
-        name: string;
+        wireless: string;
+    }
+
+    export interface ProductDetailImageItem {
+        id: number;
+        file_name: string;
+        url: string;
     }
 
     export interface ColorOptionListItem {
@@ -32,8 +38,8 @@ declare module 'CommonTypes' {
     }
 
     export interface WirelessOptionsListItem {
-        id: 1;
-        wireless: 'Y' | 'N';
+        id: number;
+        wireless: string;
     }
 
     export interface OptionItem {
@@ -42,16 +48,35 @@ declare module 'CommonTypes' {
         wireless: ProductWirelessOptionItem | null;
     }
 
+    export interface productListColorItem {
+        id: number;
+        name: string;
+    }
+
+    export interface productListWirelessItem {
+        id: number;
+        wireless: string;
+    }
+
     export interface productListItem {
         id: number;
         uuid: string;
         name: string;
+        stock: {
+            number: number;
+            string: string;
+        };
+        price: {
+            number: number;
+            string: string;
+        };
         category: {
             id: number;
             uuid: string;
             name: string;
         };
-        options: OptionItem[];
+        color: productListColorItem[];
+        wireless: productListWirelessItem[];
     }
 
     export interface ProductsCategoryItms {
@@ -132,5 +157,31 @@ declare module 'CommonTypes' {
     interface productCategoryDetailResponse {
         uuid: string;
         name: string;
+    }
+
+    // 상품 상세 정보 결과.
+    interface productDeatailResponse {
+        uuid: string;
+        category: {
+            id: number;
+            name: string;
+        };
+        name: string;
+        barcode: string;
+        price: {
+            number: number;
+            string: string;
+        };
+        stock: {
+            number: number;
+            string: string;
+        };
+        memo: string;
+        sale: string;
+        active: string;
+        color: productListColorItem[];
+        wireless: ProductWirelessOptionItem[];
+        rep_images: ProductDetailImageItem[];
+        detail_images: ProductDetailImageItem[];
     }
 }

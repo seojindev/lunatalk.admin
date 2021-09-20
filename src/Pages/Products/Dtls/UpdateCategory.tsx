@@ -5,7 +5,7 @@ import { isEmpty } from '@Helper';
 import { useLoading } from '@Hooks';
 import { getProductCategoryDetail, updateProductCategory } from '@API';
 
-export default function updateCategory() {
+export default function UpdateCategory() {
     const history = useHistory();
     const { loadingState, loadingControl } = useLoading();
 
