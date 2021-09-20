@@ -17,7 +17,7 @@ interface tableDataItem {
     color: string[];
     wireless: string[];
     description: string;
-    qty: string;
+    quantity: string;
     price: string;
 }
 
@@ -57,7 +57,7 @@ export default function ShowProducts() {
                         description: '',
                         color: item.color.map(e => e.name),
                         wireless: item.wireless.map(e => e.wireless),
-                        qty: item.stock.string,
+                        quantity: item.quantity.string,
                         price: item.price.string,
                     };
                 }),

@@ -28,7 +28,7 @@ export default function ProductForm({
         productColorOption: number[];
         productWirelessOption: number[];
         productPrice: number;
-        productStock: number;
+        productQuantity: number;
         productMemo: string;
         productSaleActive: boolean;
         productActive: boolean;
@@ -63,7 +63,7 @@ export default function ProductForm({
         productColorOption,
         productWirelessOption,
         productPrice,
-        productStock,
+        productQuantity,
         productMemo,
         productSaleActive,
         productActive,
@@ -73,7 +73,7 @@ export default function ProductForm({
         productColorOption: number[];
         productWirelessOption: number[];
         productPrice: number;
-        productStock: number;
+        productQuantity: number;
         productMemo: string;
         productSaleActive: boolean;
         productActive: boolean;
@@ -96,7 +96,7 @@ export default function ProductForm({
             color: productColorOption,
             wireless: productWirelessOption,
             price: productPrice,
-            stock: productStock,
+            quantity: productQuantity,
             memo: productMemo,
             sale: productSaleActive ? 'Y' : 'N',
             active: productActive ? 'Y' : 'N',
@@ -320,7 +320,7 @@ export default function ProductForm({
             </Form.Item>
             <Form.Item
                 label="수량"
-                name="productStock"
+                name="productQuantity"
                 rules={[{ required: true, message: '수량을 입력해 주세요.', type: 'number' }]}
             >
                 <InputNumber />

@@ -62,7 +62,7 @@ declare module 'CommonTypes' {
         id: number;
         uuid: string;
         name: string;
-        stock: {
+        quantity: {
             number: number;
             string: string;
         };
@@ -172,7 +172,7 @@ declare module 'CommonTypes' {
             number: number;
             string: string;
         };
-        stock: {
+        quantity: {
             number: number;
             string: string;
         };

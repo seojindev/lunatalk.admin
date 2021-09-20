@@ -23,7 +23,7 @@ export default function AddUpdateProduct() {
         productColorOption: number[];
         productWirelessOption: number[];
         productPrice: number;
-        productStock: number;
+        productQuantity: number;
         productMemo: string;
         productSaleActive: boolean;
         productActive: boolean;
@@ -33,7 +33,7 @@ export default function AddUpdateProduct() {
         productColorOption: [],
         productWirelessOption: [],
         productPrice: 0,
-        productStock: 0,
+        productQuantity: 0,
         productMemo: '',
         productSaleActive: false,
         productActive: false,
@@ -60,7 +60,7 @@ export default function AddUpdateProduct() {
                         return item.id;
                     }),
                     productPrice: payload.price.number,
-                    productStock: payload.stock.number,
+                    productQuantity: payload.quantity.number,
                     productMemo: payload.memo,
                     productSaleActive: payload.sale === 'Y',
                     productActive: payload.active === 'Y',

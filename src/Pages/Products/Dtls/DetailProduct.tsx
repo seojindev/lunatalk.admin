@@ -75,7 +75,7 @@ export default function DetailProduct() {
                             : '없음'}
                     </Descriptions.Item>
                     <Descriptions.Item label="남은 수량">
-                        {detailInfo && detailInfo.stock ? detailInfo.stock.string : '없음'}
+                        {detailInfo && detailInfo.quantity ? detailInfo.quantity.string : '없음'}
                     </Descriptions.Item>
                     <Descriptions.Item label="판매 상태">
                         {detailInfo && detailInfo.sale && detailInfo.sale === 'Y' ? (
