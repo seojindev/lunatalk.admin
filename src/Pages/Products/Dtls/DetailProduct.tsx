@@ -96,7 +96,11 @@ export default function DetailProduct() {
                             <Image
                                 preview={{ visible: false }}
                                 width={200}
-                                src={detailInfo && detailInfo.rep_images && detailInfo.rep_images[0].url}
+                                src={
+                                    detailInfo && detailInfo.rep_images && detailInfo.rep_images.length > 0
+                                        ? detailInfo.rep_images[0].url
+                                        : ''
+                                }
                                 onClick={() => setVisible(true)}
                             />
                             <div style={{ display: 'none' }}>
@@ -115,7 +119,11 @@ export default function DetailProduct() {
                             <Image
                                 preview={{ visible: false }}
                                 width={200}
-                                src={detailInfo && detailInfo.rep_images && detailInfo.detail_images[0].url}
+                                src={
+                                    detailInfo && detailInfo.detail_images && detailInfo.detail_images.length > 0
+                                        ? detailInfo.detail_images[0].url
+                                        : ''
+                                }
                                 onClick={() => setVisible(true)}
                             />
                             <div style={{ display: 'none' }}>
