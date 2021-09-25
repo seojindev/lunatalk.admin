@@ -1,28 +1,50 @@
 // import React from 'react';
 // import { Tag } from 'antd';
 
+import { Tag } from 'antd';
+import React from 'react';
+import History from '@Module/History';
+
 export const columns = [
     {
         title: '아이디',
         dataIndex: 'key',
         key: 'key',
+        render: key => (
+            <a
+                onClick={() => {
+                    History.push({
+                        pathname: process.env.PUBLIC_URL + `/pages/${key}/detail-main-slide`,
+                    });
+                }}
+            >
+                {key}
+            </a>
+        ),
     },
     {
-        title: '결제일',
-        dataIndex: 'date',
-        key: 'date',
+        title: '제목',
+        dataIndex: 'name',
+        key: 'name',
         // render: text => <a>{text}</a>,
     },
     {
-        title: '상품',
-        dataIndex: 'product',
-        key: 'product',
-        // render: text => <a>{text}</a>,
-    },
-    {
-        title: '등록일',
-        dataIndex: 'created_at',
-        key: 'created_at',
+        title: '상태',
+        dataIndex: 'status',
+        key: 'status',
+        render: status => (
+            <>
+                {(() => {
+                    let color = '';
+                    if (status === 'Y') {
+                        color = 'volcano';
+                    } else if (status === 'N') {
+                        color = 'geekblue';
+                    }
+                    return <Tag color={color}>{status.toUpperCase()}</Tag>;
+                })()}
+            </>
+        ),
         // render: text => <a>{text}</a>,
     },
 ];

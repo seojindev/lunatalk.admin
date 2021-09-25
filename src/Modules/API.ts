@@ -209,3 +209,12 @@ export function getDetailProducts({
         payload: { data: {} },
     });
 }
+
+// 메인슬라이드 리스트
+export function getMainSlides(): Promise<CommonTypes.ServiceResponse<CommonTypes.MainSlideItem[]>> {
+    return _Axios_({
+        method: 'get',
+        url: '/api/admin-front/v1/page-manage/show-main-slide',
+        payload: { data: {} },
+    });
+}

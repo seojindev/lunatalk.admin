@@ -184,4 +184,12 @@ declare module 'CommonTypes' {
         rep_images: ProductDetailImageItem[];
         detail_images: ProductDetailImageItem[];
     }
+
+    // 메인 슬라이드 리스트 아이템
+    export interface MainSlideItem {
+        id: number;
+        uuid: string;
+        name: string;
+        active: string;
+    }
 }
