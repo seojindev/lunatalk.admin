@@ -300,3 +300,12 @@ export function updateMainSlide({
         },
     });
 }
+
+// 메인 슬라이드 삭제
+export function deleteMainSlides(uuid: string[]): Promise<CommonTypes.ServiceResponse<{ message: string }>> {
+    return _Axios_({
+        method: 'delete',
+        url: '/api/admin-front/v1/page-manage/delete-main-slides',
+        payload: { uuid: uuid },
+    });
+}
