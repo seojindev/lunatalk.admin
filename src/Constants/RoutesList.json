@@ -93,6 +93,11 @@
             "componentName": "Pages/AddUpdateMainSlidePage"
         },
         {
+            "name": "메인슬라이드 상세 정보.",
+            "routeName": "/pages/:slide_uuid/detail-main-slide",
+            "componentName": "Pages/DetailMainSlidePage"
+        },
+        {
             "name": "싸이트 공지사항 목록.",
             "routeName": "/sites/show-site-notice",
             "componentName": "Sites/ShowSiteNoticesPage"
