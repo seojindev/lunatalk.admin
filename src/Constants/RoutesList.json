@@ -85,7 +85,12 @@
         {
             "name": "메인 슬라이드 등록.",
             "routeName": "/pages/add-main-slide",
-            "componentName": "Pages/AddMainSlidePage"
+            "componentName": "Pages/AddUpdateMainSlidePage"
+        },
+        {
+            "name": "메인 슬라이드 수정.",
+            "routeName": "/pages/update-main-slide/:slide_uuid",
+            "componentName": "Pages/AddUpdateMainSlidePage"
         },
         {
             "name": "싸이트 공지사항 목록.",

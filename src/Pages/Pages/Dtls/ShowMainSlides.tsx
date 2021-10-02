@@ -26,7 +26,7 @@ export default function ShowSlides() {
     const { DataTable, hasSelected } = useDataTable({
         columns: constants.columns,
         dataSource: tableData,
-        updateEntityPath: 'update-main-slide',
+        updateEntityPath: 'pages/update-main-slide',
     });
 
     useEffect(() => {
@@ -61,7 +61,7 @@ export default function ShowSlides() {
 
     return (
         <>
-            <PageHeader addNewPath="pages/add-customers" hasSelected={hasSelected} />
+            <PageHeader addNewPath="pages/add-main-slide" hasSelected={hasSelected} />
             <DataTable />
         </>
     );

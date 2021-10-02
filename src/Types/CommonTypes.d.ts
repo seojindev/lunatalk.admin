@@ -30,6 +30,13 @@ declare module 'CommonTypes' {
         file_name: string;
         url: string;
     }
+    export interface MainSlideDetailImageItem {
+        id: number;
+        active: string;
+        file_name: string;
+        url: string;
+        link: string;
+    }
 
     export interface ColorOptionListItem {
         id: number;
@@ -191,5 +198,13 @@ declare module 'CommonTypes' {
         uuid: string;
         name: string;
         active: string;
+    }
+
+    // 메인 슬라이드 상세 결과.
+    interface mainSlideDetailResponse {
+        uuid: string;
+        name: string;
+        active: string;
+        image: MainSlideDetailImageItem[];
     }
 }

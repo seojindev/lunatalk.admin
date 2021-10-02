@@ -218,3 +218,85 @@ export function getMainSlides(): Promise<CommonTypes.ServiceResponse<CommonTypes
         payload: { data: {} },
     });
 }
+
+// 메인슬라이드 디테일.
+export function getDetailMainSlide({
+    uuid,
+}: {
+    uuid: string;
+}): Promise<CommonTypes.ServiceResponse<CommonTypes.mainSlideDetailResponse>> {
+    return _Axios_({
+        method: 'get',
+        url: `/api/admin-front/v1/page-manage/${uuid}/detail-main-slide`,
+        payload: { data: {} },
+    });
+}
+
+//메인 슬라이드 이미지 등록
+export function uploadMainSlideImage(formData: any): Promise<
+    CommonTypes.ServiceResponse<{
+        status: boolean;
+        media_id: number;
+        media_full_url: string;
+        file_name: string;
+        message: string;
+    }>
+> {
+    return _Axios_({
+        method: 'post',
+        url: '/api/other/v1/media/page-manage/main-slide/create',
+        payload: formData,
+    });
+}
+
+// 메인 슬라이드 등록
+export function addMainSlide({
+    name,
+    active,
+    main_slide,
+}: {
+    name: string;
+    active: string;
+    main_slide: { id: number; link: string }[];
+}): Promise<
+    CommonTypes.ServiceResponse<{
+        uuid: string;
+    }>
+> {
+    return _Axios_({
+        method: 'post',
+        url: '/api/admin-front/v1/page-manage/create-main-slide',
+        payload: {
+            name: name,
+            active: active,
+            main_slide: main_slide,
+        },
+    });
+}
+
+// 메인슬라이드 수정.
+export function updateMainSlide({
+    uuid,
+    payload: { name, active, main_slide },
+}: {
+    uuid: string;
+    payload: {
+        name: string;
+        active: string;
+        main_slide: { id: number; link: string }[];
+    };
+}): Promise<
+    CommonTypes.ServiceResponse<{
+        uuid: string;
+    }>
+> {
+    return _Axios_({
+        method: 'put',
+        url: `/api/admin-front/v1/page-manage/${uuid}/update-main-slide`,
+        payload: {
+            name: name,
+            active: active,
+            main_slide: main_slide,
+        },
+    });
+}
