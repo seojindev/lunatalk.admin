@@ -1,5 +1,6 @@
 import React from 'react';
-import { Tag } from 'antd';
+import { Tag, Badge } from 'antd';
+import History from '@Module/History';
 
 export const columns = [
     {
@@ -11,22 +12,42 @@ export const columns = [
         title: '제목',
         dataIndex: 'title',
         key: 'title',
-        render: text => <a>{text}</a>,
+        render: title => (
+            <a
+                onClick={() => {
+                    History.push({
+                        pathname: process.env.PUBLIC_URL + `/sites/${title.uuid}/detail-site-notice`,
+                    });
+                }}
+            >
+                {title.title}
+            </a>
+        ),
+    },
+    {
+        title: '카테고리',
+        key: 'category',
+        dataIndex: 'category',
+        render: category => (
+            <>
+                {(() => {
+                    return <Tag color="geekblue">{category.code_name}</Tag>;
+                })()}
+            </>
+        ),
     },
     {
         title: '상태',
-        key: 'status',
-        dataIndex: 'status',
-        render: status => (
+        key: 'active',
+        dataIndex: 'active',
+        render: active => (
             <>
                 {(() => {
-                    let color = '';
-                    if (status === 'Y') {
-                        color = 'volcano';
-                    } else if (status === 'N') {
-                        color = 'geekblue';
+                    if (active === 'Y') {
+                        return <Badge status="processing" text="정상" />;
+                    } else if (active === 'N') {
+                        return <Badge Error="" text="감춤" />;
                     }
-                    return <Tag color={color}>{status.toUpperCase()}</Tag>;
                 })()}
             </>
         ),
@@ -38,27 +59,3 @@ export const columns = [
         // render: text => <a>{text}</a>,
     },
 ];
-
-export const data = {
-    totalElements: 3,
-    content: [
-        {
-            key: '3',
-            title: '가방이 입고 되었습니다.',
-            status: 'Y',
-            created_at: '2021-08-03 08:30',
-        },
-        {
-            key: '2',
-            title: '가방이 입고 되었습니다.',
-            status: 'Y',
-            created_at: '2021-08-03 08:30',
-        },
-        {
-            key: '1',
-            title: '가방이 입고 되었습니다.',
-            status: 'Y',
-            created_at: '2021-08-03 08:30',
-        },
-    ],
-};

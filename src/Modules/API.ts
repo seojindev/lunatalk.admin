@@ -61,7 +61,7 @@ export function deleteProductCategory(uuid: string[]): Promise<CommonTypes.Servi
     });
 }
 
-// 대표 이미지 업로드.
+// 상품 대표 이미지 업로드.
 export function uploadProductRepImage(formData: any): Promise<
     CommonTypes.ServiceResponse<{
         status: boolean;
@@ -78,7 +78,7 @@ export function uploadProductRepImage(formData: any): Promise<
     });
 }
 
-// 상세 이미지 업로드.
+// 상품 상세 이미지 업로드.
 export function uploadProductDetailImage(formData: any): Promise<
     CommonTypes.ServiceResponse<{
         status: boolean;
@@ -91,6 +91,40 @@ export function uploadProductDetailImage(formData: any): Promise<
     return _Axios_({
         method: 'post',
         url: '/api/other/v1/media/products/detail/create',
+        payload: formData,
+    });
+}
+
+// 싸이트 공지사항 이미지 업로드.
+export function uploadSitesNoticeImage(formData: any): Promise<
+    CommonTypes.ServiceResponse<{
+        status: boolean;
+        media_id: number;
+        media_full_url: string;
+        file_name: string;
+        message: string;
+    }>
+> {
+    return _Axios_({
+        method: 'post',
+        url: '/api/other/v1/media/sites/notice/create',
+        payload: formData,
+    });
+}
+
+// 공지 사항 이미지 업로드.
+export function uploadSiteNoticeImage(formData: any): Promise<
+    CommonTypes.ServiceResponse<{
+        status: boolean;
+        media_id: number;
+        media_full_url: string;
+        file_name: string;
+        message: string;
+    }>
+> {
+    return _Axios_({
+        method: 'post',
+        url: '/api/other/v1/media/sites/notice/create',
         payload: formData,
     });
 }
@@ -216,5 +250,50 @@ export function getMainSlides(): Promise<CommonTypes.ServiceResponse<CommonTypes
         method: 'get',
         url: '/api/admin-front/v1/page-manage/show-main-slide',
         payload: { data: {} },
+    });
+}
+
+// 싸이트 공지사항 리스트 가지고 오기.
+export function getSiteNoticeList(): Promise<CommonTypes.ServiceResponse<CommonTypes.NoticetItem[]>> {
+    return _Axios_({
+        method: 'get',
+        url: '/api/admin-front/v1/site-manage/show-notice',
+        payload: { data: {} },
+    });
+}
+
+// 싸이트 공지사항 등록.
+export function createSiteNotice(payload: {
+    title: string;
+    category: string;
+    content: string;
+    active: string;
+    image: Array<number>;
+}): Promise<CommonTypes.ServiceResponse<{ uuid: string }>> {
+    return _Axios_({ method: 'post', url: '/api/admin-front/v1/site-manage/create-notice', payload });
+}
+
+// 싸이트 공지 사항 업데이트.
+export function updateSIteNotice(
+    uuid: string,
+    payload: {
+        title: string;
+        category: string;
+        content: string;
+        active: string;
+        image: Array<number>;
+    }
+): Promise<CommonTypes.ServiceResponse<{ uuid: string }>> {
+    return _Axios_({ method: 'put', url: `/api/admin-front/v1/site-manage/${uuid}/update-notice`, payload });
+}
+
+// 싸이트 공지 사항 상세.
+export function getSiteNoticeDetail(payload: {
+    uuid: string;
+}): Promise<CommonTypes.ServiceResponse<CommonTypes.NoticetItem>> {
+    return _Axios_({
+        method: 'get',
+        url: `/api/admin-front/v1/site-manage/${payload.uuid}/detail-notice`,
+        payload: { data: [] },
     });
 }

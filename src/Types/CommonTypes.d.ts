@@ -117,15 +117,14 @@ declare module 'CommonTypes' {
     export interface Codes {
         code_name: any;
         code_group: {
-            S01: CodeItem[];
-            S02: CodeItem[];
-            S03: CodeItem[];
-            S04: CodeItem[];
-            G01: CodeItem[];
-            P01: CodeItem[];
-            O10: CodeItem[];
-            O20: CodeItem[];
-            E01: CodeItem[];
+            '010': CodeItem[];
+            '110': CodeItem[];
+            '120': CodeItem[];
+            '130': CodeItem[];
+            '210': CodeItem[];
+            '220': CodeItem[];
+            '300': CodeItem[];
+            '400': CodeItem[];
         };
     }
 
@@ -191,5 +190,23 @@ declare module 'CommonTypes' {
         uuid: string;
         name: string;
         active: string;
+    }
+
+    export interface NoticetItem {
+        id: number;
+        uuid: string;
+        category: CodeItem;
+        title: string;
+        content: {
+            default: string;
+        };
+        active: string;
+        images: array<{
+            uid: string;
+            url: string;
+            file_name: string;
+        }>;
+        created_at: string;
+        updated_at: string;
     }
 }

@@ -98,6 +98,16 @@
             "componentName": "Sites/AddSiteNoticesPage"
         },
         {
+            "name": "싸이트 공지사항 상세.",
+            "routeName": "/sites/:uuid/detail-site-notice",
+            "componentName": "Sites/DetailSiteNoticesPage"
+        },
+        {
+            "name": "싸이트 공지사항 상세.",
+            "routeName": "/sites/:uuid/update-site-notice",
+            "componentName": "Sites/UpdateSiteNoticesPage"
+        },
+        {
             "name": "서비스 공지사항 등록.",
             "routeName": "/sites/show-service-notice",
             "componentName": "Sites/ShowServiceNoticePage"

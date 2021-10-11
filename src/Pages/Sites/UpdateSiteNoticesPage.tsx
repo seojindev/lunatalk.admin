@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 const DtlPage = lazy(() => import('./Dtls/AddUpdateSiteNotices'));
 
-export default function AddSiteNoticesPage() {
+export default function DetailSiteNoticesPage() {
     const { storeRouterLocation } = useSelector((store: RootState) => ({
         storeRouterLocation: store.router.location,
     }));
@@ -16,7 +16,7 @@ export default function AddSiteNoticesPage() {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>
-                    :: {process.env.REACT_APP_TITLE} :: {`싸이트 공지사항 등록`}
+                    :: {process.env.REACT_APP_TITLE} :: {`싸이트 공지사항 수정`}
                 </title>
                 <link rel="canonical" href={`${globalThis.location.origin}${storeRouterLocation}`} />
             </Helmet>

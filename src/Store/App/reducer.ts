@@ -1,7 +1,6 @@
 import { createReducer } from 'typesafe-actions';
 import { SagaAction, Codes, Products, productListItem } from 'CommonTypes';
 import produce from 'immer';
-// import { ErrorMessage } from 'StoreTypes';
 import { AppState } from 'StoreTypes';
 import {} from './actions';
 
@@ -22,15 +21,14 @@ const initialState: AppState = {
         codes: {
             code_name: '',
             code_group: {
-                S01: [],
-                S02: [],
-                S03: [],
-                S04: [],
-                G01: [],
-                P01: [],
-                O10: [],
-                O20: [],
-                E01: [],
+                '010': [],
+                '110': [],
+                '120': [],
+                '130': [],
+                '210': [],
+                '220': [],
+                '300': [],
+                '400': [],
             },
         },
         products: {
