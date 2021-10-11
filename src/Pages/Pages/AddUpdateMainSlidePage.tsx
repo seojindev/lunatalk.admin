@@ -4,9 +4,9 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { RootState } from 'StoreTypes';
 import { useSelector } from 'react-redux';
 
-const DtlPage = lazy(() => import('./Dtls/AddMainSlide'));
+const DtlPage = lazy(() => import('./Dtls/AddUpdateMainSlide'));
 
-export default function ShowMainSlidePage() {
+export default function AddUpdateMainSlidePage() {
     const { storeRouterLocation } = useSelector((store: RootState) => ({
         storeRouterLocation: store.router.location,
     }));
@@ -16,7 +16,7 @@ export default function ShowMainSlidePage() {
             <Helmet>
                 <meta charSet="utf-8" />
                 <title>
-                    :: {process.env.REACT_APP_TITLE} :: {`메인 슬라이드 등록`}
+                    :: {process.env.REACT_APP_TITLE} :: {`메인 슬라이드 등록 및 수정`}
                 </title>
                 <link rel="canonical" href={`${globalThis.location.origin}${storeRouterLocation}`} />
             </Helmet>

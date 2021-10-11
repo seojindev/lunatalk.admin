@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { PageHeader } from '@Layouts';
 import { useDataTable, useLoading } from '@Hooks';
 import * as constants from '@Src/Data/PagesMainSlides';
-import { getMainSlides } from '@API';
+import { getMainSlides, deleteMainSlides } from '@API';
 import { MainSlideItem } from 'CommonTypes';
+import { message } from 'antd';
 
 interface tableDataItem {
     key: string;
@@ -23,10 +24,10 @@ export default function ShowSlides() {
         totalElements: 0,
         content: [],
     });
-    const { DataTable, hasSelected } = useDataTable({
+    const { DataTable, hasSelected, selectedRowKeys } = useDataTable({
         columns: constants.columns,
         dataSource: tableData,
-        updateEntityPath: 'update-main-slide',
+        updateEntityPath: 'pages/update-main-slide',
     });
 
     useEffect(() => {
@@ -59,9 +60,48 @@ export default function ShowSlides() {
         fnGetMainSlideList().then();
     }, []);
 
+    const deleteMainSlide = async () => {
+        await loadingControl({
+            type: 'fetch',
+        });
+        const response = await deleteMainSlides(selectedRowKeys);
+        if (response.status) {
+            await loadingControl({
+                type: 'success',
+            });
+            message.success('삭제 되었습니다.').then();
+            const listResponse = await getMainSlides();
+            if (listResponse.status) {
+                setTableData({
+                    totalElements: listResponse.payload.length,
+                    content: listResponse.payload.map((e: MainSlideItem) => {
+                        return {
+                            key: e.uuid,
+                            id: e.id,
+                            name: e.name,
+                            status: e.active,
+                        };
+                    }),
+                });
+            } else {
+                // FIXME: 에러 날때?
+                await loadingControl({
+                    type: 'error',
+                });
+                message.error('에러가 발생하였습니다.').then();
+            }
+        } else {
+            // FIXME: 에러 날때?
+            await loadingControl({
+                type: 'error',
+            });
+            message.error('에러가 발생하였습니다.').then();
+        }
+    };
+
     return (
         <>
-            <PageHeader addNewPath="pages/add-customers" hasSelected={hasSelected} />
+            <PageHeader addNewPath="pages/add-main-slide" hasSelected={hasSelected} handleDelete={deleteMainSlide} />
             <DataTable />
         </>
     );
