@@ -209,4 +209,12 @@ declare module 'CommonTypes' {
         created_at: string;
         updated_at: string;
     }
+
+    // 메인 슬라이드 상세 결과.
+    interface mainSlideDetailResponse {
+        uuid: string;
+        name: string;
+        active: string;
+        image: MainSlideDetailImageItem[];
+    }
 }
