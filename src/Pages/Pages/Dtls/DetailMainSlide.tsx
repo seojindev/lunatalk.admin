@@ -67,26 +67,33 @@ export default function DetailProduct() {
                             <Image
                                 preview={{ visible: false }}
                                 width={200}
-                                src={
-                                    detailInfo && detailInfo.image && detailInfo.image.length > 0
-                                        ? detailInfo.image[0].url
-                                        : ''
-                                }
+                                src={detailInfo && detailInfo.image ? detailInfo.image.url : ''}
                                 onClick={() => setVisible(true)}
                             />
                             <div style={{ display: 'none' }}>
                                 <Image.PreviewGroup preview={{ visible, onVisibleChange: vis => setVisible(vis) }}>
-                                    {detailInfo &&
-                                        detailInfo.image &&
-                                        detailInfo.image.map((item, index) => {
-                                            return <Image src={item.url} key={index} />;
-                                        })}
+                                    {detailInfo && detailInfo.image && <Image src={detailInfo.image.url} />}
                                 </Image.PreviewGroup>
                             </div>
                         </>
                     </Descriptions.Item>
                     <Descriptions.Item label="링크">
-                        {detailInfo && detailInfo.image && process.env.PUBLIC_URL + detailInfo.image[0].link}
+                        <div>{detailInfo && detailInfo.link && process.env.PUBLIC_URL + detailInfo.link}</div>
+                    </Descriptions.Item>
+                    <Descriptions.Item label="상품">
+                        <div
+                            onClick={() => {
+                                history.push({
+                                    pathname: `${process.env.PUBLIC_URL}/products/${
+                                        detailInfo &&
+                                        detailInfo.product_uuid &&
+                                        process.env.PUBLIC_URL + detailInfo.product_uuid
+                                    }/detail-product`,
+                                });
+                            }}
+                        >
+                            {detailInfo && detailInfo.product_name && process.env.PUBLIC_URL + detailInfo.product_name}
+                        </div>
                     </Descriptions.Item>
                 </Descriptions>
             </Card>

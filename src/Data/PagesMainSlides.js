@@ -7,18 +7,18 @@ import History from '@Module/History';
 
 export const columns = [
     {
-        title: '아이디',
-        dataIndex: 'key',
-        key: 'key',
-        render: key => (
+        title: '번호',
+        dataIndex: 'slide',
+        key: 'slide',
+        render: slide => (
             <a
                 onClick={() => {
                     History.push({
-                        pathname: process.env.PUBLIC_URL + `/pages/${key}/detail-main-slide`,
+                        pathname: process.env.PUBLIC_URL + `/pages/${slide.uuid}/detail-main-slide`,
                     });
                 }}
             >
-                {key}
+                {slide.id}
             </a>
         ),
     },

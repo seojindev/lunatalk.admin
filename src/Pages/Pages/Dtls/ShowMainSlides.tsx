@@ -6,16 +6,9 @@ import { getMainSlides, deleteMainSlides } from '@API';
 import { MainSlideItem } from 'CommonTypes';
 import { message } from 'antd';
 
-interface tableDataItem {
-    key: string;
-    id: number;
-    name: string;
-    status: string;
-}
-
 interface tableDataInserface {
     totalElements: number;
-    content: tableDataItem[];
+    content: Array<{ slide: { id: number; uuid: string }; key: string; id: number; name: string; status: string }>;
 }
 
 export default function ShowSlides() {
@@ -44,6 +37,10 @@ export default function ShowSlides() {
                     totalElements: response.payload.length,
                     content: response.payload.map((e: MainSlideItem) => {
                         return {
+                            slide: {
+                                id: e.id,
+                                uuid: e.uuid,
+                            },
                             key: e.uuid,
                             id: e.id,
                             name: e.name,
@@ -76,8 +73,12 @@ export default function ShowSlides() {
                     totalElements: listResponse.payload.length,
                     content: listResponse.payload.map((e: MainSlideItem) => {
                         return {
-                            key: e.uuid,
+                            slide: {
+                                id: e.id,
+                                uuid: e.uuid,
+                            },
                             id: e.id,
+                            key: e.uuid,
                             name: e.name,
                             status: e.active,
                         };

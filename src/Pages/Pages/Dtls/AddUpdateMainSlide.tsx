@@ -6,14 +6,6 @@ import { useParams } from 'react-router-dom';
 import * as CommonTypes from 'CommonTypes';
 import * as API from '@API';
 
-interface imagesInterface {
-    uid: number;
-    name: string;
-    status: 'done' | 'loading';
-    url: string;
-    active: boolean;
-}
-
 export default function AddUpdateMainSlide() {
     const params = useParams<{ slide_uuid: string }>();
     const [cardLoading, setCardLoading] = useState<boolean>(true);
@@ -22,12 +14,30 @@ export default function AddUpdateMainSlide() {
         slideName: string;
         slideActive: boolean;
         slideLink: string;
+        slideProduct: number;
+        slideMemo: string;
     }>({
         slideName: '',
         slideActive: false,
         slideLink: '',
+        slideProduct: 0,
+        slideMemo: '',
     });
-    const [imageData, setImageData] = useState<imagesInterface[]>([]);
+    const [imageData, setImageData] = useState<
+        Array<{
+            uid: number;
+            name: string;
+            status: 'done' | 'loading';
+            url: string;
+        }>
+    >([
+        {
+            uid: 0,
+            name: '',
+            status: 'loading',
+            url: '',
+        },
+    ]);
 
     // 페이지 모드가 update 일시 데이터 불러오기.
     useEffect(() => {
@@ -41,22 +51,20 @@ export default function AddUpdateMainSlide() {
                 setInputData({
                     slideName: payload.name,
                     slideActive: payload.active === 'Y',
-                    slideLink: payload.image ? payload.image[0]?.link : '',
+                    slideLink: payload.link ? payload.link : '',
+                    slideProduct: payload.product_id ? payload.product_id : 0,
+                    slideMemo: payload.memo ? payload.memo : '',
                 });
 
                 // 슬라이드 이미지 정보
-                setImageData(
-                    payload.image?.map(item => {
-                        return {
-                            uid: item.id,
-                            name: item.file_name,
-                            status: 'done',
-                            active: item.active === 'Y',
-                            link: item.link,
-                            url: item.url,
-                        };
-                    })
-                );
+                setImageData([
+                    {
+                        uid: payload.image.id,
+                        status: 'done',
+                        url: payload.image.url,
+                        name: payload.image.file_name,
+                    },
+                ]);
             } else {
                 //TODO: 에러처리.
             }
@@ -81,6 +89,7 @@ export default function AddUpdateMainSlide() {
 
         fnSetPageMode().then();
     }, [params]);
+
     return (
         <Card title="슬라이드 이미지 등록" loading={cardLoading}>
             <Row justify="center">

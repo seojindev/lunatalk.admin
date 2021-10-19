@@ -215,6 +215,15 @@ declare module 'CommonTypes' {
         uuid: string;
         name: string;
         active: string;
-        image: MainSlideDetailImageItem[];
+        image: {
+            file_name: string;
+            id: number;
+            url: string;
+        };
+        link: string;
+        product_id: number;
+        product_uuid: string;
+        product_name: string;
+        memo: string;
     }
 }

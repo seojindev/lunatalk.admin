@@ -254,14 +254,13 @@ export function getMainSlides(): Promise<CommonTypes.ServiceResponse<CommonTypes
 }
 
 // 메인 슬라이드 등록
-export function addMainSlide({
-    name,
-    active,
-    main_slide,
-}: {
+export function addMainSlide(payload: {
     name: string;
+    media_id: number;
+    link: string;
+    product_id: string;
+    memo: string;
     active: string;
-    main_slide: { id: number; link: string }[];
 }): Promise<
     CommonTypes.ServiceResponse<{
         uuid: string;
@@ -270,11 +269,7 @@ export function addMainSlide({
     return _Axios_({
         method: 'post',
         url: '/api/admin-front/v1/page-manage/create-main-slide',
-        payload: {
-            name: name,
-            active: active,
-            main_slide: main_slide,
-        },
+        payload,
     });
 }
 
@@ -303,13 +298,16 @@ export function getDetailMainSlide({
 // 메인슬라이드 수정.
 export function updateMainSlide({
     uuid,
-    payload: { name, active, main_slide },
+    payload,
 }: {
     uuid: string;
     payload: {
         name: string;
+        media_id: number;
+        link: string;
+        product_id: string;
+        memo: string;
         active: string;
-        main_slide: { id: number; link: string }[];
     };
 }): Promise<
     CommonTypes.ServiceResponse<{
@@ -319,11 +317,7 @@ export function updateMainSlide({
     return _Axios_({
         method: 'put',
         url: `/api/admin-front/v1/page-manage/${uuid}/update-main-slide`,
-        payload: {
-            name: name,
-            active: active,
-            main_slide: main_slide,
-        },
+        payload: payload,
     });
 }
 

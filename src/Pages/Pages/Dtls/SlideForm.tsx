@@ -1,58 +1,69 @@
 import React, { useEffect, useState } from 'react';
 import * as _API from '@API';
-import { Switch, Form, Input, Row, Divider, Button, Upload, message } from 'antd';
+import { Switch, Form, Input, Row, Divider, Button, Upload, message, Select } from 'antd';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from 'StoreTypes';
+import { isEmpty } from '@Helper';
 
-interface imagesInterface {
-    uid: number;
-    name: string;
-    status: 'done' | 'loading';
-    url: string;
-    active: boolean;
-}
-
-interface SlideFormProps {
+export default function SlideForm({
+    SlideUUid,
+    FormMode,
+    FormInitialData,
+    ImageInitialData,
+}: {
     SlideUUid: string;
     FormMode: 'add' | 'update';
     FormInitialData: {
         slideName: string;
         slideActive: boolean;
         slideLink: string;
+        slideProduct: number | '';
+        slideMemo: string;
     };
-    ImageInitialData: imagesInterface[];
-}
-
-export default function SlideForm({ SlideUUid, FormMode, FormInitialData, ImageInitialData }: SlideFormProps) {
+    ImageInitialData: Array<{
+        uid: number;
+        status: 'done' | 'loading';
+        url: string;
+    }>;
+}) {
     const [form] = Form.useForm();
     const history = useHistory();
+    const { storeProductsList } = useSelector((store: RootState) => ({
+        storeProductsList: store.app.common.products.list,
+    }));
+
     const [imgData, setImgData] = useState<any>([]);
+
     //이미지 로딩 처리.
     const [loadingImg, setLoadingImg] = useState<boolean>(false);
 
-    const handleSave = async ({
-        slideName,
-        slideActive,
-        slideLink,
-    }: {
+    const handleSave = async (formData: {
         slideName: string;
         slideActive: boolean;
         slideLink: string;
+        slideProduct: string;
+        slideMemo: string;
     }) => {
         if (imgData.length === 0) {
             message.error('이미지를 업로드해주세요.');
+            return;
+        }
+
+        if (isEmpty(formData.slideLink) && isEmpty(formData.slideProduct)) {
+            message.error('이동할 링크 및 이동항 상품 둘중 하나를 선택 및 입력해 주세요.');
+            return;
         }
 
         //form 데이터 처리.
         const payload = {
-            name: slideName,
-            active: slideActive ? 'Y' : 'N',
-            main_slide: imgData.map((e: any) => {
-                return {
-                    id: e.uid,
-                    link: slideLink,
-                };
-            }),
+            name: formData.slideName,
+            media_id: imgData[0].uid,
+            link: formData.slideLink,
+            product_id: formData.slideProduct,
+            memo: formData.slideMemo,
+            active: formData.slideActive ? 'Y' : 'N',
         };
 
         if (FormMode === 'add') {
@@ -93,6 +104,7 @@ export default function SlideForm({ SlideUUid, FormMode, FormInitialData, ImageI
                 };
                 // TODO: 일단 하나만 처리
                 setImgData([fileObj]);
+                // setRepfileList((repfileList: any) => [...repfileList, fileObj]);
             } else {
                 // TODO: error 처리.
             }
@@ -101,32 +113,24 @@ export default function SlideForm({ SlideUUid, FormMode, FormInitialData, ImageI
         fetchData().then();
     };
 
-    // 이미지 업로드 완료시 스테이트 및 form 에 등록처리
-    useEffect(() => {
-        const fnSetSlideImage = () => {
-            setImgData(
-                ImageInitialData.map(item => {
-                    return {
-                        uid: item.uid,
-                        name: item.name,
-                        status: 'done',
-                        url: item.url,
-                        active: item.active,
-                    };
-                })
-            );
-        };
-        if (ImageInitialData) {
-            fnSetSlideImage();
-        }
-    }, [ImageInitialData]);
-
     // 슬라이드 이미지 삭제 버튼 처리.
     const handleSlideImageOnChange = (e: any) => {
         if (e.file.status === 'removed') {
             setImgData([]);
         }
     };
+
+    // 이미지 업로드 완료시 스테이트 및 form 에 등록처리
+    useEffect(() => {
+        const fnSetSlideImage = () => {
+            setImgData(ImageInitialData);
+        };
+        if (ImageInitialData && ImageInitialData.length > 0) {
+            console.debug(ImageInitialData);
+            fnSetSlideImage();
+        }
+    }, [ImageInitialData, storeProductsList]);
+
     return (
         <Form
             labelCol={{ span: 4 }}
@@ -148,7 +152,8 @@ export default function SlideForm({ SlideUUid, FormMode, FormInitialData, ImageI
             </Form.Item>
             <Form.Item label="슬라이드 사진">
                 <Upload
-                    name="avatar"
+                    name="slideImage"
+                    multiple={false}
                     fileList={imgData}
                     listType="picture-card"
                     customRequest={mainSlideImageOnChange}
@@ -161,14 +166,31 @@ export default function SlideForm({ SlideUUid, FormMode, FormInitialData, ImageI
                 label="링크"
                 name="slideLink"
                 rules={[
-                    {
-                        required: true,
-                        message: '이미지를 클릭하였을때 이동할 링크를 입력해주세요.',
-                        type: 'string',
-                    },
+                    { required: false, message: '이미지를 클릭하였을때 이동할 링크를 입력해주세요.', type: 'string' },
                 ]}
             >
                 <Input placeholder="이미지를 클릭하였을때 이동할 링크를 입력해주세요." />
+            </Form.Item>
+            <Form.Item
+                label="상품"
+                name="slideProduct"
+                rules={[{ required: false, message: '이동할 상품을 선택해 주세요.', type: 'number' }]}
+            >
+                <Select
+                    allowClear
+                    style={{ width: '100%' }}
+                    placeholder="이동할 상품을 선택해 주세요."
+                    onChange={e => console.debug(e)}
+                >
+                    {storeProductsList.map(item => (
+                        <Select.Option key={item.id} value={item.id}>
+                            {item.name}
+                        </Select.Option>
+                    ))}
+                </Select>
+            </Form.Item>
+            <Form.Item label="메모" name="slideMemo">
+                <Input.TextArea rows={7} />
             </Form.Item>
             <Divider />
             <Row justify="center">
