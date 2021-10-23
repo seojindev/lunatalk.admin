@@ -46,7 +46,7 @@ export const columns = [
                     if (active === 'Y') {
                         return <Badge status="processing" text="정상" />;
                     } else if (active === 'N') {
-                        return <Badge Error="" text="감춤" />;
+                        return <Badge status="error" text="감춤" />;
                     }
                 })()}
             </>
