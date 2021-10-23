@@ -77,6 +77,8 @@ declare module 'CommonTypes' {
         };
         color: productListColorItem[];
         wireless: productListWirelessItem[];
+        best_item: boolean;
+        new_item: boolean;
     }
 
     export interface ProductsCategoryItms {

@@ -382,3 +382,71 @@ export function getSiteNoticeDetail(payload: {
         payload: { data: [] },
     });
 }
+
+// 메인 베스트 아이템 추가.
+export function mainBestItemCreate(uuid: string): Promise<CommonTypes.ServiceResponse<{ uuid: string }>> {
+    return _Axios_({
+        method: 'post',
+        url: `/api/admin-front/v1/page-manage/${uuid}/create-best-item`,
+        payload: { data: [] },
+    });
+}
+
+// 메인 베스트 아아템 삭제.
+export function mainBestItemDelete(uuid: string): Promise<CommonTypes.ServiceResponse<{ uuid: string }>> {
+    return _Axios_({
+        method: 'delete',
+        url: `/api/admin-front/v1/page-manage/${uuid}/delete-best-item`,
+        payload: { data: [] },
+    });
+}
+
+// 메인 베스트 아아템 리스트
+// export function mainBestItemList(uuid: string): Promise<
+//     CommonTypes.ServiceResponse<{
+//         uuid: string;
+//         product: {
+//             uuid: string;
+//         };
+//     }>
+// > {
+//     return _Axios_({
+//         method: 'delete',
+//         url: `/api/admin-front/v1/page-manage/show-best-item`,
+//         payload: { data: [] },
+//     });
+// }
+
+// 메인 뉴 아이템 추가.
+export function mainNewItemCreate(uuid: string): Promise<CommonTypes.ServiceResponse<{ uuid: string }>> {
+    return _Axios_({
+        method: 'post',
+        url: `/api/admin-front/v1/page-manage/${uuid}/create-new-item`,
+        payload: { data: [] },
+    });
+}
+
+// 메인 뉴 아아템 삭제.
+export function mainNewItemDelete(uuid: string): Promise<CommonTypes.ServiceResponse<{ uuid: string }>> {
+    return _Axios_({
+        method: 'delete',
+        url: `/api/admin-front/v1/page-manage/${uuid}/delete-new-item`,
+        payload: { data: [] },
+    });
+}
+
+// 메인 뉴 아아템 리스트
+// export function mainNewItemList(uuid: string): Promise<
+//     CommonTypes.ServiceResponse<{
+//         uuid: string;
+//         product: {
+//             uuid: string;
+//         };
+//     }>
+// > {
+//     return _Axios_({
+//         method: 'delete',
+//         url: `/api/admin-front/v1/page-manage/show-new-item`,
+//         payload: { data: [] },
+//     });
+// }

@@ -1,6 +1,7 @@
 import React from 'react';
 import History from '@Module/History';
-import { Tag } from 'antd';
+import { Tag, Button, message } from 'antd';
+import * as _API from '@API';
 
 export const columns = [
     {
@@ -66,12 +67,90 @@ export const columns = [
     },
     {
         title: '제고',
-        dataIndex: 'qty',
-        key: 'qty',
+        dataIndex: 'quantity',
+        key: 'quantity',
     },
     {
         title: '가격',
         dataIndex: 'price',
         key: 'price',
+    },
+    {
+        title: '메인 아이템',
+        dataIndex: 'main_item',
+        key: 'main_item',
+        render: main_item => {
+            return (
+                <>
+                    {main_item.best_item === true ? <Tag color={`blue`}>BESTITEM</Tag> : ``}
+                    {main_item.new_item === true ? <Tag color={`green`}>NEWITEM</Tag> : ``}
+                </>
+            );
+        },
+    },
+    {
+        title: '메인 아이템 추가',
+        dataIndex: 'main_item',
+        key: 'main_item',
+        render: main_item => {
+            const addBestItem = async () => {
+                const response = await _API.mainBestItemCreate(main_item.uuid);
+                if (response.status) {
+                    main_item.created();
+                } else {
+                    message.error(response.message);
+                }
+            };
+
+            const removeBestItem = async () => {
+                const response = await _API.mainBestItemDelete(main_item.uuid);
+                if (response.status) {
+                    main_item.deleted();
+                } else {
+                    message.error(response.message);
+                }
+            };
+
+            const addNewItem = async () => {
+                const response = await _API.mainNewItemCreate(main_item.uuid);
+                if (response.status) {
+                    main_item.created();
+                } else {
+                    message.error(response.message);
+                }
+            };
+
+            const removeNewItem = async () => {
+                const response = await _API.mainNewItemDelete(main_item.uuid);
+                if (response.status) {
+                    main_item.deleted();
+                } else {
+                    message.error(response.message);
+                }
+            };
+
+            return (
+                <>
+                    {main_item.best_item === true ? (
+                        <Button type="danger" shape="circle" onClick={() => removeBestItem()}>
+                            베스트
+                        </Button>
+                    ) : (
+                        <Button type="primary" shape="circle" onClick={() => addBestItem()}>
+                            베스트
+                        </Button>
+                    )}
+                    {main_item.new_item === true ? (
+                        <Button type="danger" shape="circle" onClick={() => removeNewItem()}>
+                            뉴
+                        </Button>
+                    ) : (
+                        <Button type="primary" shape="circle" onClick={() => addNewItem()}>
+                            뉴
+                        </Button>
+                    )}
+                </>
+            );
+        },
     },
 ];

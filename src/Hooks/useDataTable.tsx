@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Table } from 'antd';
 import { DEFAULT_PAGE_SIZE, DEFAULT_PAGE_NUMBER } from '@Constants';
-import useActionMenu from './useActionMenu';
+// import useActionMenu from './useActionMenu';
 
 function useDataTable({
     columns,
     dataSource,
-    updateEntityPath,
-}: {
+}: // updateEntityPath,
+{
     columns: any;
     dataSource: any;
     updateEntityPath: any;
@@ -16,7 +16,7 @@ function useDataTable({
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [selectedRow, setSelectedRow] = useState(null);
     const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE_NUMBER);
-    const [actionColumnView] = useActionMenu({ selectedRow, updateEntityPath });
+    // const [actionColumnView] = useActionMenu({ selectedRow, updateEntityPath });
 
     const hasSelected = selectedRowKeys.length > 0;
 
@@ -27,14 +27,7 @@ function useDataTable({
         },
     };
 
-    const updatedColumns = [
-        ...columns,
-        {
-            title: '관리',
-            key: 'action',
-            render: () => actionColumnView,
-        },
-    ];
+    const updatedColumns = [...columns];
 
     // const handleSingleDelete = () => {
     //     console.log('handleSingleDelete, selected:', selectedRow);

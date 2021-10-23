@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { PageHeader } from '@Layouts';
 import { useDataTable } from '@Hooks';
 import * as constants from '@Src/Data/ProductTable';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'StoreTypes';
 import { productListItem } from 'CommonTypes';
 import { message } from 'antd';
+import { getProductAction } from '@Store/App';
 
 interface tableDataItem {
     key: string;
@@ -19,6 +20,10 @@ interface tableDataItem {
     description: string;
     quantity: string;
     price: string;
+    main_item: {
+        best_item: boolean;
+        new_item: boolean;
+    };
 }
 
 interface tableDataInserface {
@@ -27,6 +32,7 @@ interface tableDataInserface {
 }
 
 export default function ShowProducts() {
+    const dispatch = useDispatch();
     const { storeProductsList } = useSelector((store: RootState) => ({
         storeProductsList: store.app.common.products.list,
     }));
@@ -41,6 +47,14 @@ export default function ShowProducts() {
         dataSource: tableData,
         updateEntityPath: 'update-product',
     });
+
+    const handleItemCreated = () => {
+        dispatch(getProductAction());
+    };
+
+    const handleItemDeleted = () => {
+        dispatch(getProductAction());
+    };
 
     useEffect(() => {
         const fnSetTableData = () => {
@@ -59,6 +73,13 @@ export default function ShowProducts() {
                         wireless: item.wireless.map(e => e.wireless),
                         quantity: item.quantity.string,
                         price: item.price.string,
+                        main_item: {
+                            created: handleItemCreated,
+                            deleted: handleItemDeleted,
+                            uuid: item.uuid,
+                            best_item: item.best_item,
+                            new_item: item.new_item,
+                        },
                     };
                 }),
             });
