@@ -136,6 +136,7 @@ export function addProduct({
     barcode,
     color,
     wireless,
+    original_price,
     price,
     quantity,
     memo,
@@ -149,6 +150,7 @@ export function addProduct({
     barcode: string;
     color: number[];
     wireless: number[];
+    original_price: number;
     price: number;
     quantity: number;
     memo: string;
@@ -170,6 +172,7 @@ export function addProduct({
             barcode: barcode,
             color: color,
             wireless: wireless,
+            original_price: original_price,
             price: price,
             quantity: quantity,
             memo: memo,
@@ -184,7 +187,21 @@ export function addProduct({
 // 상품 수정.
 export function updateProduct({
     uuid,
-    payload: { name, category, barcode, color, wireless, price, quantity, memo, sale, active, rep_image, detail_image },
+    payload: {
+        name,
+        category,
+        barcode,
+        color,
+        wireless,
+        original_price,
+        price,
+        quantity,
+        memo,
+        sale,
+        active,
+        rep_image,
+        detail_image,
+    },
 }: {
     uuid: string;
     payload: {
@@ -193,6 +210,7 @@ export function updateProduct({
         barcode: string;
         color: number[];
         wireless: number[];
+        original_price: number;
         price: number;
         quantity: number;
         memo: string;
@@ -215,6 +233,7 @@ export function updateProduct({
             barcode: barcode,
             color: color,
             wireless: wireless,
+            original_price: original_price,
             price: price,
             quantity: quantity,
             memo: memo,

@@ -28,6 +28,7 @@ export default function ProductForm({
         productCategory: number;
         productColorOption: number[];
         productWirelessOption: number[];
+        productOriginalPrice: number;
         productPrice: number;
         productQuantity: number;
         productMemo: string;
@@ -64,6 +65,7 @@ export default function ProductForm({
         productCategory,
         productColorOption,
         productWirelessOption,
+        productOriginalPrice,
         productPrice,
         productQuantity,
         productMemo,
@@ -74,6 +76,7 @@ export default function ProductForm({
         productCategory: number;
         productColorOption: number[];
         productWirelessOption: number[];
+        productOriginalPrice: number;
         productPrice: number;
         productQuantity: number;
         productMemo: string;
@@ -97,6 +100,7 @@ export default function ProductForm({
             barcode: '',
             color: productColorOption,
             wireless: productWirelessOption,
+            original_price: productOriginalPrice,
             price: productPrice,
             quantity: productQuantity,
             memo: productMemo,
@@ -314,6 +318,13 @@ export default function ProductForm({
                         </Select.Option>
                     ))}
                 </Select>
+            </Form.Item>
+            <Form.Item
+                label="원래 금액"
+                name="productOriginalPrice"
+                rules={[{ required: true, message: '원래 금액을 입력해 주세요.', type: 'number' }]}
+            >
+                <InputNumber />
             </Form.Item>
             <Form.Item
                 label="금액"

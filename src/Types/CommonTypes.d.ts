@@ -66,6 +66,10 @@ declare module 'CommonTypes' {
             number: number;
             string: string;
         };
+        original_price: {
+            number: number;
+            string: string;
+        };
         price: {
             number: number;
             string: string;
@@ -169,6 +173,10 @@ declare module 'CommonTypes' {
         };
         name: string;
         barcode: string;
+        original_price: {
+            number: number;
+            string: string;
+        };
         price: {
             number: number;
             string: string;

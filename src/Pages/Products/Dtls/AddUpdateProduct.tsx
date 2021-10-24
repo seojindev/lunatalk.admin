@@ -22,6 +22,7 @@ export default function AddUpdateProduct() {
         productCategory: number;
         productColorOption: number[];
         productWirelessOption: number[];
+        productOriginalPrice: number;
         productPrice: number;
         productQuantity: number;
         productMemo: string;
@@ -32,6 +33,7 @@ export default function AddUpdateProduct() {
         productCategory: 1,
         productColorOption: [],
         productWirelessOption: [],
+        productOriginalPrice: 0,
         productPrice: 0,
         productQuantity: 0,
         productMemo: '',
@@ -59,6 +61,7 @@ export default function AddUpdateProduct() {
                     productWirelessOption: payload.wireless.map(item => {
                         return item.id;
                     }),
+                    productOriginalPrice: payload.original_price.number,
                     productPrice: payload.price.number,
                     productQuantity: payload.quantity.number,
                     productMemo: payload.memo,

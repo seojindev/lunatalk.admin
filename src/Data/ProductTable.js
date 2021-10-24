@@ -71,6 +71,11 @@ export const columns = [
         key: 'quantity',
     },
     {
+        title: '원래 가격',
+        dataIndex: 'original_price',
+        key: 'original_price',
+    },
+    {
         title: '가격',
         dataIndex: 'price',
         key: 'price',

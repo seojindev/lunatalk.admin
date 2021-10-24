@@ -19,6 +19,7 @@ interface tableDataItem {
     wireless: string[];
     description: string;
     quantity: string;
+    original_price: string;
     price: string;
     main_item: {
         best_item: boolean;
@@ -61,6 +62,7 @@ export default function ShowProducts() {
             setTableData({
                 totalElements: storeProductsList.length,
                 content: storeProductsList.map((item: productListItem) => {
+                    console.debug(item);
                     return {
                         key: String(item.id),
                         product: {
@@ -72,6 +74,7 @@ export default function ShowProducts() {
                         color: item.color.map(e => e.name),
                         wireless: item.wireless.map(e => e.wireless),
                         quantity: item.quantity.string,
+                        original_price: item.original_price.string,
                         price: item.price.string,
                         main_item: {
                             created: handleItemCreated,
