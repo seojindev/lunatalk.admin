@@ -236,4 +236,46 @@ declare module 'CommonTypes' {
         product_name: string;
         memo: string;
     }
+
+    interface userListResponseItem {
+        id: number;
+        uuid: string;
+        client: CodeItem;
+        type: CodeItem;
+        level: CodeItem;
+        status: CodeItem;
+        login_id: string;
+        name: string;
+        email: string;
+        phone_number: string;
+        active: 'Y' | 'N';
+        created_at: string;
+        updated_at: string;
+    }
+
+    interface userDetailResponseItem {
+        id: number;
+        uuid: string;
+        client: CodeItem;
+        type: CodeItem;
+        level: CodeItem;
+        status: CodeItem;
+        login_id: string;
+        name: string;
+        email: string;
+        active: 'Y' | 'N';
+        user_select: {
+            email: 'Y' | 'N';
+            message: 'Y' | 'N';
+        };
+        phone_verifies: {
+            uuid: string;
+            phone_number: string;
+            auth_code: string;
+            verified: 'Y' | 'N';
+        };
+        memo: string;
+        created_at: string;
+        updated_at: string;
+    }
 }

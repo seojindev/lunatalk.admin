@@ -69,8 +69,18 @@
         },
         {
             "name": "사용자 목록.",
-            "routeName": "/customers/show-customers",
-            "componentName": "Customers/ShowCustomersPage"
+            "routeName": "/users/show-users",
+            "componentName": "Users/ShowUsersPage"
+        },
+        {
+            "name": "사용자 등록.",
+            "routeName": "/users/add-users",
+            "componentName": "Users/AddUsersPage"
+        },
+        {
+            "name": "사용자 상세.",
+            "routeName": "/users/:uuid/detail-users",
+            "componentName": "Users/DetailUsersPage"
         },
         {
             "name": "결제 목록.",

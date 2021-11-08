@@ -420,22 +420,6 @@ export function mainBestItemDelete(uuid: string): Promise<CommonTypes.ServiceRes
     });
 }
 
-// 메인 베스트 아아템 리스트
-// export function mainBestItemList(uuid: string): Promise<
-//     CommonTypes.ServiceResponse<{
-//         uuid: string;
-//         product: {
-//             uuid: string;
-//         };
-//     }>
-// > {
-//     return _Axios_({
-//         method: 'delete',
-//         url: `/api/admin-front/v1/page-manage/show-best-item`,
-//         payload: { data: [] },
-//     });
-// }
-
 // 메인 뉴 아이템 추가.
 export function mainNewItemCreate(uuid: string): Promise<CommonTypes.ServiceResponse<{ uuid: string }>> {
     return _Axios_({
@@ -453,6 +437,85 @@ export function mainNewItemDelete(uuid: string): Promise<CommonTypes.ServiceResp
         payload: { data: [] },
     });
 }
+
+// 회원 생성.
+export function userCreate(payload: {
+    type: string;
+    level: string;
+    status: string;
+    user_id: string;
+    user_password: string;
+    user_phone_number: string;
+    user_name: string;
+    user_email: string;
+    user_select_email: string;
+    user_select_message: string;
+}): Promise<CommonTypes.ServiceResponse<{ uuid: string }>> {
+    return _Axios_({
+        method: 'post',
+        url: `/api/admin-front/v1/user-manage/create-user`,
+        payload: payload,
+    });
+}
+
+export function getUserList(): Promise<CommonTypes.ServiceResponse<Array<CommonTypes.userListResponseItem>>> {
+    return _Axios_({
+        method: `get`,
+        url: `/api/admin-front/v1/user-manage/show-user`,
+        payload: { data: [] },
+    });
+}
+
+export function getUserDetail({
+    uuid,
+}: {
+    uuid: string;
+}): Promise<CommonTypes.ServiceResponse<CommonTypes.userDetailResponseItem>> {
+    return _Axios_({
+        method: `get`,
+        url: `/api/admin-front/v1/user-manage/${uuid}/detail-user`,
+        payload: { data: [] },
+    });
+}
+
+export function updateUser({
+    uuid,
+    payload,
+}: {
+    uuid: string;
+    payload: {
+        type: string;
+        level: string;
+        status: string;
+        user_name: string;
+        user_email: string;
+        user_memo: string;
+        user_select_email: 'Y' | 'N';
+        user_select_message: 'Y' | 'N';
+    };
+}): Promise<CommonTypes.ServiceResponse<{ uuid: string }>> {
+    return _Axios_({
+        method: `put`,
+        url: `/api/admin-front/v1/user-manage/${uuid}/update-user`,
+        payload: payload,
+    });
+}
+
+// 메인 베스트 아아템 리스트
+// export function mainBestItemList(uuid: string): Promise<
+//     CommonTypes.ServiceResponse<{
+//         uuid: string;
+//         product: {
+//             uuid: string;
+//         };
+//     }>
+// > {
+//     return _Axios_({
+//         method: 'delete',
+//         url: `/api/admin-front/v1/page-manage/show-best-item`,
+//         payload: { data: [] },
+//     });
+// }
 
 // 메인 뉴 아아템 리스트
 // export function mainNewItemList(uuid: string): Promise<

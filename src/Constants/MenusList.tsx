@@ -32,12 +32,12 @@ export const menus = [
     },
     {
         name: '회원관리',
-        key: 'customers',
+        key: 'users',
         icon: <TeamOutlined />,
         list: [
             {
                 name: '회원',
-                key: 'show-customers',
+                key: 'show-users',
             },
         ],
     },
