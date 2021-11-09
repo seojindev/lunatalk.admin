@@ -450,6 +450,7 @@ export function userCreate(payload: {
     user_email: string;
     user_select_email: string;
     user_select_message: string;
+    user_memo: string;
 }): Promise<CommonTypes.ServiceResponse<{ uuid: string }>> {
     return _Axios_({
         method: 'post',

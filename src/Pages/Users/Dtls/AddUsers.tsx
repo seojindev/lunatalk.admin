@@ -16,6 +16,9 @@ export default function AddUsers() {
         userPhoneNumber: string;
         userSelectEmail: boolean;
         userSelectMessage: boolean;
+        userLevel: string;
+        userStatus: string;
+        userType: string;
     }>({
         userLoginId: '',
         userLoginName: '',
@@ -23,6 +26,9 @@ export default function AddUsers() {
         userLoginPassword: '',
         userMemo: '',
         userPhoneNumber: '',
+        userLevel: '',
+        userStatus: '',
+        userType: '',
         userSelectEmail: false,
         userSelectMessage: false,
     });
@@ -35,18 +41,22 @@ export default function AddUsers() {
         userPhoneNumber: string;
         userSelectEmail: boolean;
         userSelectMessage: boolean;
+        userLevel: string;
+        userStatus: string;
+        userType: string;
     }) => {
         const response = await userCreate({
-            type: '0100010',
-            level: '1200000',
-            status: '1300100',
+            type: formData.userType,
+            level: formData.userLevel,
+            status: formData.userStatus,
             user_id: formData.userLoginId,
             user_password: formData.userLoginPassword,
             user_phone_number: formData.userPhoneNumber,
             user_name: formData.userLoginName,
             user_email: formData.userEmail,
-            user_select_email: formData.userSelectEmail == true ? 'Y' : 'N',
-            user_select_message: formData.userSelectMessage == true ? 'Y' : 'N',
+            user_memo: formData.userMemo,
+            user_select_email: formData.userSelectEmail ? 'Y' : 'N',
+            user_select_message: formData.userSelectMessage ? 'Y' : 'N',
         });
 
         if (response.status) {

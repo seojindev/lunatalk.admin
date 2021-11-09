@@ -17,6 +17,9 @@ export default function DetailUsers() {
         userPhoneNumber: string;
         userSelectEmail: boolean;
         userSelectMessage: boolean;
+        userLevel: string;
+        userStatus: string;
+        userType: string;
     }>({
         userLoginId: '',
         userLoginName: '',
@@ -24,6 +27,9 @@ export default function DetailUsers() {
         userLoginPassword: '',
         userMemo: '',
         userPhoneNumber: '',
+        userLevel: '',
+        userStatus: '',
+        userType: '',
         userSelectEmail: false,
         userSelectMessage: false,
     });
@@ -37,13 +43,18 @@ export default function DetailUsers() {
         userPhoneNumber: string;
         userSelectEmail: boolean;
         userSelectMessage: boolean;
+        userLevel: string;
+        userStatus: string;
+        userType: string;
     }) => {
+        console.debug(formData);
+
         const response = await API.updateUser({
             uuid: params.uuid,
             payload: {
-                type: `0100020`,
-                level: `1200900`,
-                status: `1300100`,
+                type: formData.userType,
+                level: formData.userLevel,
+                status: formData.userStatus,
                 user_name: formData.userLoginName,
                 user_email: formData.userEmail,
                 user_memo: formData.userMemo,
@@ -73,10 +84,13 @@ export default function DetailUsers() {
                     userLoginName: response.payload.name,
                     userEmail: response.payload.email,
                     userLoginPassword: '',
+                    userLevel: response.payload.level.code_id,
+                    userStatus: response.payload.status.code_id,
+                    userType: response.payload.type.code_id,
                     userMemo: response.payload.memo,
                     userPhoneNumber: response.payload.phone_verifies.phone_number,
-                    userSelectEmail: response.payload.user_select.email == 'Y' ? true : false,
-                    userSelectMessage: response.payload.user_select.message == 'Y' ? true : false,
+                    userSelectEmail: response.payload.user_select.email == 'Y',
+                    userSelectMessage: response.payload.user_select.message == 'Y',
                 });
             } else {
                 message.error(response.message);

@@ -1,6 +1,8 @@
-import React from 'react';
-import { Button, Divider, Form, Input, Row, Switch } from 'antd';
+import React, { useEffect } from 'react';
+import { Button, Divider, Form, Input, Row, Switch, Select } from 'antd';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+import { RootState } from 'StoreTypes';
 
 export default function UserForm({
     HandleFormData,
@@ -16,6 +18,9 @@ export default function UserForm({
         userPhoneNumber: string;
         userSelectEmail: boolean;
         userSelectMessage: boolean;
+        userLevel: string;
+        userStatus: string;
+        userType: string;
     }) => void;
     FormInitialData: {
         userLoginId: string;
@@ -26,12 +31,22 @@ export default function UserForm({
         userPhoneNumber: string;
         userSelectEmail: boolean;
         userSelectMessage: boolean;
+        userLevel: string;
+        userStatus: string;
+        userType: string;
     };
     Mode: 'create' | 'detail';
 }) {
+    const { storeCodeGroup } = useSelector((store: RootState) => ({
+        storeCodeGroup: store.app.common.codes.code_group,
+    }));
+
     const [form] = Form.useForm();
 
     const handleSave = async (formData: {
+        userLevel: string;
+        userStatus: string;
+        userType: string;
         userLoginId: string;
         userLoginName: string;
         userEmail: string;
@@ -43,6 +58,10 @@ export default function UserForm({
     }) => {
         HandleFormData(formData);
     };
+
+    useEffect(() => {
+        console.debug(storeCodeGroup['010']);
+    }, [storeCodeGroup]);
 
     return (
         <Form
@@ -58,7 +77,52 @@ export default function UserForm({
                 name="userLoginId"
                 rules={[{ required: true, message: '사용자 아이디를 입력해 주세요.', type: 'string' }]}
             >
-                <Input disabled={Mode === `detail` ? true : false} />
+                <Input disabled={Mode === `detail`} />
+            </Form.Item>
+            <Form.Item
+                label="타입"
+                name="userType"
+                rules={[{ required: true, message: '타입을 선택해 주세요.', type: 'string' }]}
+            >
+                <Select>
+                    {storeCodeGroup['010'].map(item => {
+                        return (
+                            <Select.Option value={item.code_id} key={item.code_id}>
+                                {item.code_name}
+                            </Select.Option>
+                        );
+                    })}
+                </Select>
+            </Form.Item>
+            <Form.Item
+                label="레벨"
+                name="userLevel"
+                rules={[{ required: true, message: '레벨을 선택해 주세요.', type: 'string' }]}
+            >
+                <Select>
+                    {storeCodeGroup['120'].map(item => {
+                        return (
+                            <Select.Option value={item.code_id} key={item.code_id}>
+                                {item.code_name}
+                            </Select.Option>
+                        );
+                    })}
+                </Select>
+            </Form.Item>
+            <Form.Item
+                label="상태"
+                name="userStatus"
+                rules={[{ required: true, message: '상태를 선택해 주세요.', type: 'string' }]}
+            >
+                <Select>
+                    {storeCodeGroup['130'].map(item => {
+                        return (
+                            <Select.Option value={item.code_id} key={item.code_id}>
+                                {item.code_name}
+                            </Select.Option>
+                        );
+                    })}
+                </Select>
             </Form.Item>
             {Mode === `create` && (
                 <Form.Item
@@ -79,7 +143,7 @@ export default function UserForm({
             </Form.Item>
 
             <Form.Item
-                label="이미엘"
+                label="이메일"
                 name="userEmail"
                 rules={[{ required: true, message: '이름을 입력해 주세요.', type: 'string' }]}
             >
