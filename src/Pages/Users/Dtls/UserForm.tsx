@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
-import { Button, Divider, Form, Input, Row, Switch, Select } from 'antd';
+import React from 'react';
+import { Button, Divider, Form, Input, Row, Switch, Select, Col } from 'antd';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { RootState } from 'StoreTypes';
+import Swal from 'sweetalert2';
+import * as _API_ from '@API';
+import { useParams } from 'react-router-dom';
 
 export default function UserForm({
     HandleFormData,
@@ -37,6 +40,7 @@ export default function UserForm({
     };
     Mode: 'create' | 'detail';
 }) {
+    const params = useParams<{ uuid: string }>();
     const { storeCodeGroup } = useSelector((store: RootState) => ({
         storeCodeGroup: store.app.common.codes.code_group,
     }));
@@ -59,9 +63,40 @@ export default function UserForm({
         HandleFormData(formData);
     };
 
-    useEffect(() => {
-        console.debug(storeCodeGroup['010']);
-    }, [storeCodeGroup]);
+    const handleClickPasswordChangeButton = () => {
+        Swal.fire({
+            title: '변경할 비밀 번호를 입력해 주세요.',
+            input: 'text',
+            inputAttributes: {
+                autocapitalize: 'off',
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Look up',
+            showLoaderOnConfirm: true,
+            preConfirm: async (password: string) => {
+                return await _API_.updateUserPassword({ uuid: params.uuid, payload: { user_password: password } });
+            },
+            allowOutsideClick: () => !Swal.isLoading(),
+        }).then(result => {
+            if (result.value?.status) {
+                Swal.fire({
+                    text: result.value.message,
+                    icon: 'success',
+                    inputAttributes: {
+                        autocapitalize: 'off',
+                    },
+                });
+            } else {
+                Swal.fire({
+                    text: result.value?.message,
+                    icon: 'error',
+                    inputAttributes: {
+                        autocapitalize: 'off',
+                    },
+                });
+            }
+        });
+    };
 
     return (
         <Form
@@ -170,9 +205,17 @@ export default function UserForm({
 
             <Divider />
             <Row justify="center">
-                <Button type="primary" htmlType="submit">
-                    저장
-                </Button>
+                <Col>
+                    <Button type="primary" htmlType="submit">
+                        저장
+                    </Button>
+                </Col>
+
+                <Col style={{ paddingLeft: '3px' }}>
+                    <Button type="primary" htmlType="button" onClick={handleClickPasswordChangeButton}>
+                        비밀번호 변경
+                    </Button>
+                </Col>
             </Row>
         </Form>
     );

@@ -60,7 +60,7 @@ export default function ShowUsers() {
             }
         };
 
-        fnGetUserList();
+        fnGetUserList().then();
     }, []);
 
     return (

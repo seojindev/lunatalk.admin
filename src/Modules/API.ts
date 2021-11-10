@@ -502,6 +502,23 @@ export function updateUser({
     });
 }
 
+// 사용자 비밀번호 변경.
+export function updateUserPassword({
+    uuid,
+    payload,
+}: {
+    uuid: string;
+    payload: {
+        user_password: string;
+    };
+}): Promise<CommonTypes.ServiceResponse<{ uuid: string }>> {
+    return _Axios_({
+        method: `put`,
+        url: `/api/admin-front/v1/user-manage/${uuid}/update-user-password`,
+        payload: payload,
+    });
+}
+
 // 메인 베스트 아아템 리스트
 // export function mainBestItemList(uuid: string): Promise<
 //     CommonTypes.ServiceResponse<{

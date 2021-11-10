@@ -47,8 +47,6 @@ export default function DetailUsers() {
         userStatus: string;
         userType: string;
     }) => {
-        console.debug(formData);
-
         const response = await API.updateUser({
             uuid: params.uuid,
             payload: {
