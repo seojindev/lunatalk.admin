@@ -576,6 +576,7 @@ export function getProductReviewDetail(id: number): Promise<
     });
 }
 
+// 상품 리뷰 답글 등록.
 export function productReviewAnswer(
     id: number,
     data: { title: string; contents: string }
@@ -584,6 +585,32 @@ export function productReviewAnswer(
         method: 'post',
         url: `/api/admin-front/v1/product/${id}/answer-product-review`,
         payload: { title: data.title, contents: data.contents },
+    });
+}
+
+// 시스템 공지 사항 가져오기.
+export function getSystemNotice(): Promise<
+    CommonTypes.ServiceResponse<{
+        notice: string;
+    }>
+> {
+    return _Axios_({
+        method: `get`,
+        url: `/api/admin-front/v1/system/notice`,
+        payload: { data: [] },
+    });
+}
+
+// 시스템 공지 사항 저장.
+export function createSystemNotice(notice: string): Promise<
+    CommonTypes.ServiceResponse<{
+        notice: string;
+    }>
+> {
+    return _Axios_({
+        method: `post`,
+        url: `/api/admin-front/v1/system/notice`,
+        payload: { notice: notice },
     });
 }
 
