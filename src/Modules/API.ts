@@ -519,6 +519,74 @@ export function updateUserPassword({
     });
 }
 
+// 상품 리뉴 리스트.
+export function getProductReviews(): Promise<
+    CommonTypes.ServiceResponse<
+        Array<{
+            id: number;
+            user: {
+                id: number;
+                name: string;
+                email: string;
+            };
+            product: {
+                id: number;
+                uuid: string;
+                name: string;
+            };
+            title: string;
+            created_at: string;
+        }>
+    >
+> {
+    return _Axios_({
+        method: `get`,
+        url: `/api/admin-front/v1/product/show-product-reviews`,
+        payload: { data: [] },
+    });
+}
+
+export function getProductReviewDetail(id: number): Promise<
+    CommonTypes.ServiceResponse<{
+        id: number;
+        user: {
+            id: number;
+            name: string;
+            email: string;
+        };
+        product: {
+            id: number;
+            uuid: string;
+            name: string;
+        };
+        title: string;
+        contents: string;
+        created_at: string;
+        answer: {
+            title: string;
+            contents: string;
+            created_at: string;
+        };
+    }>
+> {
+    return _Axios_({
+        method: `get`,
+        url: `/api/admin-front/v1/product/${id}/detail-product-reviews`,
+        payload: { data: [] },
+    });
+}
+
+export function productReviewAnswer(
+    id: number,
+    data: { title: string; contents: string }
+): Promise<CommonTypes.ServiceResponse<{ message: string }>> {
+    return _Axios_({
+        method: 'post',
+        url: `/api/admin-front/v1/product/${id}/answer-product-review`,
+        payload: { title: data.title, contents: data.contents },
+    });
+}
+
 // 메인 베스트 아아템 리스트
 // export function mainBestItemList(uuid: string): Promise<
 //     CommonTypes.ServiceResponse<{

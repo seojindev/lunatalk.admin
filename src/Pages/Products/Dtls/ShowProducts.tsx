@@ -62,7 +62,6 @@ export default function ShowProducts() {
             setTableData({
                 totalElements: storeProductsList.length,
                 content: storeProductsList.map((item: productListItem) => {
-                    console.debug(item);
                     return {
                         key: String(item.id),
                         product: {

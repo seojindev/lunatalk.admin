@@ -68,6 +68,16 @@
             "componentName": "Products/UpdateProductPage"
         },
         {
+            "name": "리뷰 관리.",
+            "routeName": "/products/show-reviews",
+            "componentName": "Products/ShowReviewsPage"
+        },
+        {
+            "name": "리뷰 상세.",
+            "routeName": "/products/:id/detail-reviews",
+            "componentName": "Products/DetailReviewsPage"
+        },
+        {
             "name": "사용자 목록.",
             "routeName": "/users/show-users",
             "componentName": "Users/ShowUsersPage"

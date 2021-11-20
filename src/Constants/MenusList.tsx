@@ -28,6 +28,10 @@ export const menus = [
                 name: '상품',
                 key: 'show-products',
             },
+            {
+                name: '리뷰관리',
+                key: 'show-reviews',
+            },
         ],
     },
     {
