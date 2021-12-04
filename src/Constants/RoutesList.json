@@ -48,6 +48,21 @@
             "componentName": "Products/updateProductsCategoryPage"
         },
         {
+            "name": "배지 등록.",
+            "routeName": "/products/add-product-badge",
+            "componentName": "Products/AddProductBadgePage"
+        },
+        {
+            "name": "배지 목록.",
+            "routeName": "/products/show-product-badge",
+            "componentName": "Products/ShowProductBadgePage"
+        },
+        {
+            "name": "배지 상세.",
+            "routeName": "/products/:id/detail-product-badge",
+            "componentName": "Products/DetailProductBadgePage"
+        },
+        {
             "name": "상품 목록.",
             "routeName": "/products/show-products",
             "componentName": "Products/ShowProductsPage"

@@ -614,6 +614,107 @@ export function createSystemNotice(notice: string): Promise<
     });
 }
 
+// 배지 이미지 업로드
+export function uploadProductBadgeImage(formData: any): Promise<
+    CommonTypes.ServiceResponse<{
+        status: boolean;
+        media_id: number;
+        media_full_url: string;
+        file_name: string;
+        message: string;
+    }>
+> {
+    return _Axios_({
+        method: 'post',
+        url: '/api/other/v1/media/products/badge/create',
+        payload: formData,
+    });
+}
+
+// 상품 배지 이미지 저장
+export function saveProductBadgeImage({ name, media_id }: { name: string; media_id: number }): Promise<
+    CommonTypes.ServiceResponse<{
+        message: string;
+    }>
+> {
+    return _Axios_({
+        method: 'post',
+        url: '/api/admin-front/v1/product/create-product-badge-image',
+        payload: {
+            name: name,
+            media_id: media_id,
+        },
+    });
+}
+
+// 상품 배지 리스트
+export function getProductBadgeList(): Promise<
+    CommonTypes.ServiceResponse<
+        Array<{
+            id: number;
+            name: string;
+            image: {
+                id: number;
+                file_name: string;
+                url: string;
+            };
+        }>
+    >
+> {
+    return _Axios_({
+        method: `get`,
+        url: `/api/admin-front/v1/product/show-product-badges`,
+        payload: { data: [] },
+    });
+}
+
+// 배지 상세 가지고 오기
+export function getProductBadgeDetail(id: number): Promise<
+    CommonTypes.ServiceResponse<{
+        id: number;
+        name: string;
+        image: {
+            id: number;
+            file_name: string;
+            url: string;
+        };
+    }>
+> {
+    return _Axios_({
+        method: `get`,
+        url: `/api/admin-front/v1/product/${id}/detail-product-badges`,
+        payload: {},
+    });
+}
+
+// 상품 배지 수정.
+export function updateProductBadgeDetail({
+    id,
+    data,
+}: {
+    id: number;
+    data: { name: string; media_id: number };
+}): Promise<
+    CommonTypes.ServiceResponse<{
+        id: number;
+        name: string;
+        image: {
+            id: number;
+            file_name: string;
+            url: string;
+        };
+    }>
+> {
+    return _Axios_({
+        method: `put`,
+        url: `/api/admin-front/v1/product/${id}/update-product-badges`,
+        payload: {
+            name: data.name,
+            media_id: data.media_id,
+        },
+    });
+}
+
 // 메인 베스트 아아템 리스트
 // export function mainBestItemList(uuid: string): Promise<
 //     CommonTypes.ServiceResponse<{

@@ -25,6 +25,10 @@ export const menus = [
                 key: 'show-product-category',
             },
             {
+                name: '배지 관리',
+                key: 'show-product-badge',
+            },
+            {
                 name: '상품',
                 key: 'show-products',
             },
