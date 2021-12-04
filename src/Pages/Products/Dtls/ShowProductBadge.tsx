@@ -81,7 +81,7 @@ export default function ShowProductBadge() {
     return (
         <>
             <PageHeader
-                addNewPath="products/add-product-category"
+                addNewPath="products/add-product-badge"
                 hasSelected={hasSelected}
                 // handleDelete={deleteCategory}
             />
