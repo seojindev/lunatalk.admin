@@ -27,7 +27,7 @@ export default function ProductForm({
         productName: string;
         productCategory: number;
         productColorOption: number[];
-        productWirelessOption: number[];
+        productWirelessOption: number | null;
         productOriginalPrice: number;
         productPrice: number;
         productQuantity: number;
@@ -43,13 +43,13 @@ export default function ProductForm({
     const history = useHistory();
 
     // 상품 리시트 처리. 상품 리스트는 최초 로딩시 가지고 온다. AppStore.
-    const { storeProductCategory, storeProductColorOptions, storeProductWirelessOptions } = useSelector(
-        (store: RootState) => ({
+    const { storeProductCategory, storeProductColorOptions, storeProductWirelessOptions, storeProductBadge } =
+        useSelector((store: RootState) => ({
             storeProductCategory: store.app.common.products.category,
             storeProductColorOptions: store.app.common.products.color_options,
             storeProductWirelessOptions: store.app.common.products.wireless_options,
-        })
-    );
+            storeProductBadge: store.app.common.products.badge,
+        }));
 
     const [form] = Form.useForm();
     const [repfileList, setRepfileList] = useState<any>([]);
@@ -71,17 +71,19 @@ export default function ProductForm({
         productMemo,
         productSaleActive,
         productActive,
+        productBadge,
     }: {
         productName: string;
         productCategory: number;
         productColorOption: number[];
-        productWirelessOption: number[];
+        productWirelessOption: number;
         productOriginalPrice: number;
         productPrice: number;
         productQuantity: number;
         productMemo: string;
         productSaleActive: boolean;
         productActive: boolean;
+        productBadge: number[];
     }) => {
         if (repfileList.length === 0) {
             message.error('대표이미지를 하나 이상 선택해 주세요.');
@@ -112,6 +114,7 @@ export default function ProductForm({
             detail_image: detailFileList.map((e: any) => {
                 return e.uid;
             }),
+            badge: productBadge,
         };
 
         // 수정 및 등록 api 호출.
@@ -303,18 +306,18 @@ export default function ProductForm({
             <Form.Item
                 label="옵션(유무선)"
                 name="productWirelessOption"
-                rules={[{ message: '유무선을 선택해 주세요.', type: 'array' }]}
+                rules={[{ required: false, message: '유무선을 선택해 주세요.' }]}
             >
                 <Select
-                    mode="multiple"
+                    // mode="multiple"
                     allowClear
                     style={{ width: '100%' }}
                     placeholder="유무선을 선택해 주세요."
                     onChange={e => console.debug(e)}
                 >
                     {storeProductWirelessOptions.map(item => (
-                        <Select.Option key={item.id} value={String(item.id)}>
-                            {item.wireless === 'Y' ? '무선' : '유선'}
+                        <Select.Option key={item.id} value={item.id}>
+                            {item.wireless}
                         </Select.Option>
                     ))}
                 </Select>
@@ -345,6 +348,26 @@ export default function ProductForm({
             </Form.Item>
             <Form.Item label="상품 상태" name="productActive" valuePropName="checked">
                 <Switch checkedChildren={<CheckOutlined />} unCheckedChildren={<CloseOutlined />} />
+            </Form.Item>
+            <Form.Item
+                label="상품 배지"
+                name="productBadge"
+                rules={[{ required: false, message: '상품 배지를 선택해 주세요.', type: 'array' }]}
+            >
+                <Select
+                    mode="multiple"
+                    // allowClear
+                    style={{ width: '100%' }}
+                    placeholder="상품 배지를 선택해 주세요."
+                    onChange={e => console.debug(e)}
+                    // tokenSeparators={[',']}
+                >
+                    {storeProductBadge.map(item => (
+                        <Select.Option key={item.id} value={item.id}>
+                            {item.name}
+                        </Select.Option>
+                    ))}
+                </Select>
             </Form.Item>
             <Form.Item label="메모" name="productMemo">
                 <Input.TextArea rows={7} />

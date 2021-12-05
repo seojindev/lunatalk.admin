@@ -58,6 +58,16 @@ declare module 'CommonTypes' {
         wireless: string;
     }
 
+    export interface productBadgeItem {
+        id: number;
+        name: string;
+        image: {
+            id: number;
+            file_name: string;
+            url: string;
+        };
+    }
+
     export interface productListItem {
         id: number;
         uuid: string;
@@ -80,7 +90,8 @@ declare module 'CommonTypes' {
             name: string;
         };
         color: productListColorItem[];
-        wireless: productListWirelessItem[];
+        wireless: productListWirelessItem;
+        badge: productBadgeItem[];
         best_item: boolean;
         new_item: boolean;
     }
@@ -96,6 +107,7 @@ declare module 'CommonTypes' {
         list: productListItem[];
         color_options: ColorOptionListItem[];
         wireless_options: WirelessOptionsListItem[];
+        badge: productBadgeItem[];
     }
 
     // 기본 데이터들.
@@ -189,7 +201,8 @@ declare module 'CommonTypes' {
         sale: string;
         active: string;
         color: productListColorItem[];
-        wireless: ProductWirelessOptionItem[];
+        wireless: ProductWirelessOptionItem;
+        badge: productBadgeItem[];
         rep_images: ProductDetailImageItem[];
         detail_images: ProductDetailImageItem[];
     }

@@ -16,7 +16,12 @@ interface tableDataItem {
     };
     category: string;
     color: string[];
-    wireless: string[];
+    wireless: string;
+    badge: Array<{
+        id: number;
+        name: string;
+        image: string;
+    }>;
     description: string;
     quantity: string;
     original_price: string;
@@ -71,7 +76,14 @@ export default function ShowProducts() {
                         category: item.category.name,
                         description: '',
                         color: item.color.map(e => e.name),
-                        wireless: item.wireless.map(e => e.wireless),
+                        wireless: item.wireless ? item.wireless.wireless : '없음',
+                        badge: item.badge.map(item => {
+                            return {
+                                id: item.id,
+                                name: item.name,
+                                image: item.image.url,
+                            };
+                        }),
                         quantity: item.quantity.string,
                         original_price: item.original_price.string,
                         price: item.price.string,

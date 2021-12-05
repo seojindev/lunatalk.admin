@@ -68,11 +68,12 @@ export default function DetailProduct() {
                             })}
                     </Descriptions.Item>
                     <Descriptions.Item label="옵션(유무선)">
-                        {detailInfo && detailInfo.wireless
-                            ? detailInfo.wireless.map(wireless => {
-                                  return wireless.wireless;
-                              })
-                            : '없음'}
+                        {detailInfo && detailInfo.wireless ? detailInfo.wireless.wireless : '없음'}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="배지">
+                        {detailInfo && detailInfo.badge
+                            ? detailInfo.badge.map(item => <img key={item.id} src={item.image.url} alt={'배지'} />)
+                            : ''}
                     </Descriptions.Item>
                     <Descriptions.Item label="남은 수량">
                         {detailInfo && detailInfo.quantity ? detailInfo.quantity.string : '없음'}

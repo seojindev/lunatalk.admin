@@ -149,7 +149,7 @@ export function addProduct({
     category: number;
     barcode: string;
     color: number[];
-    wireless: number[];
+    wireless: number;
     original_price: number;
     price: number;
     quantity: number;
@@ -201,6 +201,7 @@ export function updateProduct({
         active,
         rep_image,
         detail_image,
+        badge,
     },
 }: {
     uuid: string;
@@ -209,7 +210,7 @@ export function updateProduct({
         category: number;
         barcode: string;
         color: number[];
-        wireless: number[];
+        wireless: number;
         original_price: number;
         price: number;
         quantity: number;
@@ -218,6 +219,7 @@ export function updateProduct({
         active: string;
         rep_image: number[];
         detail_image: number[];
+        badge: number[];
     };
 }): Promise<
     CommonTypes.ServiceResponse<{
@@ -241,6 +243,7 @@ export function updateProduct({
             active: active,
             rep_image: rep_image,
             detail_image: detail_image,
+            badge: badge,
         },
     });
 }

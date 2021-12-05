@@ -10,6 +10,20 @@ export const columns = [
         key: 'uuid',
     },
     {
+        title: '배지',
+        dataIndex: 'badge',
+        key: 'badge',
+        render: badge => {
+            return (
+                <>
+                    {badge.map(item => {
+                        return <img src={item.image} key={item.id} alt="배지" />;
+                    })}
+                </>
+            );
+        },
+    },
+    {
         title: '상품명',
         dataIndex: 'product',
         key: 'product',

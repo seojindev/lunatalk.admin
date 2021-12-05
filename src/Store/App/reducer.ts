@@ -2,7 +2,7 @@ import { createReducer } from 'typesafe-actions';
 import { SagaAction, Codes, Products, productListItem } from 'CommonTypes';
 import produce from 'immer';
 import { AppState } from 'StoreTypes';
-import {} from './actions';
+// import {} from './actions';
 
 import * as _Types from './types';
 
@@ -36,6 +36,7 @@ const initialState: AppState = {
             list: [],
             color_options: [],
             wireless_options: [],
+            badge: [],
         },
     },
 };
