@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Card, Form, Input, Row, Col, Divider, Button, message, Upload } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { addProductCategory, saveProductBadgeImage, uploadProductBadgeImage } from '@API';
 import { useLoading } from '@Hooks';
 import * as _API from '@API';
 // import * as Helper from '@Helper';
 
 export default function AddBadge() {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const { loadingControl } = useLoading();
 
@@ -65,7 +65,7 @@ export default function AddBadge() {
 
         if (response.status) {
             message.success('정상 처리 되었습니다.');
-            history.push({
+            navigate({
                 pathname: process.env.PUBLIC_URL + `/products/show-product-badge`,
             });
         } else {

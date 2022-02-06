@@ -74,7 +74,10 @@ export default function UserForm({
             confirmButtonText: 'Look up',
             showLoaderOnConfirm: true,
             preConfirm: async (password: string) => {
-                return await _API_.updateUserPassword({ uuid: params.uuid, payload: { user_password: password } });
+                return await _API_.updateUserPassword({
+                    uuid: params.uuid ? params.uuid : '',
+                    payload: { user_password: password },
+                });
             },
             allowOutsideClick: () => !Swal.isLoading(),
         }).then(result => {

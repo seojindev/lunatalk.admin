@@ -44,7 +44,7 @@ export default function AddUpdateMainSlide() {
         const fnGetPageDetail = async () => {
             setCardLoading(true);
             const { status, payload }: CommonTypes.ServiceResponse<CommonTypes.mainSlideDetailResponse> =
-                await API.getDetailMainSlide({ uuid: params.slide_uuid });
+                await API.getDetailMainSlide({ uuid: params.slide_uuid ? params.slide_uuid : '' });
 
             if (status) {
                 // 슬라이드 정보
@@ -95,7 +95,7 @@ export default function AddUpdateMainSlide() {
             <Row justify="center">
                 <Col span={12}>
                     <SlideForm
-                        SlideUUid={params.slide_uuid}
+                        SlideUUid={params.slide_uuid ? params.slide_uuid : ''}
                         FormMode={pageMode}
                         FormInitialData={inputData}
                         ImageInitialData={imageData}

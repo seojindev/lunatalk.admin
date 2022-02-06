@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as _API from '@API';
 import { Switch, Form, Input, Row, Divider, Button, Upload, message, Select } from 'antd';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from 'StoreTypes';
 import { isEmpty } from '@Helper';
@@ -29,7 +29,7 @@ export default function SlideForm({
     }>;
 }) {
     const [form] = Form.useForm();
-    const history = useHistory();
+    const navigate = useNavigate();
     const { storeProductsList } = useSelector((store: RootState) => ({
         storeProductsList: store.app.common.products.list,
     }));
@@ -70,7 +70,7 @@ export default function SlideForm({
             const addResponse = await _API.addMainSlide(payload);
             if (addResponse.status) {
                 message.success('정상처리 하였습니다.');
-                history.push({ pathname: `${process.env.PUBLIC_URL}/pages/show-main-slide` });
+                navigate({ pathname: `${process.env.PUBLIC_URL}/pages/show-main-slide` });
             } else {
                 message.error(addResponse.message);
             }
@@ -81,7 +81,7 @@ export default function SlideForm({
             });
             if (updateResponse.status) {
                 message.success('정상처리 하였습니다.');
-                history.push({ pathname: `${process.env.PUBLIC_URL}/pages/show-main-slide` });
+                navigate({ pathname: `${process.env.PUBLIC_URL}/pages/show-main-slide` });
             } else {
                 message.error(updateResponse.message);
             }

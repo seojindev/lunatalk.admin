@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Image, message as antdMessage } from 'antd';
 import { Descriptions, Badge } from 'antd';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as API from '@API';
 import * as CommonTypes from 'CommonTypes';
 
 export default function DetailSiteNotices() {
     const params = useParams<{ uuid: string }>();
-    const history = useHistory();
+    const navigate = useNavigate();
     const [noticeData, setNoticeData] = useState<CommonTypes.NoticetItem>();
 
     useEffect(() => {
         const fnGetNoticeDetail = async () => {
-            const { status, payload, message } = await API.getSiteNoticeDetail({ uuid: params.uuid });
+            const { status, payload, message } = await API.getSiteNoticeDetail({
+                uuid: params.uuid ? params.uuid : '',
+            });
             if (status) {
                 setNoticeData(payload);
             } else {
@@ -37,7 +39,7 @@ export default function DetailSiteNotices() {
                         <Button
                             type="primary"
                             onClick={() => {
-                                history.push({
+                                navigate({
                                     pathname: `${process.env.PUBLIC_URL}/sites/${params.uuid}/update-site-notice`,
                                 });
                             }}

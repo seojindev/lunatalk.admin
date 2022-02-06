@@ -5,7 +5,7 @@ import * as _API from '@API';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'StoreTypes';
 import { resetProductAction, getProductAction } from '@Store/App';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface imagesInterface {
     uid: number;
@@ -40,7 +40,7 @@ export default function ProductForm({
     DetailImageInitalData: imagesInterface[];
 }) {
     const dispatch = useDispatch();
-    const history = useHistory();
+    const navigate = useNavigate();
 
     // 상품 리시트 처리. 상품 리스트는 최초 로딩시 가지고 온다. AppStore.
     const { storeProductCategory, storeProductColorOptions, storeProductWirelessOptions, storeProductBadge } =
@@ -137,7 +137,7 @@ export default function ProductForm({
             }
         }
 
-        history.push({ pathname: `${process.env.PUBLIC_URL}/products/show-products` });
+        navigate({ pathname: `${process.env.PUBLIC_URL}/products/show-products` });
     };
 
     // 대표 이미지 삭제 버튼 처리.

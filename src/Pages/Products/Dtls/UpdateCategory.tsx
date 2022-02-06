@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Form, Input, Row, Col, Divider, Button, message } from 'antd';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { isEmpty } from '@Helper';
 import { useLoading } from '@Hooks';
 import { getProductCategoryDetail, updateProductCategory } from '@API';
 
 export default function UpdateCategory() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const { loadingState, loadingControl } = useLoading();
 
     const [form] = Form.useForm();
@@ -18,14 +18,19 @@ export default function UpdateCategory() {
             await loadingControl({
                 type: 'fetch',
             });
-            const response = await updateProductCategory(parmas.category_uuid, values.categoryName);
+
+            const response = await updateProductCategory(
+                parmas.category_uuid ? parmas.category_uuid : '',
+                values.categoryName
+            );
+
             if (response.status) {
                 await loadingControl({
                     type: 'success',
                 });
                 message.success('수정 되었습니다.').then();
                 setCardLoading(false);
-                history.push({ pathname: `${process.env.PUBLIC_URL}/products/show-product-category` });
+                navigate({ pathname: `${process.env.PUBLIC_URL}/products/show-product-category` });
             } else {
                 await loadingControl({
                     type: 'error',
@@ -43,7 +48,7 @@ export default function UpdateCategory() {
             await loadingControl({
                 type: 'fetch',
             });
-            const response = await getProductCategoryDetail(parmas.category_uuid);
+            const response = await getProductCategoryDetail(parmas.category_uuid ? parmas.category_uuid : '');
             if (response.status) {
                 await loadingControl({
                     type: 'success',

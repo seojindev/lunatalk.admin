@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { menus } from '@Constants/MenusList';
 
@@ -23,13 +23,13 @@ interface menusInterface {
 export default function SideBarComponent({ handleOnCollapse, collapsed }: { handleOnCollapse: any; collapsed: any }) {
     const theme = 'light';
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleSiderMenuClick = (action: any) => {
         if (action.keyPath.length === 1) {
-            history.push(`${process.env.PUBLIC_URL}/${action.key}`);
+            navigate(`${process.env.PUBLIC_URL}/${action.key}`);
         } else {
-            history.push(`${process.env.PUBLIC_URL}/${action.keyPath[1]}/${action.key}`);
+            navigate(`${process.env.PUBLIC_URL}/${action.keyPath[1]}/${action.key}`);
         }
     };
 

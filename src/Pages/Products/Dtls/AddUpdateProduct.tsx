@@ -50,7 +50,7 @@ export default function AddUpdateProduct() {
         const fnGetPageDetail = async () => {
             setCardLoading(true);
             const { status, payload }: CommonTypes.ServiceResponse<CommonTypes.productDeatailResponse> =
-                await API.getDetailProducts({ uuid: params.product_uuid });
+                await API.getDetailProducts({ uuid: params.product_uuid ? params.product_uuid : '' });
 
             if (status) {
                 // 상품 정보.
@@ -124,7 +124,7 @@ export default function AddUpdateProduct() {
             <Row justify="center">
                 <Col span={12}>
                     <ProductForm
-                        ProductUUid={params.product_uuid}
+                        ProductUUid={params.product_uuid ? params.product_uuid : ''}
                         FormMode={pageMode}
                         FormInitialData={inputData}
                         RepImageInitialData={repImageData}

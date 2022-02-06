@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Card, Form, Input, Row, Col, Divider, Button, message } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { addProductCategory } from '@API';
 import { useLoading } from '@Hooks';
 
 export default function AddCategory() {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const { loadingControl } = useLoading();
 
@@ -21,7 +21,7 @@ export default function AddCategory() {
                 type: 'success',
             });
             message.success('정상 처리 하였습니다.');
-            history.push({ pathname: `${process.env.PUBLIC_URL}/products/show-product-category` });
+            navigate({ pathname: `${process.env.PUBLIC_URL}/products/show-product-category` });
         } else {
             await loadingControl({
                 type: 'error',

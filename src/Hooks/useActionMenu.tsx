@@ -1,15 +1,15 @@
 import React from 'react';
 import { Dropdown, Menu } from 'antd';
 import { DownOutlined, EditOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function useActionMenu({ selectedRow, updateEntityPath }: { selectedRow: any; updateEntityPath: any }) {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleMenuClick = (action: any) => {
         if (action.key === 'edit') {
             const updatePath = '/' + updateEntityPath + '/' + selectedRow.key;
-            history.push(updatePath);
+            navigate(updatePath);
         }
     };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Col, Divider, Input, Popconfirm, Row } from 'antd';
 import { DeleteOutlined, PlusOutlined, QuestionCircleOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const { Search } = Input;
 
@@ -16,10 +16,10 @@ export default function PageHeaderComponent({
     handleSearch?: any;
     handleDelete?: any;
 }) {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleAddNew = () => {
-        history.push('/' + addNewPath);
+        navigate('/' + addNewPath);
     };
 
     return (

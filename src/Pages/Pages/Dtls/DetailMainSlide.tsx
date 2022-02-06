@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Descriptions, Button, Image, Badge, Card } from 'antd';
 import { isEmpty } from '@Helper';
 import * as API from '@API';
 import CommonTypes from 'CommonTypes';
 
 export default function DetailProduct() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
     const params = useParams<{ slide_uuid: string }>();
 
@@ -17,7 +17,7 @@ export default function DetailProduct() {
         const fnGetMainSlideDetail = async () => {
             //
             const response: CommonTypes.ServiceResponse<CommonTypes.mainSlideDetailResponse> =
-                await API.getDetailMainSlide({ uuid: params.slide_uuid });
+                await API.getDetailMainSlide({ uuid: params.slide_uuid ? params.slide_uuid : '' });
 
             if (response.status) {
                 setDetailInfo(response.payload);
@@ -44,7 +44,7 @@ export default function DetailProduct() {
                         <Button
                             type="primary"
                             onClick={() => {
-                                history.push({
+                                navigate({
                                     pathname: `${process.env.PUBLIC_URL}/pages/update-main-slide/${params.slide_uuid}`,
                                 });
                             }}
@@ -83,7 +83,7 @@ export default function DetailProduct() {
                     <Descriptions.Item label="상품">
                         <div
                             onClick={() => {
-                                history.push({
+                                navigate({
                                     pathname: `${process.env.PUBLIC_URL}/products/${
                                         detailInfo &&
                                         detailInfo.product_uuid &&

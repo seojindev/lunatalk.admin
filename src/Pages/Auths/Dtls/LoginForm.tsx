@@ -15,7 +15,6 @@ export default function LoginForm() {
         authsLoginMessage: store.auths.login.message,
     }));
 
-    // const history = useHistory();
     const [checkState, setCheckState] = useState<boolean>(false);
     const [checkRemember, setCheckRemember] = useState<{ state: boolean; id: string }>({ state: true, id: '' });
 
@@ -32,7 +31,7 @@ export default function LoginForm() {
         //     pathname: process.env.PUBLIC_URL + `/main/dashboard`,
         // });
 
-        if (remember === true) {
+        if (remember) {
             cookieManager.set('remember', login_id, 24 * 31);
         }
 
@@ -73,7 +72,7 @@ export default function LoginForm() {
 
     return (
         <>
-            {checkState === true && (
+            {checkState && (
                 <Form
                     name="normal_login"
                     className="login-form"

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Row, Col, message } from 'antd';
 import UserForm from './UserForm';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import * as API from '@API';
 
 export default function DetailUsers() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const params = useParams<{ uuid: string }>();
     const [cardLoading, setCardLoading] = useState<boolean>(true);
     const [formInitialData, setFormInitialData] = useState<{
@@ -48,7 +48,7 @@ export default function DetailUsers() {
         userType: string;
     }) => {
         const response = await API.updateUser({
-            uuid: params.uuid,
+            uuid: params.uuid ? params.uuid : '',
             payload: {
                 type: formData.userType,
                 level: formData.userLevel,
@@ -63,7 +63,7 @@ export default function DetailUsers() {
 
         if (response.status) {
             message.success(`정상 처리 하였습니다.`);
-            history.push({ pathname: `${process.env.PUBLIC_URL}/users/show-users` });
+            navigate({ pathname: `${process.env.PUBLIC_URL}/users/show-users` });
         } else {
             message.error(response.message);
         }
@@ -73,7 +73,7 @@ export default function DetailUsers() {
         setCardLoading(true);
 
         const fnGetUserDetail = async () => {
-            const response = await API.getUserDetail({ uuid: params.uuid });
+            const response = await API.getUserDetail({ uuid: params.uuid ? params.uuid : '' });
 
             if (response.status) {
                 setFormInitialData({

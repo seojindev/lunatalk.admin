@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import UserForm from './UserForm';
 import { userCreate } from '@API';
 import { Card, Col, message, Row } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddUsers() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [cardLoading] = useState<boolean>(false);
     const [formInitialData] = useState<{
         userLoginId: string;
@@ -61,7 +61,7 @@ export default function AddUsers() {
 
         if (response.status) {
             message.success('정상 등록 하였습니다.').then();
-            history.push({ pathname: `${process.env.PUBLIC_URL}/users/show-users` });
+            navigate({ pathname: `${process.env.PUBLIC_URL}/users/show-users` });
         }
     };
 

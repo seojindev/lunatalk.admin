@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Descriptions, Button, Image, Badge, Tag, Card } from 'antd';
 import { isEmpty } from '@Helper';
 import * as API from '@API';
 import CommonTypes from 'CommonTypes';
 
 export default function DetailProduct() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
     const params = useParams<{ product_uuid: string }>();
 
@@ -17,7 +17,7 @@ export default function DetailProduct() {
         const fnGetProductDetail = async () => {
             //
             const response: CommonTypes.ServiceResponse<CommonTypes.productDeatailResponse> =
-                await API.getDetailProducts({ uuid: params.product_uuid });
+                await API.getDetailProducts({ uuid: params.product_uuid ? params.product_uuid : '' });
 
             if (response.status) {
                 setDetailInfo(response.payload);
@@ -44,7 +44,7 @@ export default function DetailProduct() {
                         <Button
                             type="primary"
                             onClick={() => {
-                                history.push({
+                                navigate({
                                     pathname: `${process.env.PUBLIC_URL}/products/${params.product_uuid}/update-product`,
                                 });
                             }}

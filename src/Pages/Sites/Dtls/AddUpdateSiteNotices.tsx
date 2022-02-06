@@ -4,10 +4,10 @@ import NoticeForm from './NoticeForm';
 import { useParams } from 'react-router-dom';
 import { isEmpty } from '@Helper';
 import * as _API from '@API';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddUpdateSiteNotices() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const params = useParams<{ uuid: string }>();
     const [cardLoading, setCardLoading] = useState<boolean>(false);
     const [actionMode, setActionMode] = useState<'ADD' | 'UPDATE' | 'yet'>('yet');
@@ -50,10 +50,10 @@ export default function AddUpdateSiteNotices() {
         const payload = { category: category, title: title, content: content, active: active, image: image };
 
         if (actionMode === 'UPDATE') {
-            const { status, message } = await _API.updateSIteNotice(params.uuid, payload);
+            const { status, message } = await _API.updateSIteNotice(params.uuid ? params.uuid : '', payload);
             if (status) {
                 antdMessage.success('정상 처리 하였습니다.');
-                history.push({ pathname: `${process.env.PUBLIC_URL}/sites/show-site-notice` });
+                navigate({ pathname: `${process.env.PUBLIC_URL}/sites/show-site-notice` });
             } else {
                 antdMessage.error(message);
             }
@@ -61,7 +61,7 @@ export default function AddUpdateSiteNotices() {
             const { status, message } = await _API.createSiteNotice(payload);
             if (status) {
                 antdMessage.success('정상 처리 하였습니다.');
-                history.push({ pathname: `${process.env.PUBLIC_URL}/sites/show-site-notice` });
+                navigate({ pathname: `${process.env.PUBLIC_URL}/sites/show-site-notice` });
             } else {
                 antdMessage.error(message);
             }
@@ -74,7 +74,9 @@ export default function AddUpdateSiteNotices() {
         const fnSetActionMode = async () => {
             if (!isEmpty(params.uuid)) {
                 setCardLoading(true);
-                const { status, payload, message } = await _API.getSiteNoticeDetail({ uuid: params.uuid });
+                const { status, payload, message } = await _API.getSiteNoticeDetail({
+                    uuid: params.uuid ? params.uuid : '',
+                });
                 if (status) {
                     setActionMode('UPDATE');
                     setFormInitialData({
@@ -109,7 +111,7 @@ export default function AddUpdateSiteNotices() {
         <Card title="공지사항 등록 & 수정" loading={cardLoading}>
             <Row justify="center">
                 <Col span={12}>
-                    {cardLoading === false && (
+                    {!cardLoading && (
                         <NoticeForm
                             FormInitialData={formInitialData}
                             ImageList={imageList}

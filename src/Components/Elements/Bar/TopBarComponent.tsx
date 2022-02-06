@@ -2,14 +2,14 @@ import React from 'react';
 import { MenuUnfoldOutlined, MenuFoldOutlined, BellOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Layout, Menu, Badge } from 'antd';
 import { TopAvatar } from '@Element/Avatar';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const { Header } = Layout;
 const { SubMenu } = Menu;
 
 // FIXME: 타입 정의.
 export default function TopBarComponent({ collapsed, handleOnCollapse }: { collapsed: any; handleOnCollapse: any }) {
-    const history = useHistory();
+    const navigate = useNavigate();
     const getCollapseIcon = () => {
         if (collapsed) {
             return <MenuUnfoldOutlined onClick={handleOnCollapse} className="trigger" />;
@@ -23,7 +23,7 @@ export default function TopBarComponent({ collapsed, handleOnCollapse }: { colla
 
     const handleSettingMenuClick = (action: any) => {
         if (action.key === 'logout') {
-            history.push({
+            navigate({
                 pathname: process.env.PUBLIC_URL + '/auth/logout',
             });
         }

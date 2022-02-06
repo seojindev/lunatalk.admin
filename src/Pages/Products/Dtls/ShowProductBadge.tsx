@@ -5,7 +5,7 @@ import * as constants from '@Src/Data/ProductBadgeTable';
 // import { ProductCategoryItem } from 'CommonTypes';
 import { getProductBadgeList } from '@API';
 // import { message } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface tableDataItem {
     key: number;
@@ -25,7 +25,7 @@ interface tableDataInserface {
 }
 
 export default function ShowProductBadge() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const { loadingControl } = useLoading();
     const [tableData, setTableData] = useState<tableDataInserface>({
         totalElements: 0,
@@ -42,7 +42,10 @@ export default function ShowProductBadge() {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             const { data } = selectedRow;
-            history.push({
+
+            navigate({
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 pathname: process.env.PUBLIC_URL + `/products/${data.id}/detail-product-badge`,
             });
         }

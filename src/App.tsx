@@ -3,8 +3,8 @@ import '@Style/MainStyle.less';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import configureStore from '@Store/configureStore';
-import History from '@Module/History';
-import Routes from '@Module/Routes';
+// import History from '@Module/History';
+import RootRoutes from '@Module/RootRoutes';
 import SplashComponent from '@Src/Components/SplashComponent';
 
 const history = createBrowserHistory();
@@ -18,7 +18,7 @@ function App() {
 
     // 스피너 페이지.
     const handleAppLoading = () => {
-        if (AppLoading === false) {
+        if (!AppLoading) {
             setAppLoading(true);
         } else {
             setAppLoading(false);
@@ -30,10 +30,10 @@ function App() {
         // <React.StrictMode>
         <Provider store={store}>
             {(function () {
-                if (AppLoading === true) {
+                if (AppLoading) {
                     return <SplashComponent appLoading={handleAppLoading} />;
                 } else {
-                    return <Routes Routerhistory={History} />;
+                    return <RootRoutes />;
                 }
             })()}
         </Provider>

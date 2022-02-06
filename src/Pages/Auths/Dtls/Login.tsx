@@ -2,19 +2,19 @@ import { useEffect } from 'react';
 import { Row, Col } from 'antd';
 import { RootState } from 'StoreTypes';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import LoginForm from './LoginForm';
 
 export default function Login() {
-    const history = useHistory();
+    const navigate = useNavigate();
     const { appLoginState } = useSelector((store: RootState) => ({
         appLoginState: store.app.loginState,
     }));
 
     useEffect(() => {
-        if (appLoginState === true) {
-            history.push({
+        if (appLoginState) {
+            navigate({
                 pathname: process.env.PUBLIC_URL + `/dashboard`,
             });
         }

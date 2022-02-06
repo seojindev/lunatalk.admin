@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import { Layout } from 'antd';
 import { FooterBar } from '@Element/Bar';
 import { useSelector } from 'react-redux';
@@ -7,7 +8,7 @@ import { PageSpinner } from '@Element/Spinners';
 
 const { Content } = Layout;
 
-export default function BlankLayoutComponent({ children }: { children: any }) {
+export default function BlankLayoutComponent() {
     const { appPageLoading } = useSelector((store: RootState) => ({
         appPageLoading: store.app.pageState.loading,
     }));
@@ -34,7 +35,7 @@ export default function BlankLayoutComponent({ children }: { children: any }) {
                                         minHeight: '90vh',
                                     }}
                                 >
-                                    {children}
+                                    <Outlet />
                                 </div>
                             );
                         }

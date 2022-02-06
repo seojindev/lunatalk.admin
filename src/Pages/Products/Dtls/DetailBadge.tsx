@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Form, Input, Row, Col, Divider, Button, message, Upload } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { addProductCategory, saveProductBadgeImage, uploadProductBadgeImage } from '@API';
 // import { useLoading } from '@Hooks';
 import * as _API from '@API';
@@ -8,7 +8,7 @@ import * as _API from '@API';
 import { useParams } from 'react-router-dom';
 
 export default function DetailBadge() {
-    const history = useHistory();
+    const navigate = useNavigate();
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const params = useParams<{ id: number }>();
@@ -61,7 +61,7 @@ export default function DetailBadge() {
     const handleSave = async (values: { badgeName: string }) => {
         //
         const response = await _API.updateProductBadgeDetail({
-            id: params.id,
+            id: params.id ? Number(params.id) : 0,
             data: {
                 name: values.badgeName,
                 media_id: badgeImage[0].uid,
@@ -69,7 +69,7 @@ export default function DetailBadge() {
         });
         if (response.status) {
             message.success('정상 처리 되었습니다.');
-            history.push({
+            navigate({
                 pathname: process.env.PUBLIC_URL + `/products/show-product-badge`,
             });
         } else {
