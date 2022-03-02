@@ -50,13 +50,13 @@ export const menus = [
         ],
     },
     {
-        name: '결제 관리',
-        key: 'pays',
+        name: '주문 관리',
+        key: 'orders',
         icon: <PayCircleOutlined />,
         list: [
             {
-                name: '결제',
-                key: 'show-pays',
+                name: '주문목록',
+                key: 'show-orders',
             },
         ],
     },

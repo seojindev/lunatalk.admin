@@ -29,7 +29,7 @@ import DetailReviewsPage from '@Page/Products/DetailReviewsPage';
 import ShowUsersPage from '@Page/Users/ShowUsersPage';
 import AddUsersPage from '@Page/Users/AddUsersPage';
 import DetailUsersPage from '@Page/Users/DetailUsersPage';
-import ShowPaysPage from '@Page/Pays/ShowPaysPage';
+import ShowOrdersPage from '@Page/Orders/ShowOrdersPage';
 import ShowMainSlidePage from '@Page/Pages/ShowMainSlidePage';
 import AddUpdateMainSlidePage from '@Page/Pages/AddUpdateMainSlidePage';
 import DetailMainSlidePage from '@Page/Pages/DetailMainSlidePage';
@@ -73,7 +73,7 @@ const RootRoutes = () => {
                     <Route path="/users/show-users" element={<ShowUsersPage />} />
                     <Route path="/users/add-users" element={<AddUsersPage />} />
                     <Route path="/users/:uuid/detail-users" element={<DetailUsersPage />} />
-                    <Route path="/pays/show-pays" element={<ShowPaysPage />} />
+                    <Route path="/orders/show-orders" element={<ShowOrdersPage />} />
                     <Route path="/pages/show-main-slide" element={<ShowMainSlidePage />} />
                     <Route path="/pages/add-main-slide" element={<AddUpdateMainSlidePage />} />
                     <Route path="/pages/update-main-slide/:slide_uuid" element={<AddUpdateMainSlidePage />} />

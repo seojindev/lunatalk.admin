@@ -4,9 +4,9 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { RootState } from 'StoreTypes';
 import { useSelector } from 'react-redux';
 
-const DtlPage = lazy(() => import('./Dtls/ShowPays'));
+const DtlPage = lazy(() => import('./Dtls/ShowOrders'));
 
-export default function ShowPaysPage() {
+export default function ShowOrdersPage() {
     const { storeRouterLocation } = useSelector((store: RootState) => ({
         storeRouterLocation: store.router.location,
     }));
