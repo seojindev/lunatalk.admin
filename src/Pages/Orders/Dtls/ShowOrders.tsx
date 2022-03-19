@@ -82,7 +82,7 @@ export default function ShowOrders() {
         if (selectedRow) {
             const { uuid } = selectedRow;
             navigate({
-                pathname: process.env.PUBLIC_URL + `/orders/show-order/${uuid}/detail`,
+                pathname: process.env.PUBLIC_URL + `/orders/show-orders/${uuid}/detail`,
             });
         }
     }, [selectedRow]);

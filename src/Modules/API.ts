@@ -718,52 +718,22 @@ export function updateProductBadgeDetail({
     });
 }
 
-export function getProductOrder(): Promise<
-    CommonTypes.ServiceResponse<
-        Array<{
-            id: number;
-            uuid: string;
-            order_name: string;
-            order_price: {
-                number: number;
-                string: string;
-            };
-            user: {
-                id: number;
-                uuid: string;
-                login_id: string;
-                name: string;
-                email: string;
-                phone_number: {
-                    type1: string;
-                    type2: string;
-                };
-            };
-            active: string;
-            state: {
-                code_id: string;
-                code_name: string;
-            };
-            delivery: {
-                code_id: string;
-                code_name: string;
-            };
-            payments: {
-                id: number;
-                order_id: number;
-                method: string;
-                status: string;
-            };
-            created_at: {
-                type1: string;
-                type2: string;
-            };
-        }>
-    >
-> {
+export function getProductOrder(): Promise<CommonTypes.ServiceResponse<Array<CommonTypes.productOrderListItem>>> {
     return _Axios_({
         method: `get`,
         url: `/api/admin-front/v1/order-manage/show-order`,
+        payload: {},
+    });
+}
+
+export function getProductOrderDetail({
+    uuid,
+}: {
+    uuid: string;
+}): Promise<CommonTypes.ServiceResponse<CommonTypes.productOrderDetailItem>> {
+    return _Axios_({
+        method: `get`,
+        url: `/api/admin-front/v1/order-manage/show-order/${uuid}/detail`,
         payload: {},
     });
 }

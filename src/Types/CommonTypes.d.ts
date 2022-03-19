@@ -291,4 +291,145 @@ declare module 'CommonTypes' {
         created_at: string;
         updated_at: string;
     }
+
+    interface productOrderListItem {
+        id: number;
+        uuid: string;
+        order_name: string;
+        order_price: {
+            number: number;
+            string: string;
+        };
+        user: {
+            id: number;
+            uuid: string;
+            login_id: string;
+            name: string;
+            email: string;
+            phone_number: {
+                type1: string;
+                type2: string;
+            };
+        };
+        active: string;
+        state: {
+            code_id: string;
+            code_name: string;
+        };
+        delivery: {
+            code_id: string;
+            code_name: string;
+        };
+        payments: {
+            id: number;
+            order_id: number;
+            method: string;
+            status: string;
+        };
+        created_at: {
+            type1: string;
+            type2: string;
+        };
+    }
+
+    interface productOrderDetailItem {
+        id: number;
+        uuid: string;
+        order_name: string;
+        order_price: {
+            number: number;
+            string: string;
+        };
+        user: {
+            id: number;
+            uuid: string;
+            login_id: string;
+            name: string;
+            email: string;
+            phone_number: {
+                type1: string;
+                type2: string;
+            };
+        };
+        active: string;
+        state: {
+            code_id: string;
+            code_name: string;
+        };
+        delivery: {
+            code_id: string;
+            code_name: string;
+        };
+        products: Array<{
+                id: number;
+                uuid: string;
+                name: string;
+                quantity: {
+                    number: number;
+                    string: string;
+                };
+                original_price: {
+                    number: number;
+                    string: string;
+                };
+                price: {
+                    number: number;
+                    string: string;
+                };
+                category: {
+                    id: number;
+                    uuid: string;
+                    name: string;
+                };
+                color: Array<{ id: number; name: string; }>;
+                rep_images: Array<{ id: number; file_name: string; url: string; } >;
+        }>;
+        payments: {
+            id: number;
+            order_id: number;
+            orderId: string;
+            orderName: string;
+            method: string;
+            status: string;
+            requestedAt: string;
+            totalAmount: string;
+            balanceAmount: string;
+            suppliedAmount: string;
+            vat: string;
+            created_at: string;
+            updated_at: string;
+            cards: {
+                id: number;
+                pay_id: number;
+                company: string;
+                number: string;
+                installmentPlanMonths: string;
+                isInterestFree: string;
+                approveNo: string;
+                useCardPoint: string;
+                cardType: string;
+                ownerType: string;
+                acquireStatus: string;
+                receiptUrl: string,
+                created_at: string;
+                updated_at: string;
+            };
+            virtuals: {
+                id: number;
+                pay_id: number;
+                bank: string;
+                customerName: string;
+                dueDate: string;
+                expired: string;
+                settlementStatus: string;
+                refundStatus: string;
+                created_at: string;
+                updated_at: string;
+            };
+        };
+        created_at: {
+            type1: string;
+            type2: string;
+        };
+    }
 }
