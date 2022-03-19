@@ -27,7 +27,7 @@ export default function DetailOrders() {
     }, [uuid]);
 
     useEffect(() => {
-        console.debug(detailInfo);
+        // console.debug(detailInfo);
     }, [detailInfo]);
     return (
         <>
@@ -43,7 +43,7 @@ export default function DetailOrders() {
                         {detailInfo?.created_at.type1}
                     </Descriptions.Item>
                     <Descriptions.Item label="결제구분">
-                        {detailInfo?.payments.virtuals ? '가상계좌' : '카드'}
+                        {detailInfo?.payments?.cards ? '카드' : '가상계좌'}
                     </Descriptions.Item>
                     <Descriptions.Item label="결제상태" span={2}>
                         {detailInfo?.state.code_name}
