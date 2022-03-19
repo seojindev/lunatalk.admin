@@ -29,6 +29,7 @@ const initialState: AppState = {
                 '220': [],
                 '300': [],
                 '400': [],
+                '520': [],
             },
         },
         products: {

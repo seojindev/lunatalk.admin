@@ -143,6 +143,7 @@ declare module 'CommonTypes' {
             '220': CodeItem[];
             '300': CodeItem[];
             '400': CodeItem[];
+            '520': CodeItem[];
         };
     }
 
@@ -427,6 +428,7 @@ declare module 'CommonTypes' {
                 updated_at: string;
             };
         };
+        payments_serialize: string;
         created_at: {
             type1: string;
             type2: string;

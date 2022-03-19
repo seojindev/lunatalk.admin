@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Descriptions, Card } from 'antd';
+import { Descriptions, Card, Input, Select } from 'antd';
 import { isEmpty } from '@Helper';
 import { getProductOrderDetail } from '@API';
 import { productOrderDetailItem } from 'CommonTypes';
+import { useSelector } from 'react-redux';
+import { RootState } from 'StoreTypes';
 
 export default function DetailOrders() {
     const { uuid } = useParams();
+    const { TextArea } = Input;
+    const { Option } = Select;
     const [detailInfo, setDetailInfo] = useState<productOrderDetailItem>();
     const [cardLoading, setCardLoading] = useState<boolean>(true);
+    const { commonCodeGroup } = useSelector((store: RootState) => ({
+        commonCodeGroup: store.app.common.codes.code_group,
+    }));
 
     useEffect(() => {
         const fnGetOrderDetail = async (uuid: string) => {
@@ -26,8 +33,13 @@ export default function DetailOrders() {
         }
     }, [uuid]);
 
+    const handleDeliveryChange = () => {
+        //
+        console.debug('');
+    };
+
     useEffect(() => {
-        // console.debug(detailInfo);
+        console.debug(detailInfo);
     }, [detailInfo]);
     return (
         <>
@@ -56,12 +68,30 @@ export default function DetailOrders() {
                     <Descriptions.Item label="사용자 전화번호" span={2}>
                         {detailInfo?.user.phone_number.type2}
                     </Descriptions.Item>
-                    <Descriptions.Item label="상품 정보">
+                    <Descriptions.Item label="상품 정보" span={3}>
                         <pre>
                             {detailInfo?.products.map(e => {
                                 return `${e.name} \n`;
                             })}
                         </pre>
+                    </Descriptions.Item>
+                    <Descriptions.Item label="배송 상태" span={3}>
+                        <Select
+                            defaultValue={detailInfo?.delivery.code_id}
+                            style={{ width: 120 }}
+                            onChange={handleDeliveryChange}
+                        >
+                            {commonCodeGroup &&
+                                commonCodeGroup['520'].map(e => {
+                                    return <Option value={e.code_id}>{e.code_name}</Option>;
+                                })}
+                        </Select>
+                    </Descriptions.Item>
+                    <Descriptions.Item label="메모" span={3}>
+                        <TextArea value={``} rows={10} />
+                    </Descriptions.Item>
+                    <Descriptions.Item label="결제 정보 상세" span={3}>
+                        <TextArea value={JSON.stringify(detailInfo?.payments, null, 2)} />
                     </Descriptions.Item>
                 </Descriptions>
             </Card>
