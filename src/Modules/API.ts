@@ -718,6 +718,7 @@ export function updateProductBadgeDetail({
     });
 }
 
+// 주문 리스트 가지고 오기.
 export function getProductOrder(): Promise<CommonTypes.ServiceResponse<Array<CommonTypes.productOrderListItem>>> {
     return _Axios_({
         method: `get`,
@@ -726,6 +727,7 @@ export function getProductOrder(): Promise<CommonTypes.ServiceResponse<Array<Com
     });
 }
 
+// 주문 상세 정보 가지고 오기.
 export function getProductOrderDetail({
     uuid,
 }: {
@@ -738,6 +740,39 @@ export function getProductOrderDetail({
     });
 }
 
+// 주문 상품 상태 변경
+export function orderChangeDelivery({
+    uuid,
+    code,
+}: {
+    uuid: string;
+    code: string;
+}): Promise<CommonTypes.ServiceResponse<{ message: string }>> {
+    return _Axios_({
+        method: `post`,
+        url: `/api/admin-front/v1/order-manage/show-order/${uuid}/change-delivery`,
+        payload: {
+            change_code: code,
+        },
+    });
+}
+
+// 주문 메모 저장.
+export function orderChangeMemo({
+    uuid,
+    memo,
+}: {
+    uuid: string;
+    memo: string;
+}): Promise<CommonTypes.ServiceResponse<{ message: string }>> {
+    return _Axios_({
+        method: `post`,
+        url: `/api/admin-front/v1/order-manage/show-order/${uuid}/change-memo`,
+        payload: {
+            memo: memo,
+        },
+    });
+}
 // 메인 베스트 아아템 리스트
 // export function mainBestItemList(uuid: string): Promise<
 //     CommonTypes.ServiceResponse<{

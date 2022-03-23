@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Descriptions, Card, Input, Select } from 'antd';
+import { Descriptions, Card, Input, Select, Button, message } from 'antd';
 import { isEmpty } from '@Helper';
 import { getProductOrderDetail } from '@API';
 import { productOrderDetailItem } from 'CommonTypes';
 import { useSelector } from 'react-redux';
 import { RootState } from 'StoreTypes';
+import { orderChangeDelivery, orderChangeMemo } from '@API';
 
 export default function DetailOrders() {
     const { uuid } = useParams();
@@ -16,12 +17,16 @@ export default function DetailOrders() {
     const { commonCodeGroup } = useSelector((store: RootState) => ({
         commonCodeGroup: store.app.common.codes.code_group,
     }));
+    const [deliveryState, setDeliveryState] = useState<string>();
+    const [memoState, setMemoState] = useState<string>('');
 
     useEffect(() => {
         const fnGetOrderDetail = async (uuid: string) => {
             const response = await getProductOrderDetail({ uuid: uuid }).then();
             if (response.status) {
                 setDetailInfo(response.payload);
+                setDeliveryState(response.payload.delivery.code_id);
+                setMemoState(response.payload.memo);
             } else {
                 // 에러 났을때??
             }
@@ -29,18 +34,49 @@ export default function DetailOrders() {
         };
 
         if (!isEmpty(uuid)) {
-            fnGetOrderDetail(String(uuid));
+            fnGetOrderDetail(String(uuid)).then();
         }
     }, [uuid]);
 
-    const handleDeliveryChange = () => {
-        //
-        console.debug('');
+    const handleDeliveryChange = (e: string) => {
+        setDeliveryState(e);
+    };
+
+    const handleOrderMemoChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setMemoState(e.target.value);
+    };
+
+    // 배송 상태 변경.
+    const handleClickDeliveryButtonClick = async () => {
+        const response = await orderChangeDelivery({
+            uuid: String(uuid),
+            code: String(deliveryState),
+        });
+
+        if (response.status) {
+            message.success(response.payload.message);
+        } else {
+            // 에러 났을때?
+        }
+    };
+
+    const handleClickOrderMemoButtonClick = async () => {
+        const response = await orderChangeMemo({
+            uuid: String(uuid),
+            memo: String(memoState),
+        });
+
+        if (response.status) {
+            message.success(response.payload.message);
+        } else {
+            // 에러 났을때?
+        }
     };
 
     useEffect(() => {
         console.debug(detailInfo);
     }, [detailInfo]);
+
     return (
         <>
             <Card loading={cardLoading}>
@@ -77,21 +113,31 @@ export default function DetailOrders() {
                     </Descriptions.Item>
                     <Descriptions.Item label="배송 상태" span={3}>
                         <Select
-                            defaultValue={detailInfo?.delivery.code_id}
-                            style={{ width: 120 }}
+                            defaultValue={deliveryState}
+                            style={{ width: 300, paddingRight: 6 }}
                             onChange={handleDeliveryChange}
                         >
                             {commonCodeGroup &&
                                 commonCodeGroup['520'].map(e => {
-                                    return <Option value={e.code_id}>{e.code_name}</Option>;
+                                    return (
+                                        <Option key={e.code_id} value={e.code_id}>
+                                            {e.code_name}
+                                        </Option>
+                                    );
                                 })}
                         </Select>
+                        <Button type={`primary`} onClick={handleClickDeliveryButtonClick}>
+                            변경
+                        </Button>
                     </Descriptions.Item>
                     <Descriptions.Item label="메모" span={3}>
-                        <TextArea value={``} rows={10} />
+                        <TextArea rows={10} onChange={handleOrderMemoChange} defaultValue={memoState} />
+                        <Button type={`primary`} onClick={handleClickOrderMemoButtonClick}>
+                            저장
+                        </Button>
                     </Descriptions.Item>
                     <Descriptions.Item label="결제 정보 상세" span={3}>
-                        <TextArea value={JSON.stringify(detailInfo?.payments, null, 2)} />
+                        <TextArea value={JSON.stringify(detailInfo?.payments ? detailInfo.payments : '', null, 2)} />
                     </Descriptions.Item>
                 </Descriptions>
             </Card>

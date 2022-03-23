@@ -429,6 +429,7 @@ declare module 'CommonTypes' {
             };
         };
         payments_serialize: string;
+        memo: string;
         created_at: {
             type1: string;
             type2: string;
