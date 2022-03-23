@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Descriptions, Card, Input, Select, Button, message } from 'antd';
+import { Descriptions, Card, Input, Select, Button, message, Col } from 'antd';
 import { isEmpty } from '@Helper';
 import { getProductOrderDetail } from '@API';
 import { productOrderDetailItem } from 'CommonTypes';
@@ -132,9 +132,11 @@ export default function DetailOrders() {
                     </Descriptions.Item>
                     <Descriptions.Item label="메모" span={3}>
                         <TextArea rows={10} onChange={handleOrderMemoChange} defaultValue={memoState} />
-                        <Button type={`primary`} onClick={handleClickOrderMemoButtonClick}>
-                            저장
-                        </Button>
+                        <Col style={{ paddingTop: 10 }}>
+                            <Button type={`primary`} onClick={handleClickOrderMemoButtonClick}>
+                                저장
+                            </Button>
+                        </Col>
                     </Descriptions.Item>
                     <Descriptions.Item label="결제 정보 상세" span={3}>
                         <TextArea value={JSON.stringify(detailInfo?.payments ? detailInfo.payments : '', null, 2)} />
