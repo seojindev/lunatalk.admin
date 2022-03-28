@@ -54,6 +54,7 @@
     "start:prod": "cp project/production.env .env && PORT=4001 craco start --reset-cache",
     "build": "cp project/local.env .env && GENERATE_SOURCEMAP=false craco build",
     "build:dev": "cp project/develop.env .env && GENERATE_SOURCEMAP=false craco build",
+    "build:prod": "cp project/production.env .env && GENERATE_SOURCEMAP=false craco build",
     "build:test": "yarn build && serve -s build"
   },
   "eslintConfig": {

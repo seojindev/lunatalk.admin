@@ -52,7 +52,7 @@ export default function AddCategory() {
                                 name="categoryName"
                                 rules={[{ required: true, message: '상품명을 입력해 주세요.', type: 'string' }]}
                             >
-                                <Input placeholder="상품명을 입력해 주세요." />
+                                <Input placeholder="카테고리명을 입력해 주세요." />
                             </Form.Item>
                             <Divider />
                             <Row justify="center">
