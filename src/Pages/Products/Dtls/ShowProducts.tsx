@@ -7,9 +7,11 @@ import { RootState } from 'StoreTypes';
 import { productListItem } from 'CommonTypes';
 import { message } from 'antd';
 import { getProductAction } from '@Store/App';
+import { useNavigate } from 'react-router-dom';
 
 interface tableDataItem {
     key: string;
+    product_uuid: string;
     product: {
         uuid: string;
         name: string;
@@ -39,6 +41,8 @@ interface tableDataInserface {
 
 export default function ShowProducts() {
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
     const { storeProductsList } = useSelector((store: RootState) => ({
         storeProductsList: store.app.common.products.list,
     }));
@@ -48,7 +52,7 @@ export default function ShowProducts() {
         content: [],
     });
 
-    const { DataTable, hasSelected } = useDataTable({
+    const { DataTable, hasSelected, selectedRow } = useDataTable({
         columns: constants.columns,
         dataSource: tableData,
         updateEntityPath: 'update-product',
@@ -69,6 +73,7 @@ export default function ShowProducts() {
                 content: storeProductsList.map((item: productListItem) => {
                     return {
                         key: String(item.id),
+                        product_uuid: item.uuid,
                         product: {
                             uuid: item.uuid,
                             name: item.name,
@@ -101,6 +106,15 @@ export default function ShowProducts() {
 
         fnSetTableData();
     }, [storeProductsList]);
+
+    useEffect(() => {
+        if (selectedRow) {
+            const { product_uuid } = selectedRow;
+            navigate({
+                pathname: process.env.PUBLIC_URL + `/products/${product_uuid}/detail-product`,
+            });
+        }
+    }, [selectedRow]);
 
     return (
         <>

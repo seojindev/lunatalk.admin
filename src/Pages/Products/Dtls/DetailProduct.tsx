@@ -29,7 +29,7 @@ export default function DetailProduct() {
         if (!isEmpty(params.product_uuid)) {
             fnGetProductDetail().then();
         }
-    }, []);
+    }, [params]);
 
     return (
         <>
