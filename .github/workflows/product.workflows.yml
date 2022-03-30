@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Lunatalk.admin.product.Workflows
+name: Lunatalk.admin.production.Workflows
 
 # Controls when the action will run.
 on:
@@ -30,7 +30,7 @@ jobs:
             - name: Build
               run: yarn build:prod
 
-            - name: deploy file to server
+            - name: deploy file to production server
               uses: wlixcc/SFTP-Deploy-Action@v1.0
               with:
                   username: '${{ secrets.PRODUCTION_SERVER_USER_NAME }}'
