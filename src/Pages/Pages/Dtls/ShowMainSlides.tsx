@@ -5,6 +5,7 @@ import * as constants from '@Src/Data/PagesMainSlides';
 import { getMainSlides, deleteMainSlides } from '@API';
 import { MainSlideItem } from 'CommonTypes';
 import { message } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 interface tableDataInserface {
     totalElements: number;
@@ -13,11 +14,12 @@ interface tableDataInserface {
 
 export default function ShowSlides() {
     const { loadingControl } = useLoading();
+    const navigate = useNavigate();
     const [tableData, setTableData] = useState<tableDataInserface>({
         totalElements: 0,
         content: [],
     });
-    const { DataTable, hasSelected, selectedRowKeys } = useDataTable({
+    const { DataTable, hasSelected, selectedRowKeys, selectedRow } = useDataTable({
         columns: constants.columns,
         dataSource: tableData,
         updateEntityPath: 'pages/update-main-slide',
@@ -99,6 +101,15 @@ export default function ShowSlides() {
             message.error('에러가 발생하였습니다.').then();
         }
     };
+
+    useEffect(() => {
+        if (selectedRow) {
+            const { key } = selectedRow;
+            navigate({
+                pathname: process.env.PUBLIC_URL + `/pages/${key}/detail-main-slide`,
+            });
+        }
+    }, [selectedRow]);
 
     return (
         <>
