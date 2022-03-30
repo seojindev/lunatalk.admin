@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { useRoot } from '@Hooks';
-import PulseLoader from 'react-spinners/PulseLoader';
-// import { PageSpinnerStyle } from '@Src/Styles/SpinnersStyles';
+import { BodySpinner } from '@Element/Spinners';
 
 export default function SplashComponent({ appLoading }: { appLoading: () => void }) {
     const { AppBaseCheckState } = useRoot();
 
     useEffect(() => {
         const setAppMainLoading = (loading: boolean) => {
-            if (loading === true) {
+            if (loading) {
                 appLoading();
             }
         };
@@ -17,8 +16,8 @@ export default function SplashComponent({ appLoading }: { appLoading: () => void
     }, [AppBaseCheckState]);
 
     return (
-        <div className="page-spinner">
-            <PulseLoader color="#ddd" size="15" />
-        </div>
+        <>
+            <BodySpinner />
+        </>
     );
 }

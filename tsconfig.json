@@ -5,7 +5,7 @@
     "baseUrl": "./src",
     "target": "es2018",
     "lib": [
-      "es2018",
+      "es6",
       "dom",
       "scripthost"
     ],
@@ -28,7 +28,10 @@
       "./node_modules/@types",
       "src/types"
     ],
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true
   },
   "include": [
     "src"

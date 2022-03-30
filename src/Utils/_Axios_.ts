@@ -1,5 +1,5 @@
-import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
-import { AccessTokenType, LocalTokenInterface } from 'CommonTypes';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { LocalTokenInterface } from 'CommonTypes';
 import * as Helper from '@Util/Helper';
 import { _Alert_ } from '@Utils';
 import * as _ from 'lodash';
@@ -21,7 +21,7 @@ export const axiosDefaultHeader: AxiosRequestConfig = {
     headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         'Access-Control-Allow-Origin': '*',
-        'Request-Client-Type': process.env.REACT_APP_CLIENT_CODE,
+        'Request-Client-Type': process.env.REACT_APP_CLIENT_CODE ? process.env.REACT_APP_CLIENT_CODE : '',
         Accept: 'application/json',
         Authorization: '',
     },
@@ -69,6 +69,8 @@ const handleTokenRefresh = (): Promise<LocalTokenInterface> => {
  * @param access_token
  */
 const attachTokenToRequest = (request: AxiosRequestConfig, access_token: any) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     request.headers['Authorization'] = 'Bearer ' + access_token;
 };
 
@@ -116,7 +118,7 @@ export default ({ method = 'post', url, payload }: serviceInterface): any => {
         const status = error.response?.status;
 
         // FIXME 서버 상태, 인증 외에 401 에러 처리 어떻게 할껀지?
-        if (options.shouldIntercept(error) === false) {
+        if (!options.shouldIntercept(error)) {
             if (status === 503) {
                 // 서버 에러
                 _Alert_.serverStatusError({
@@ -189,7 +191,7 @@ export default ({ method = 'post', url, payload }: serviceInterface): any => {
                     .catch(() => {
                         // 토큰 Refresh Error
                         Helper.COLORLOG(':: Fail Token Refresh :: ', 'error');
-                        Helper.removeLoginToken();
+                        Helper.removeLocalToken();
                         // processQueue(err, '');
                         // reject(err);
                         _Alert_.thenGoHome({
@@ -226,8 +228,9 @@ export default ({ method = 'post', url, payload }: serviceInterface): any => {
         }
     };
 
-    const defaultHeaderToken: AccessTokenType = Helper.getAccessToken() ? 'Bearer ' + Helper.getAccessToken() : '';
-    axiosDefaultHeader.headers.Authorization = defaultHeaderToken;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    axiosDefaultHeader.headers.Authorization = Helper.getAccessToken() ? 'Bearer ' + Helper.getAccessToken() : '';
 
     const _Axios_: AxiosInstance = axios.create(axiosDefaultHeader);
 

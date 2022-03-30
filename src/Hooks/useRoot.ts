@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { COLORLOG } from '@Helper';
 import { appInitAction } from '@Store/App';
+import { checkLocalTokenAction } from '@Store/Auths';
 import { RootState } from 'StoreTypes';
 import _Alert_ from '@_Alert_';
 
@@ -31,13 +32,14 @@ export default function useRoot() {
         if (appLoading === false && appStatus === true) {
             COLORLOG(':: App Init Success :: ', 'success');
             setAppBaseCheckState(true);
+            dispatch(checkLocalTokenAction());
         } else if (appStatus === false) {
             // 상태가 false 일떄.
             if (appErrorMessage) {
                 _Alert_.default({ text: appErrorMessage });
             }
         }
-    }, [appLoading, appStatus, appErrorMessage]);
+    }, [appLoading, appStatus]);
 
     return {
         AppBaseCheckState,

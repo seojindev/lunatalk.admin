@@ -11,8 +11,8 @@ import { rootSaga, createRootReducer } from '@Stores';
 export default function configureStore(history: History, initialState: any): Store<RootState> {
     let compose;
 
-    const isDevelopment = process.env.REACT_APP_ENV === 'production' ? false : true;
-    const useReduxLogger = process.env.REACT_APP_USE_REDUX_LOGGER === 'TRUE' ? true : false;
+    const isDevelopment = process.env.REACT_APP_ENV !== 'production';
+    const useReduxLogger = process.env.REACT_APP_USE_REDUX_LOGGER === 'TRUE';
 
     const composeEnhancers = composeWithDevTools({});
     const sagaMiddleware = createSagaMiddleware();

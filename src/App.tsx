@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import '@Style/MainStyle.less';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import configureStore from '@Store/configureStore';
-import History from '@Module/History';
-import Routes from '@Module/Routes';
+// import History from '@Module/History';
+import RootRoutes from '@Module/RootRoutes';
 import SplashComponent from '@Src/Components/SplashComponent';
 
 const history = createBrowserHistory();
@@ -17,7 +18,7 @@ function App() {
 
     // 스피너 페이지.
     const handleAppLoading = () => {
-        if (AppLoading === false) {
+        if (!AppLoading) {
             setAppLoading(true);
         } else {
             setAppLoading(false);
@@ -25,18 +26,18 @@ function App() {
     };
 
     return (
-        <React.StrictMode>
-            <Provider store={store}>
-                {(function () {
-                    if (AppLoading === true) {
-                        return <SplashComponent appLoading={handleAppLoading} />;
-                    } else {
-                        return <Routes Routerhistory={History} />;
-                    }
-                })()}
-                <Routes Routerhistory={History} />
-            </Provider>
-        </React.StrictMode>
+        // FIXME: 2021-07-29 11:32 StrictMode 사이트 메뉴 클릭시 에러나서 주석처리. 원인 파악 필요.
+        // <React.StrictMode>
+        <Provider store={store}>
+            {(function () {
+                if (AppLoading) {
+                    return <SplashComponent appLoading={handleAppLoading} />;
+                } else {
+                    return <RootRoutes />;
+                }
+            })()}
+        </Provider>
+        // </React.StrictMode>
     );
 }
 

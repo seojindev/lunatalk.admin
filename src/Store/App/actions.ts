@@ -1,30 +1,13 @@
 import { deprecated } from 'typesafe-actions';
 const { createStandardAction } = deprecated;
-
-/* action type start */
-export const START_APP_LOADING = 'app/START_APP_LOADING';
-export const END_APP_LOADING = 'app/END_APP_LOADING';
-
-export const APP_INIT_START = 'app/APP_INIT_START';
-export const APP_INIT_END = 'app/APP_INIT_END';
-
-export const APP_ERROR = 'app/APP_ERROR';
-export const COMMON_DATA = 'app/COMMON_DATA';
-
-export const CHECK_LOGIN_START = 'app/CHECK_LOGIN_START';
-export const CHECK_LOGIN_SUCCESS = 'app/CHECK_LOGIN_SUCCESS';
-export const CHECK_LOGIN_FAILURE = 'app/CHECK_LOGIN_FAILURE';
-
-export const LOGIN_SET_START = 'app/LOGIN_SET_START';
-export const LOGIN_SET_END = 'app/LOGIN_SET_END';
-/* action type end */
+import * as _Types from './types';
 
 /* action action start */
-export const appInitAction = createStandardAction(APP_INIT_START)();
+export const appInitAction = createStandardAction(_Types.APP_INIT_START)();
+
+export const startAppLoadingAction = createStandardAction(_Types.APP_PAGE_LOADING_START)();
+export const endAppLoadingAction = createStandardAction(_Types.APP_PAGE_LOADING_END)();
+export const resetAppLoadingAction = createStandardAction(_Types.RESET_PAGE_LOADING)();
+export const getProductAction = createStandardAction(_Types.GET_PRODUCT_REQUEST)();
+export const resetProductAction = createStandardAction(_Types.RESET_PRODUCT_LIST)();
 /* action action end */
-
-// 로그인 체크.
-export const loginCheckAction = createStandardAction(CHECK_LOGIN_START)();
-
-// 로그인 정보 저장.
-export const loginSetAction = createStandardAction(LOGIN_SET_START)();
