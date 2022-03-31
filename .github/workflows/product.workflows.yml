@@ -33,9 +33,9 @@ jobs:
             - name: deploy file to production server
               uses: wlixcc/SFTP-Deploy-Action@v1.0
               with:
-                  username: '${{ secrets.PRODUCTION_SERVER_USER_NAME }}'
-                  server: '${{ secrets.PRODUCTION_SERVER_IP }}'
-                  ssh_private_key: '${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}'
-                  local_path: './build/*'
-                  remote_path: '/var/www/site/lunatalk.co.kr/admin'
-                  args: '-o ConnectTimeout=5'
+                username: '${{ secrets.PRODUCTION_SERVER_USER_NAME }}'
+                server: '${{ secrets.PRODUCTION_SERVER_IP }}'
+                ssh_private_key: '${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}'
+                local_path: './build/*'
+                remote_path: '/var/www/site/lunatalk.co.kr/admin'
+                args: '-o ConnectTimeout=5'
