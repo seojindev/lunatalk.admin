@@ -361,6 +361,10 @@ declare module 'CommonTypes' {
             code_id: string;
             code_name: string;
         };
+        address: {
+           step1: string;
+           step2: string;
+        }
         products: Array<{
                 id: number;
                 uuid: string;

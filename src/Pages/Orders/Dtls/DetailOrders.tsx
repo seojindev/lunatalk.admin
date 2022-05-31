@@ -107,9 +107,12 @@ export default function DetailOrders() {
                     <Descriptions.Item label="상품 정보" span={3}>
                         <pre>
                             {detailInfo?.products.map(e => {
-                                return `${e.name} \n`;
+                                return `${e.name} - ${e.color[0].name}\n`;
                             })}
                         </pre>
+                    </Descriptions.Item>
+                    <Descriptions.Item label="주문 주소" span={3}>
+                        {detailInfo?.address.step1} {detailInfo?.address.step2}
                     </Descriptions.Item>
                     <Descriptions.Item label="배송 상태" span={3}>
                         <Select
