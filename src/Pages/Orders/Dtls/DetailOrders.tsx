@@ -7,6 +7,12 @@ import { productOrderDetailItem } from 'CommonTypes';
 import { useSelector } from 'react-redux';
 import { RootState } from 'StoreTypes';
 import { orderChangeDelivery, orderChangeMemo } from '@API';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(timezone);
+dayjs.extend(utc);
 
 export default function DetailOrders() {
     const { uuid } = useParams();
@@ -88,7 +94,7 @@ export default function DetailOrders() {
                     <Descriptions.Item label="주문금액">{detailInfo?.order_price.string}</Descriptions.Item>
                     <Descriptions.Item label="주문명">{detailInfo?.order_name}</Descriptions.Item>
                     <Descriptions.Item label="주문날짜" span={2}>
-                        {detailInfo?.created_at.type1}
+                        {dayjs(detailInfo?.created_at.type1).add(9, 'h').format('YYYY-MM-DD HH:mm:ss')}
                     </Descriptions.Item>
                     <Descriptions.Item label="결제구분">
                         {detailInfo?.payments?.cards ? '카드' : '가상계좌'}
