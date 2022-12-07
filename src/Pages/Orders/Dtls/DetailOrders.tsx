@@ -94,7 +94,7 @@ export default function DetailOrders() {
                     <Descriptions.Item label="주문금액">{detailInfo?.order_price.string}</Descriptions.Item>
                     <Descriptions.Item label="주문명">{detailInfo?.order_name}</Descriptions.Item>
                     <Descriptions.Item label="주문날짜" span={2}>
-                        {dayjs(detailInfo?.created_at.type1).add(9, 'h').format('YYYY-MM-DD HH:mm:ss')}
+                        {dayjs(detailInfo?.created_at.type3).format('YYYY-MM-DD HH:mm:ss')}
                     </Descriptions.Item>
                     <Descriptions.Item label="결제구분">
                         {detailInfo?.payments?.cards ? '카드' : '가상계좌'}

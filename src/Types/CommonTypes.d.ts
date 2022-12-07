@@ -330,6 +330,7 @@ declare module 'CommonTypes' {
         created_at: {
             type1: string;
             type2: string;
+            type3: string;
         };
     }
 
@@ -437,6 +438,7 @@ declare module 'CommonTypes' {
         created_at: {
             type1: string;
             type2: string;
+            type3: string;
         };
     }
 }

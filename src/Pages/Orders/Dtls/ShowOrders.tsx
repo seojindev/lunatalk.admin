@@ -4,6 +4,7 @@ import { useDataTable, useLoading } from '@Hooks';
 import * as constants from '@Src/Data/ShowOrderTable';
 import { getProductOrder } from '@API';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 export default function ShowOrders() {
     const { loadingControl } = useLoading();
@@ -62,7 +63,7 @@ export default function ShowOrders() {
                             order_active: e.active === 'Y' ? '정상' : '시도',
                             order_state: e.state.code_name,
                             order_delivery: e.delivery.code_name,
-                            order_created_at: e.created_at.type2,
+                            order_created_at: dayjs(e.created_at.type3).format('YYYY-MM-DD HH:mm'),
                             // order_payments_at:
                         };
                     }),
